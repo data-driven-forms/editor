@@ -57,18 +57,6 @@ const reducer = (state: any, action: any) => {
                     },
                 })
             };
-        case 'ADD_CONTAINER':
-            return {
-                ...state,
-                containers: {
-                    ...state.containers,
-                    [action.id]: {
-                        children: [],
-                        ref: action.ref,
-                        isStatic: action.isStatic
-                    }
-                }
-            }
         case 'UPDATE_CONTAINER':
             return {
                 ...state,
@@ -99,7 +87,12 @@ function useBuilderState(): [any, any] {
         return {
             draggingElement: null,
             components: {},
-            containers: {}
+            containers: {
+                form: {
+                    children: [],
+                    ref: null
+                }
+            }
         };
     });
 

@@ -9,9 +9,7 @@ const Canvas = ({ id, isStatic }: any) => {
     const ref = createRef<HTMLDivElement>();
 
     useEffect(() => {
-        if (isStatic && ref.current) {
-            dispatch({ type: 'ADD_CONTAINER', id, ref: ref.current, isStatic })
-        } else if (ref.current) {
+        if (ref.current) {
             dispatch({ type: 'UPDATE_CONTAINER', id, ref: ref.current })
         }
     }, [])

@@ -25,12 +25,7 @@ const findTargetElement = (position: any, state: any): any => {
         ) {
             // check if users wants to move item under another item
             container.children.forEach((id: any, index: number) => {
-                const component = state.components[id];
-
-                if (!component) {
-                    return;
-                }
-
+                const component = state.components[id] || state.containers[id];
                 const componentPosition = component.ref.getBoundingClientRect().toJSON();
 
                 // if users points 5px under and half of the component
