@@ -8,11 +8,10 @@ import BuilderContextState from './hooks/builder-context-state';
 
 import useBuilderState from './hooks/use-builder-state';
 
-function pauseEvent(e: any) {
+function pauseEvent(e: MouseEvent | TouchEvent) {
   if (e.stopPropagation) e.stopPropagation();
-  if (e.preventDefault) e.preventDefault();
+  if (e.preventDefault && e.type !== 'touchstart') e.preventDefault();
   e.cancelBubble = true;
-  e.returnValue = false;
   return false;
 }
 
@@ -21,6 +20,7 @@ function App() {
 
   const handleDragStart = React.useCallback(
     (component, isContainer, e) => {
+      console.log(e)
       pauseEvent(e);
       dispatch({
         type: 'DRAG_START',

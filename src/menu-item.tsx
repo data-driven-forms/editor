@@ -11,6 +11,7 @@ const MenuItem = ({ onDragStart, component, label, isContainer }: any) => {
     return <div
         className="component"
         onMouseDown={handleMouseDown(component, isContainer)}
+        onTouchStart={handleMouseDown(component, isContainer)}
     >
         {label}
     </div>

@@ -10,6 +10,14 @@ const reducer = (state: any, action: any) => {
                 isDraggingContainer: action.isContainer,
             };
         case 'DRAG_DROP':
+            if(!action.targetContainer) {
+                return {
+                    ...state,
+                    draggingElement: null,
+                    isDraggingContainer: null,
+                }
+            }
+
             const id = `${state.draggingElement}-${Date.now()}`;
 
             if(typeof action.position === 'undefined') {

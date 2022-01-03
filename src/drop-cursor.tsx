@@ -26,7 +26,7 @@ const findTargetElement = (position: any, state: any): any => {
             container.children.forEach((id: any, index: number) => {
                 const component = state.components[id];
 
-                if(!component) {
+                if (!component) {
                     return;
                 }
 
@@ -72,7 +72,15 @@ const DropCursor = ({ onMouseUp }: any) => {
             selectorRef.current.style.border = '';
             selectorRef.current.style.outline = '';
 
-            const { rect, container, position } = findTargetElement({ x: e.x, y: e.y }, state);
+            let cursorPosition = { x: e.x, y: e.y }
+            if (e.type === 'touchmove') {
+                cursorPosition = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY,
+                }
+            }
+
+            const { rect, container, position } = findTargetElement(cursorPosition, state);
 
             console.log(rect)
 
@@ -93,11 +101,11 @@ const DropCursor = ({ onMouseUp }: any) => {
     );
 
     const handleMouseUp = useCallback(
-        (e: MouseEvent) => {
+        (e: MouseEvent | TouchEvent) => {
             if (!onMouseUp) return;
 
-            e.preventDefault();
-            e.stopPropagation();
+            if (e.stopPropagation) e.stopPropagation();
+            if (e.preventDefault) e.preventDefault();
 
             onMouseUp(targetContainer.current);
         },
@@ -108,9 +116,15 @@ const DropCursor = ({ onMouseUp }: any) => {
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
 
+        document.addEventListener('touchmove', handleMouseMove);
+        document.addEventListener('touchend', handleMouseUp);
+
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
+
+            document.removeEventListener('touchmove', handleMouseMove);
+            document.removeEventListener('touchend', handleMouseUp);
         };
     })
 
