@@ -1,17 +1,32 @@
 import { useCallback } from "react";
+import useDispatch from "./hooks/use-dispatch";
 
-const MenuItem = ({ onDragStart, component, label, isContainer }: any) => {
+function pauseEvent(e: MouseEvent | TouchEvent) {
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.preventDefault && e.type !== 'touchstart') e.preventDefault();
+    e.cancelBubble = true;
+    return false;
+}
+
+const MenuItem = ({ component, label, isContainer }: any) => {
+    const dispatch = useDispatch();
+
     const handleMouseDown = useCallback(
-        (componentInfo, isContainer) => (e: any) => {
-            if (onDragStart) onDragStart(componentInfo, isContainer, e);
+        (component, isContainer, e) => {
+            pauseEvent(e);
+            dispatch({
+                type: 'DRAG_START',
+                component,
+                isContainer
+            });
         },
-        [onDragStart],
+        [],
     );
 
     return <div
         className="component"
-        onMouseDown={handleMouseDown(component, isContainer)}
-        onTouchStart={handleMouseDown(component, isContainer)}
+        onMouseDown={(e) => handleMouseDown(component, isContainer, e)}
+        onTouchStart={(e) => handleMouseDown(component, isContainer, e)}
     >
         {label}
     </div>

@@ -1,4 +1,5 @@
 import React, { createRef, Fragment, useCallback, useEffect, useRef } from "react";
+import useDispatch from "./hooks/use-dispatch";
 
 import useState from "./hooks/use-state";
 
@@ -57,12 +58,13 @@ const findTargetElement = (position: any, state: any): any => {
     return { rect: result, container: resultContainer, position: resultPosition };
 }
 
-const DropCursor = ({ onMouseUp }: any) => {
+const DropCursor = () => {
     const selectorRef = createRef<HTMLDivElement>();
     const mouseRef = createRef<HTMLDivElement>();
     const targetContainer = useRef<any>();
 
     const state = useState();
+    const dispatch = useDispatch();
 
     const handleMouseMove = React.useCallback(
         (e: any) => {
@@ -95,19 +97,20 @@ const DropCursor = ({ onMouseUp }: any) => {
             mouseRef.current.style.left = `${e.x}px`;
             mouseRef.current.style.top = `${e.y}px`;
 
-            targetContainer.current = { container, position };
+            targetContainer.current = { targetContainer: container, position };
         },
         [],
     );
 
     const handleMouseUp = useCallback(
         (e: MouseEvent | TouchEvent) => {
-            if (!onMouseUp) return;
-
             if (e.stopPropagation) e.stopPropagation();
             if (e.preventDefault) e.preventDefault();
 
-            onMouseUp(targetContainer.current);
+            dispatch({
+                type: 'DRAG_DROP',
+                ...targetContainer.current
+            });
         },
         [],
     );
