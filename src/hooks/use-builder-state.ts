@@ -12,7 +12,11 @@ const reducer = (state: any, action: any) => {
         case 'DRAG_DROP':
             const id = `${state.draggingElement}-${Date.now()}`;
 
-            state.containers[action.targetContainer].children.splice(action.position, 0, id)
+            if(typeof action.position === 'undefined') {
+                state.containers[action.targetContainer].children.push(id)
+            } else {
+                state.containers[action.targetContainer].children.splice(action.position, 0, id)
+            }
 
             if (state.isDraggingContainer) {
                 return {
