@@ -3,6 +3,8 @@ import './app.css';
 import Canvas from './canvas';
 import Component from './component';
 import DropCursor from './drop-cursor';
+import BuilderContextDispatch from './hooks/builder-context-dispatch';
+import BuilderContextState from './hooks/builder-context-state';
 
 import useBuilderState from './hooks/use-builder-state';
 
@@ -45,14 +47,18 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className='builder'>
-      <div className='components'>
-        <Component onDragStart={handleDragStart} />
-        <Component onDragStart={handleDragStart} />
-        {state.draggingElement && <DropCursor />}
-      </div>
-      <Canvas onMouseUp={handleCanvasMouseUp}/>
-    </div>
+    <BuilderContextDispatch.Provider value={dispatch}>
+      <BuilderContextState.Provider value={state}>
+        <div className='builder'>
+          <div className='components'>
+            <Component onDragStart={handleDragStart} />
+            <Component onDragStart={handleDragStart} />
+            {state.draggingElement && <DropCursor onMouseUp={handleCanvasMouseUp} />}
+          </div>
+          <Canvas id="form" />
+        </div>
+      </BuilderContextState.Provider>
+    </BuilderContextDispatch.Provider>
   );
 }
 

@@ -1,29 +1,28 @@
-import React, { useCallback, useEffect } from "react";
+import React, { createRef, useEffect } from "react";
+import useDispatch from "./hooks/use-dispatch";
+import useState from "./hooks/use-state";
 
-const Canvas = ({ onMouseUp }: any) => {
-    const handleMouseUp = useCallback(
-        (e: MouseEvent) => {
-            if (!onMouseUp) return;
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            onMouseUp();
-        },
-        [],
-    );
+const Canvas = ({ id, isStatic }: any) => {
+    const state = useState();
+    const dispatch = useDispatch();
+    const ref = createRef<HTMLDivElement>();
 
     useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp);
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect().toJSON();
 
-        return () => document.removeEventListener('mouseup', handleMouseUp);
-    })
+            console.log(rect)
 
-    return <div className='canvas'>
-        <div style={{width: 100, height:100, margin: 5, background: 'black'}} />
-        <div style={{width: 100, height:100, margin: 5, background: 'white'}} />
-        <div style={{width: 100, height:100, margin: 5, background: 'yellow'}} />
-        <div style={{width: 100, height:100, margin: 5, background: 'green'}} />
+            dispatch({ type: 'ADD_CONTAINER', id, ref: ref.current, isStatic })
+        }
+    }, [])
+
+    const { children } = state.containers[id] || { children: []};
+
+    return <div className='canvas' ref={ref}>
+        {children.map(() =>
+            <div style={{ width: 100, height: 100, margin: 5, background: 'black' }} />
+        )}
     </div>
 }
 
