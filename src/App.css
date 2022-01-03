@@ -11,7 +11,8 @@
 }
 
 .canvas {
-  height: 500px;
-  width: 100%;
+  min-height: 150px;
+  width: 80%;
   background-color: lightcyan;
+  border: 2px dotted #0508FF;
 }

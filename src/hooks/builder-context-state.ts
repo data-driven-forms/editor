@@ -4,12 +4,14 @@ interface BuilderState {
     containers: any;
     schema: any;
     draggingElement: any;
+    components: any;
 }
 
 const BuilderContextState = createContext<BuilderState>({
     containers: {},
     schema: {},
-    draggingElement: null
+    draggingElement: null,
+    components: {}
 });
 
 export default BuilderContextState;

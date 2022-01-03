@@ -1,28 +1,51 @@
-import React, { createRef, Fragment, useCallback, useEffect } from "react";
+import React, { createRef, Fragment, useCallback, useEffect, useRef } from "react";
 
 import useState from "./hooks/use-state";
 
-const findTargetElement = (position: any, containers: any): any => {
+const findTargetElement = (position: any, state: any): any => {
     let result = null;
+    let resultContainer = null;
+    let resultPosition;
 
-    Object.keys(containers).forEach(key => {
-        const container = containers[key];
+    Object.keys(state.containers).forEach(key => {
+        let temporaryResult = null;
+
+        const container = state.containers[key];
 
         const metadata = container.ref.getBoundingClientRect().toJSON();
 
         if (position.x >= metadata.x && position.x <= metadata.right
             && position.y >= metadata.y && position.y <= metadata.bottom
         ) {
-            result = metadata
+            container.children.forEach((id: any, index: number) => {
+                const component = state.components[id];
+                const componentPosition = component.ref.getBoundingClientRect().toJSON();
+
+                if (
+                    Math.abs(componentPosition.bottom - position.y) < (componentPosition.height / 2) ||
+                    Math.abs(position.y - componentPosition.bottom) < 5) {
+                    temporaryResult = { ...componentPosition, top: componentPosition.bottom - 1, height: 2 };
+                    resultPosition = index + 1;
+                }
+            })
+
+            if (position.y - metadata.top < 10) {
+                temporaryResult = { ...metadata, height: 2 }
+                resultPosition = 0;
+            }
+
+            result = temporaryResult || metadata;
+            resultContainer = key;
         }
     })
 
-    return result;
+    return { rect: result, container: resultContainer, position: resultPosition };
 }
 
 const DropCursor = ({ onMouseUp }: any) => {
     const selectorRef = createRef<HTMLDivElement>();
     const mouseRef = createRef<HTMLDivElement>();
+    const targetContainer = useRef<any>();
 
     const state = useState();
 
@@ -34,20 +57,22 @@ const DropCursor = ({ onMouseUp }: any) => {
             selectorRef.current.style.border = '';
             selectorRef.current.style.outline = '';
 
-            const targetRect = findTargetElement({ x: e.x, y: e.y }, state.containers);
+            const { rect, container, position } = findTargetElement({ x: e.x, y: e.y }, state);
 
-            console.log(targetRect)
+            console.log(rect)
 
-            if (targetRect) {
-                selectorRef.current.style.top = `${targetRect.top}px`;
-                selectorRef.current.style.left = `${targetRect.left}px`;
-                selectorRef.current.style.width = `${targetRect.width}px`;
-                selectorRef.current.style.height = `${targetRect.height}px`;
+            if (rect) {
+                selectorRef.current.style.top = `${rect.top}px`;
+                selectorRef.current.style.left = `${rect.left}px`;
+                selectorRef.current.style.width = `${rect.width - 8}px`;
+                selectorRef.current.style.height = `${rect.height}px`;
                 selectorRef.current.style.border = '3px solid #A40000';
             }
 
             mouseRef.current.style.left = `${e.x}px`;
             mouseRef.current.style.top = `${e.y}px`;
+
+            targetContainer.current = { container, position };
         },
         [],
     );
@@ -59,7 +84,7 @@ const DropCursor = ({ onMouseUp }: any) => {
             e.preventDefault();
             e.stopPropagation();
 
-            onMouseUp();
+            onMouseUp(targetContainer.current);
         },
         [],
     );

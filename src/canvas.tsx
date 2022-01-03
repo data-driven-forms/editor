@@ -1,4 +1,5 @@
 import React, { createRef, useEffect } from "react";
+import Component from "./component";
 import useDispatch from "./hooks/use-dispatch";
 import useState from "./hooks/use-state";
 
@@ -8,21 +9,23 @@ const Canvas = ({ id, isStatic }: any) => {
     const ref = createRef<HTMLDivElement>();
 
     useEffect(() => {
-        if (ref.current) {
-            const rect = ref.current.getBoundingClientRect().toJSON();
-
-            console.log(rect)
-
+        if (isStatic && ref.current) {
             dispatch({ type: 'ADD_CONTAINER', id, ref: ref.current, isStatic })
+        } else if (ref.current) {
+            dispatch({ type: 'UPDATE_CONTAINER', id, ref: ref.current })
         }
     }, [])
 
-    const { children } = state.containers[id] || { children: []};
+    const { children } = state.containers[id] || { children: [] };
 
     return <div className='canvas' ref={ref}>
-        {children.map(() =>
-            <div style={{ width: 100, height: 100, margin: 5, background: 'black' }} />
-        )}
+        {children.map((key: string) => {
+            if(!state.components[key]) {
+                return <Canvas key={key} id={key} />
+            }
+
+            return <Component key={key} id={key}/>
+        })}
     </div>
 }
 
