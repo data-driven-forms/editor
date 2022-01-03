@@ -7,6 +7,7 @@ const findTargetElement = (position: any, state: any): any => {
     let resultContainer = null;
     let resultPosition;
 
+    // find most suitable container
     Object.keys(state.containers).forEach(key => {
         let temporaryResult = null;
 
@@ -14,13 +15,25 @@ const findTargetElement = (position: any, state: any): any => {
 
         const metadata = container.ref.getBoundingClientRect().toJSON();
 
-        if (position.x >= metadata.x && position.x <= metadata.right
-            && position.y >= metadata.y && position.y <= metadata.bottom
+        // check if mouse is inside a container
+        if (
+            position.x >= metadata.x
+            && position.x <= metadata.right
+            && position.y >= metadata.y
+            && position.y <= metadata.bottom
         ) {
+            // check if users wants to move item under another item
             container.children.forEach((id: any, index: number) => {
                 const component = state.components[id];
+
+                if(!component) {
+                    return;
+                }
+
                 const componentPosition = component.ref.getBoundingClientRect().toJSON();
 
+                // if users points 5px under and half of the component
+                // insert item under the component
                 if (
                     Math.abs(componentPosition.bottom - position.y) < (componentPosition.height / 2) ||
                     Math.abs(position.y - componentPosition.bottom) < 5) {
@@ -29,11 +42,13 @@ const findTargetElement = (position: any, state: any): any => {
                 }
             })
 
+            // user is pointing to the top of the container
             if (position.y - metadata.top < 10) {
                 temporaryResult = { ...metadata, height: 2 }
                 resultPosition = 0;
             }
 
+            // push to the bottom
             result = temporaryResult || metadata;
             resultContainer = key;
         }

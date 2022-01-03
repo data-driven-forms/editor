@@ -12,6 +12,8 @@ const reducer = (state: any, action: any) => {
         case 'DRAG_DROP':
             const id = `${state.draggingElement}-${Date.now()}`;
 
+            state.containers[action.targetContainer].children.splice(action.position, 0, id)
+
             if (state.isDraggingContainer) {
                 return {
                     ...state,
@@ -20,13 +22,6 @@ const reducer = (state: any, action: any) => {
                     ...(action.targetContainer && {
                         containers: {
                             ...state.containers,
-                            [action.targetContainer]: {
-                                ...state.containers[action.targetContainer],
-                                children: [
-                                    ...state.containers[action.targetContainer].children,
-                                    id
-                                ]
-                            },
                             [id]: {
                                 children: [],
                                 ref: null,
@@ -48,16 +43,6 @@ const reducer = (state: any, action: any) => {
                             name: id
                         }
                     },
-                    containers: {
-                        ...state.containers,
-                        [action.targetContainer]: {
-                            ...state.containers[action.targetContainer],
-                            children: [
-                                ...state.containers[action.targetContainer].children,
-                                id
-                            ]
-                        }
-                    }
                 })
             };
         case 'ADD_CONTAINER':
