@@ -1,10 +1,6 @@
 import { MouseEvent, TouchEvent, useCallback } from "react";
+import pauseEvent from "./pause-event";
 import useDispatch from "./use-dispatch";
-
-function pauseEvent(e: MouseEvent | TouchEvent) {
-    if (e.stopPropagation) e.stopPropagation();
-    if (e.preventDefault && e.type !== 'touchstart') e.preventDefault();
-}
 
 interface UseHandleConfig {
     component: string;
