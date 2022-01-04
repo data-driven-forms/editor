@@ -6,13 +6,13 @@ function pauseEvent(e: MouseEvent | TouchEvent) {
     if (e.preventDefault && e.type !== 'touchstart') e.preventDefault();
 }
 
-interface UseStartDragConfig {
+interface UseHandleConfig {
     component: string;
     isContainer?: boolean;
     sourceContainer?: string;
 }
 
-const handleMouseDown = (config: UseStartDragConfig, dispatch: Function) => (e: MouseEvent | TouchEvent) => {
+const handleMouseDown = (config: UseHandleConfig, dispatch: Function) => (e: MouseEvent | TouchEvent) => {
     pauseEvent(e);
     dispatch({
         type: 'DRAG_START',
@@ -20,7 +20,7 @@ const handleMouseDown = (config: UseStartDragConfig, dispatch: Function) => (e: 
     });
 }
 
-const useStartDrag = (config: UseStartDragConfig) => {
+const useHandle = (config: UseHandleConfig) => {
     const dispatch = useDispatch();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,4 +34,4 @@ const useStartDrag = (config: UseStartDragConfig) => {
     }
 }
 
-export default useStartDrag;
+export default useHandle;

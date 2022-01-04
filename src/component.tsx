@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import useDispatch from './hooks/use-dispatch';
-import useStartDrag from './hooks/use-start-drag';
+import useHandle from './hooks/use-handle';
 
 import useState from './hooks/use-state';
 
@@ -8,7 +8,7 @@ const Component = ({ id, container }: any) => {
     const state = useState();
     const dispatch = useDispatch();
 
-    const events = useStartDrag({ component: id, sourceContainer: container });
+    const events = useHandle({ component: id, sourceContainer: container });
 
     const ref = createRef<HTMLDivElement>();
 

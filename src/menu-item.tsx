@@ -1,7 +1,7 @@
-import useStartDrag from "./hooks/use-start-drag";
+import useHandle from "./hooks/use-handle";
 
 const MenuItem = ({ component, label, isContainer }: any) => {
-    const events = useStartDrag({component, isContainer});
+    const events = useHandle({component, isContainer});
 
     return <div
         className="component"
