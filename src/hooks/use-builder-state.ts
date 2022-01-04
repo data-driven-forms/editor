@@ -25,6 +25,14 @@ const reducer = (state: any, action: any) => {
                 }
             }
 
+            // dragging container into itself
+            if(state.isDraggingContainer && state.draggingElement === action.targetContainer) {
+                return {
+                    ...state,
+                    ...clearDrag,
+                }
+            }
+
             // is moving to the same position
             if (state.sourceContainer
                 &&

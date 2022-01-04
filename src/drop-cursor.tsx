@@ -8,6 +8,8 @@ const findTargetElement = (position: any, state: any): any => {
     let resultContainer = null;
     let resultPosition;
 
+    let margin = Infinity;
+
     // find most suitable container
     Object.keys(state.containers).forEach(key => {
         let temporaryResult = null;
@@ -22,6 +24,7 @@ const findTargetElement = (position: any, state: any): any => {
             && position.x <= metadata.right
             && position.y >= metadata.y
             && position.y <= metadata.bottom
+            && position.x - metadata.left <= margin
         ) {
             // check if users wants to move item under another item
             container.children.forEach((id: any, index: number) => {
@@ -53,6 +56,7 @@ const findTargetElement = (position: any, state: any): any => {
             // push to the bottom
             result = temporaryResult || metadata;
             resultContainer = key;
+            margin = position.x - metadata.left;
         }
     })
 
