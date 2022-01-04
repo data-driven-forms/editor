@@ -33,8 +33,14 @@ const findTargetElement = (position: any, state: any): any => {
                 if (
                     Math.abs(componentPosition.bottom - position.y) < (componentPosition.height / 2) ||
                     Math.abs(position.y - componentPosition.bottom) < 5) {
-                    temporaryResult = { ...componentPosition, top: componentPosition.bottom - 1, height: 2 };
-                    resultPosition = index + 1;
+                    // x position constraint
+                    if (
+                        position.x + 5 >= componentPosition.x
+                        && position.x <= componentPosition.right + 5
+                    ) {
+                        temporaryResult = { ...componentPosition, top: componentPosition.bottom - 1, height: 2 };
+                        resultPosition = index + 1;
+                    }
                 }
             })
 
