@@ -26,10 +26,29 @@ const reducer = (state: any, action: any) => {
             }
 
             // dragging container into itself
-            if(state.isDraggingContainer && state.draggingElement === action.targetContainer) {
+            if (state.isDraggingContainer && state.draggingElement === action.targetContainer) {
                 return {
                     ...state,
                     ...clearDrag,
+                }
+            }
+
+            // dragging container into sub-container
+            if (state.isDraggingContainer) {
+                let parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(action.targetContainer));
+
+                // check all parent containers
+                while (parentContainer && parentContainer !== 'form' && parentContainer !== state.draggingElement) {
+                    // eslint-disable-next-line no-loop-func
+                    parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(parentContainer));
+                    console.log('parent', parentContainer)
+                }
+
+                if (parentContainer === state.draggingElement) {
+                    return {
+                        ...state,
+                        ...clearDrag,
+                    }
                 }
             }
 
@@ -39,8 +58,8 @@ const reducer = (state: any, action: any) => {
                 state.sourceContainer === action.targetContainer
                 // is being moved to the same position or after the position
                 && (
-                state.containers[state.sourceContainer].children.indexOf(state.draggingElement) === action.position ||
-                state.containers[state.sourceContainer].children.indexOf(state.draggingElement) + 1 === action.position
+                    state.containers[state.sourceContainer].children.indexOf(state.draggingElement) === action.position ||
+                    state.containers[state.sourceContainer].children.indexOf(state.draggingElement) + 1 === action.position
                 )
             ) {
                 return {
