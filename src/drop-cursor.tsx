@@ -134,6 +134,7 @@ const DropCursor = () => {
                 pointerEvents: 'none',
                 userSelect: 'none',
                 outlineOffset: '-1px',
+                transition: 'top 0.2s, left 0.2s, height 0.2s, width 0.2s'
             }}
         />
         <div
