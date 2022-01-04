@@ -1,5 +1,11 @@
 import { useReducer } from "react";
 
+const clearDrag = {
+    draggingElement: null,
+    isDraggingContainer: null,
+    draggingSourceContainer: null,
+}
+
 const reducer = (state: any, action: any) => {
     console.log(action.type, action, state)
     switch (action.type) {
@@ -8,84 +14,103 @@ const reducer = (state: any, action: any) => {
                 ...state,
                 draggingElement: action.component,
                 isDraggingContainer: action.isContainer,
+                sourceContainer: action.sourceContainer,
             };
         case 'DRAG_DROP':
-            if(!action.targetContainer) {
+            // dragging outside container
+            if (!action.targetContainer) {
                 return {
                     ...state,
-                    draggingElement: null,
-                    isDraggingContainer: null,
+                    ...clearDrag,
                 }
             }
 
-            const id = `${state.draggingElement}-${Date.now()}`;
+            // is moving to the same position
+            if (state.sourceContainer
+                &&
+                state.sourceContainer === action.targetContainer
+                // is being moved to the same position or after the position
+                && (
+                state.containers[state.sourceContainer].children.indexOf(state.draggingElement) === action.position ||
+                state.containers[state.sourceContainer].children.indexOf(state.draggingElement) + 1 === action.position
+                )
+            ) {
+                return {
+                    ...state,
+                    ...clearDrag,
+                }
+            }
 
-            if(typeof action.position === 'undefined') {
+            // generate id for new items or used the old one
+            const id = state.sourceContainer ? state.draggingElement : `${state.draggingElement}-${Date.now()}`;
+
+            // remove item from the old container, or create a new one
+            if (state.sourceContainer) {
+                state.containers[state.sourceContainer].children = state.containers[state.sourceContainer].children.filter((child: string) => child !== id);
+            }
+
+            // push to the exact position
+            // when position is not specified, push to the bottom
+            if (typeof action.position === 'undefined') {
                 state.containers[action.targetContainer].children.push(id)
             } else {
                 state.containers[action.targetContainer].children.splice(action.position, 0, id)
             }
 
-            if (state.isDraggingContainer) {
+            // moving existing node
+            if (state.sourceContainer) {
                 return {
                     ...state,
-                    draggingElement: null,
-                    isDraggingContainer: null,
+                    ...clearDrag,
+                }
+                // inserting a new node
+            } else {
+                // if dragging container add a container
+                if (state.isDraggingContainer) {
+                    return {
+                        ...state,
+                        ...clearDrag,
+                        ...(action.targetContainer && {
+                            containers: {
+                                ...state.containers,
+                                [id]: {
+                                    children: [],
+                                    ref: null,
+                                }
+                            },
+                        })
+                    };
+                }
+                // if dragging component add a component
+                return {
+                    ...state,
+                    ...clearDrag,
                     ...(action.targetContainer && {
-                        containers: {
-                            ...state.containers,
+                        components: {
+                            ...state.components,
                             [id]: {
-                                children: [],
-                                ref: null,
+                                component: state.draggingElement,
+                                name: id
                             }
                         },
                     })
                 };
             }
-
-            return {
-                ...state,
-                draggingElement: null,
-                isDraggingContainer: null,
-                ...(action.targetContainer && {
-                    components: {
-                        ...state.components,
-                        [id]: {
-                            component: state.draggingElement,
-                            name: id
-                        }
-                    },
-                })
-            };
         case 'UPDATE_CONTAINER':
-            return {
-                ...state,
-                containers: {
-                    ...state.containers,
-                    [action.id]: {
-                        ...state.containers[action.id],
-                        ref: action.ref,
-                    }
-                }
-            }
+            state.containers[action.id].ref = action.ref;
+
+            return state;
         case 'UPDATE_COMPONENT':
-            return {
-                ...state,
-                components: {
-                    ...state.components,
-                    [action.id]: {
-                        ...state.components[action.id],
-                        ref: action.ref,
-                    }
-                }
-            }
+            state.components[action.id].ref = action.ref;
+
+            return state;
     }
 }
 
 function useBuilderState(): [any, any] {
     const [state, dispatch] = useReducer(reducer, null, () => {
         return {
-            draggingElement: null,
+            ...clearDrag,
             components: {},
             containers: {
                 form: {

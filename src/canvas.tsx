@@ -3,7 +3,7 @@ import Component from "./component";
 import useDispatch from "./hooks/use-dispatch";
 import useState from "./hooks/use-state";
 
-const Canvas = ({ id, isStatic }: any) => {
+const Canvas = ({ id }: any) => {
     const state = useState();
     const dispatch = useDispatch();
     const ref = createRef<HTMLDivElement>();
@@ -22,7 +22,7 @@ const Canvas = ({ id, isStatic }: any) => {
                 return <Canvas key={key} id={key} />
             }
 
-            return <Component key={key} id={key}/>
+            return <Component key={key} id={key} container={id} />
         })}
     </div>
 }
