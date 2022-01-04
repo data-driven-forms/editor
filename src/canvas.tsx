@@ -9,7 +9,7 @@ const Canvas = ({ id, container, isRoot }: any) => {
     const dispatch = useDispatch();
     const ref = createRef<HTMLDivElement>();
 
-    const finalId = isRoot ? 'form' : id;
+    const finalId = isRoot ? 'root' : id;
 
     const { children } = state.containers[finalId] || { children: [] };
 

@@ -38,7 +38,7 @@ const reducer = (state: any, action: any) => {
                 let parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(action.targetContainer));
 
                 // check all parent containers
-                while (parentContainer && parentContainer !== 'form' && parentContainer !== state.draggingElement) {
+                while (parentContainer && parentContainer !== 'root' && parentContainer !== state.draggingElement) {
                     // eslint-disable-next-line no-loop-func
                     parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(parentContainer));
                     console.log('parent', parentContainer)
@@ -140,7 +140,7 @@ function useBuilderState(): [any, any] {
             ...clearDrag,
             components: {},
             containers: {
-                form: {
+                root: {
                     children: [],
                     ref: null
                 }
