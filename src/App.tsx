@@ -40,9 +40,9 @@ function App() {
     <Editor>
       <div className='builder'>
         <div className='components'>
-          <MenuItem component="text-field">Text field</MenuItem>
-          <MenuItem component="select">Select</MenuItem>
-          <MenuItem component="form-group" isContainer>Form group</MenuItem>
+          <MenuItem component="text-field" className="component">Text field</MenuItem>
+          <MenuItem component="select" className="component">Select</MenuItem>
+          <MenuItem component="form-group" isContainer className="component">Form group</MenuItem>
         </div>
         <ContainerWrapper isRoot Component={ComponentWrapper} />
       </div>
