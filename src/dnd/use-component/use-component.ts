@@ -1,12 +1,16 @@
 import { createRef, useEffect } from "react";
-
+import useDispatch from "../use-dispatch";
+import useState from "../use-state";
 interface UseComponentConfig {
     id: string;
-    dispatch: Function;
 }
 
-const useComponent = ({id, dispatch}: UseComponentConfig) => {
+const useComponent = ({ id }: UseComponentConfig) => {
+    const state = useState();
+    const dispatch = useDispatch();
     const ref = createRef<HTMLDivElement>();
+
+    const component = state.components[id];
 
     useEffect(() => {
         if (ref.current) {
@@ -14,7 +18,7 @@ const useComponent = ({id, dispatch}: UseComponentConfig) => {
         }
     }, [])
 
-    return ref;
+    return { ref, component };
 }
 
 export default useComponent;

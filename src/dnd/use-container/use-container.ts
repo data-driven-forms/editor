@@ -7,7 +7,7 @@ interface UseContainerConfig {
     isRoot?: boolean;
 }
 
-const useContainer = ({id, isRoot}: UseContainerConfig) => {
+const useContainer = ({ id, isRoot }: UseContainerConfig) => {
     const state = useState();
     const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ const useContainer = ({id, isRoot}: UseContainerConfig) => {
 
     const finalId = isRoot ? 'root' : id;
 
-    const { children } = state.containers[finalId] || { children: [] };
+    const container = state.containers[finalId] || { children: [] };
 
     useEffect(() => {
         if (ref.current) {
@@ -23,7 +23,7 @@ const useContainer = ({id, isRoot}: UseContainerConfig) => {
         }
     }, [])
 
-    return {ref, children};
+    return { ref, container };
 }
 
 export default useContainer;

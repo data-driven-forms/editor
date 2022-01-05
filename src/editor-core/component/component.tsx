@@ -1,8 +1,8 @@
 import React, { createRef, useEffect } from 'react';
-import useDispatch from './hooks/use-dispatch';
-import useHandle from './hooks/use-handle';
 
-import useState from './hooks/use-state';
+import useDispatch from '../../dnd/use-dispatch';
+import useHandle from '../../dnd/use-handle';
+import useState from '../../dnd/use-state';
 
 const Component = ({ id, container }: any) => {
     const state = useState();

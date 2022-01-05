@@ -1,8 +1,9 @@
 import { MouseEvent, TouchEvent, useCallback } from "react";
 import pauseEvent from "../pause-event";
+import { AnyObject } from "../types";
 import useDispatch from "../use-dispatch";
 
-interface UseHandleConfig {
+interface UseHandleConfig extends AnyObject {
     component: string;
     isContainer?: boolean;
     sourceContainer?: string;
@@ -16,13 +17,11 @@ const handleMouseDown = (config: UseHandleConfig, dispatch: Function) => (e: Mou
     });
 }
 
-const useHandle = (config: UseHandleConfig) => {
+const useHandle = (config: UseHandleConfig) => {
     const dispatch = useDispatch();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const startDrag = useCallback(handleMouseDown(config, dispatch), [
-        config.component, config.isContainer, config.sourceContainer
-    ])
+    const startDrag = useCallback(handleMouseDown(config, dispatch), [ ...Object.values(config) ])
 
     return {
         onMouseDown: startDrag,
