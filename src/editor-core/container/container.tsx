@@ -11,9 +11,10 @@ export interface ContainerProps extends React.HTMLProps<HTMLDivElement> {
     HandleProps?: React.HTMLProps<HTMLDivElement>;
     ListProps?: React.HTMLProps<HTMLDivElement>;
     Component: React.FC<{ id: string; container: string; }>;
+    Handle?: string | React.FC;
 }
 
-const Container: React.FC<ContainerProps> = ({ id, container: sourceContainer, isRoot, HandleProps, ListProps, Component, ...props }) => {
+const Container: React.FC<ContainerProps> = ({ id, container: sourceContainer, isRoot, Handle = 'div', HandleProps, ListProps, Component, ...props }) => {
     const state = useState();
 
     const { ref, container, id: containerId } = useContainer({ id, isRoot })
@@ -30,13 +31,14 @@ const Container: React.FC<ContainerProps> = ({ id, container: sourceContainer, i
                         Component={Component}
                         HandleProps={HandleProps}
                         ListProps={ListProps}
+                        Handle={Handle}
                         {...props}
                     />
                 }
                 return <Component key={key} id={key} container={containerId} />
             })}
         </div>
-        {sourceContainer && <div
+        {sourceContainer && <Handle
             {...HandleProps}
             {...events}
         />}

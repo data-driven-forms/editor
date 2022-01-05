@@ -4,7 +4,7 @@
 }
 
 .component {
-  background-color: aquamarine;
+  background-color: #f9fafc;
   width: 100px;
   padding: 16px;
   margin: 4px;
@@ -13,8 +13,12 @@
 .canvas {
   min-height: 150px;
   width: 80%;
-  background-color: lightcyan;
-  border: 2px dotted #0508FF;
+  background-color: #f9fafc;
+  border: 2px dotted #474d66;
   padding: 4px;
   margin: 4px;
+}
+
+body {
+  margin: 0px;
 }

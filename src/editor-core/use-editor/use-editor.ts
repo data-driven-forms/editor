@@ -12,7 +12,8 @@ function useEditor(): [any, any] {
                     children: [],
                     ref: null
                 }
-            }
+            },
+            selectedComponent: null
         };
     });
 

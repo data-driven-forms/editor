@@ -1,8 +1,11 @@
 import React from 'react';
+
+import { Menu, Pane, Text, DragHandleVerticalIcon } from 'evergreen-ui';
+
 import './app.css';
 
 import Container, { ContainerProps } from './editor-core/container';
-import MenuItem from './editor-core/menu-item';
+import MenuItem, { MenuItemProps } from './editor-core/menu-item';
 import Editor from './editor-core/editor';
 import Component, { ComponentProps } from './editor-core/component';
 import useState from './dnd/use-state';
@@ -10,23 +13,26 @@ import useState from './dnd/use-state';
 const ComponentWrapper: React.FC<ComponentProps> = (props) => {
   const state = useState();
 
+  console.log(state.selectedComponent)
 
   return <Component
     {...props}
-    style={{ padding: 8, margin: 5, border: '2px dotted #0508FF', display: 'flex', opacity: state.draggingElement === props.id ? 0.5 : 1 }}
+    style={{ padding: 8, margin: 5, border: state.selectedComponent === props.id ? '2px dotted red' : '2px dotted #474d66', display: 'flex', opacity: state.draggingElement === props.id ? 0.5 : 1 }}
     HandleProps={{
-      style: { marginLeft: 'auto', background: 'black', color: 'white', fontWeight: 'bold' },
-      children: 'Handle'
+      style: { marginLeft: 'auto' },
+      size: 24
     }}
+    Handle={DragHandleVerticalIcon}
   />
 }
 
 const ContainerWrapper: React.FC<ContainerProps> = (props) => <Container
   {...props}
   HandleProps={{
-    style: { marginLeft: 'auto', background: 'black', color: 'white', fontWeight: 'bold' },
-    children: 'Handle'
+    style: { marginLeft: 'auto' },
+    size: 24
   }}
+  Handle={DragHandleVerticalIcon}
   ListProps={{
     style: { minWidth: '80%' }
   }}
@@ -34,15 +40,23 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => <Container
   style={{ display: 'flex' }}
 />
 
+const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />
 
 function App() {
   return (
     <Editor>
+      <Pane background='tint1' marginBottom={8} padding={16} >
+        <Text>Data Driven Forms Pro Editor</Text>
+      </Pane>
       <div className='builder'>
         <div className='components'>
-          <MenuItem component="text-field" className="component">Text field</MenuItem>
-          <MenuItem component="select" className="component">Select</MenuItem>
-          <MenuItem component="form-group" isContainer className="component">Form group</MenuItem>
+          <Menu>
+            <Menu.Group title="Components">
+              <MenuItemWrapper component="text-field" >Text field</MenuItemWrapper>
+              <MenuItemWrapper component="select">Select</MenuItemWrapper>
+              <MenuItemWrapper component="form-group" isContainer>Form group</MenuItemWrapper>
+            </Menu.Group>
+          </Menu>
         </div>
         <ContainerWrapper isRoot Component={ComponentWrapper} />
       </div>
