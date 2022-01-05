@@ -1,39 +1,26 @@
-import React, { createRef, useEffect } from "react";
+import React from "react";
 import Component from "../component";
 
-import useDispatch from '../../dnd/use-dispatch';
 import useHandle from '../../dnd/use-handle';
 import useState from '../../dnd/use-state';
+import useContainer from "../../dnd/use-container";
 
-const Canvas = ({ id, container, isRoot }: any) => {
+const Canvas = ({ id, container: sourceContainer, isRoot }: any) => {
     const state = useState();
-    const dispatch = useDispatch();
-    const ref = createRef<HTMLDivElement>();
 
-    const finalId = isRoot ? 'root' : id;
-
-    const { children } = state.containers[finalId] || { children: [] };
-
-    const events = useHandle({ component: finalId, sourceContainer: container, isContainer: true })
-
-    useEffect(() => {
-        if (ref.current) {
-            dispatch({ type: 'UPDATE_CONTAINER', id: finalId, ref: ref.current })
-        }
-    }, [])
-
+    const { ref, container, id: containerId } = useContainer({ id, isRoot })
+    const events = useHandle({ component: containerId, sourceContainer, isContainer: true })
 
     return <div className='canvas' ref={ref} style={{ display: 'flex' }}>
         <div style={{ minWidth: '80%' }}>
-
-            {children.map((key: string) => {
+            {container.children.map((key: string) => {
                 if (!state.components[key]) {
-                    return <Canvas key={key} id={key} container={finalId} />
+                    return <Canvas key={key} id={key} container={containerId} />
                 }
-                return <Component key={key} id={key} container={finalId} />
+                return <Component key={key} id={key} container={containerId} />
             })}
         </div>
-        {container && <div
+        {sourceContainer && <div
             style={{ marginLeft: 'auto', background: 'black', color: 'white', fontWeight: 'bold' }}
             {...events}
         >

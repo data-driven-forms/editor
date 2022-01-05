@@ -23,7 +23,7 @@ const useContainer = ({ id, isRoot }: UseContainerConfig) => {
         }
     }, [])
 
-    return { ref, container };
+    return { ref, container, id: finalId };
 }
 
 export default useContainer;
