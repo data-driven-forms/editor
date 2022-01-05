@@ -49,7 +49,7 @@ function App() {
         <Text>Data Driven Forms Pro Editor</Text>
       </Pane>
       <div className='builder'>
-        <div className='components'>
+        <Pane border className='components'>
           <Menu>
             <Menu.Group title="Components">
               <MenuItemWrapper component="text-field" >Text field</MenuItemWrapper>
@@ -57,7 +57,7 @@ function App() {
               <MenuItemWrapper component="form-group" isContainer>Form group</MenuItemWrapper>
             </Menu.Group>
           </Menu>
-        </div>
+        </Pane>
         <ContainerWrapper isRoot Component={ComponentWrapper} />
       </div>
     </Editor>

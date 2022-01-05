@@ -10,13 +10,16 @@
   margin: 4px;
 }
 
+.components {
+}
+
 .canvas {
   min-height: 150px;
-  width: 80%;
   background-color: #f9fafc;
   border: 2px dotted #474d66;
   padding: 4px;
-  margin: 4px;
+  margin-left: 4px;
+  flex-grow: 1;
 }
 
 body {
