@@ -3,7 +3,7 @@ import useDispatch from "../use-dispatch";
 import useState from "../use-state";
 
 interface UseContainerConfig {
-    id: string;
+    id?: string;
     isRoot?: boolean;
 }
 
@@ -15,7 +15,11 @@ const useContainer = ({ id, isRoot }: UseContainerConfig) => {
 
     const finalId = isRoot ? 'root' : id;
 
-    const container = state.containers[finalId] || { children: [] };
+    if(!isRoot && !finalId) {
+        throw new Error('Missing id for non-root container!');
+    }
+
+    const container = state.containers[finalId || 'root'] || { children: [] };
 
     useEffect(() => {
         if (ref.current) {
@@ -23,7 +27,7 @@ const useContainer = ({ id, isRoot }: UseContainerConfig) => {
         }
     }, [])
 
-    return { ref, container, id: finalId };
+    return { ref, container, id: finalId || 'root' };
 }
 
 export default useContainer;
