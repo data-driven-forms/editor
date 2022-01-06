@@ -25,3 +25,7 @@
 body {
   margin: 0px;
 }
+
+.handle:hover {
+  cursor: grab;
+}
