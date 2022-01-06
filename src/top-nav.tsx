@@ -14,7 +14,8 @@ const TopNav = () => {
         display="flex"
         alignItems="center"
         borderBottom="muted"
-        paddingX={majorScale(2)}
+        paddingX={majorScale(3)}
+        background='tint2'
     >
         <Pane display="flex" alignItems="center" width={236}>
             <Heading size={500}>
