@@ -27,20 +27,22 @@ const ComponentWrapper: React.FC<ComponentProps> = (props) => {
   />
 }
 
-const ContainerWrapper: React.FC<ContainerProps> = (props) => <Container
-  {...props}
-  HandleProps={{
-    style: { marginLeft: 'auto' },
-    size: 24,
-    className: 'handle'
-  }}
-  Handle={DragHandleVerticalIcon}
-  ListProps={{
-    style: { minWidth: '80%' }
-  }}
-  className='canvas'
-  style={{ display: 'flex' }}
-/>
+const ContainerWrapper: React.FC<ContainerProps> = (props) => {
+  return <Container
+    {...props}
+    HandleProps={{
+      style: { marginLeft: 'auto' },
+      size: 24,
+      className: 'handle'
+    }}
+    Handle={DragHandleVerticalIcon}
+    ListProps={{
+      style: { minWidth: '80%' }
+    }}
+    className='canvas'
+    style={{ display: 'flex', ...(props.isRoot && { border: '2px dotted rgb(71 77 102 / 50%)' }) }}
+  />
+}
 
 const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />
 
@@ -71,7 +73,7 @@ function App() {
             </Menu.Group>
           </Menu>
         </Pane>
-        <ContainerWrapper isRoot Component={ComponentWrapper} />
+        <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />
         <PropertiesCard />
       </Pane>
     </Editor>

@@ -42,7 +42,7 @@ const PropertiesCard: React.FC = () => {
                 </Tablist>
             </Pane>
         </Pane>
-        <Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
+        <Pane flex="1" overflowY="scroll" background="tint1" padding={8}>
             <Card
                 backgroundColor="white"
                 elevation={0}
