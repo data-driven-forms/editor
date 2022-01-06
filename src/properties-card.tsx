@@ -25,7 +25,7 @@ const PropertiesCard: React.FC = () => {
                     {state.selectedComponent}
                 </Heading>
                 <Paragraph size={400} color="muted">
-                    Optional description or sub title
+                    Edit field properties.
                 </Paragraph>
             </Pane>
             <Pane display="flex" padding={8}>

@@ -1,16 +1,8 @@
-.builder {
-  display: flex;
-  flex-grow: 1;
-}
-
 .component {
   background-color: #f9fafc;
   width: 100px;
   padding: 16px;
   margin: 4px;
-}
-
-.components {
 }
 
 .canvas {
@@ -20,6 +12,7 @@
   padding: 4px;
   margin-left: 4px;
   flex-grow: 1;
+  margin-right: 4px;
 }
 
 body {

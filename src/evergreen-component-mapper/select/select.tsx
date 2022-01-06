@@ -18,7 +18,7 @@ interface SelectProps extends UseFieldApiProps<string> {
 };
 
 const Select: React.FC<SelectProps> = (props) => {
-    const { input, meta, isDisabled, options, ...rest } = useFieldApi(props);
+    const { input, meta, isDisabled, options, isRequired, ...rest } = useFieldApi(props);
 
     return (
         <SelectField
@@ -26,6 +26,7 @@ const Select: React.FC<SelectProps> = (props) => {
             isInvalid={Boolean(meta.error)}
             validationMessage={meta.error}
             disabled={isDisabled}
+            required={isRequired}
             {...rest}
         >
             {options &&

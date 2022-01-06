@@ -4,7 +4,7 @@ import findTargetElement from "../find-target-element";
 import useDispatch from "../use-dispatch";
 import useState from "../use-state";
 
-const DropCursor = () => {
+const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
     const selectorRef = createRef<HTMLDivElement>();
     const mouseRef = createRef<HTMLDivElement>();
     const targetContainer = useRef<any>();
@@ -99,7 +99,9 @@ const DropCursor = () => {
                 zIndex: 99999999,
                 pointerEvents: 'none',
                 userSelect: 'none',
-            }} />
+            }}
+            {...CursorProps}
+        />
     </Fragment>
 }
 

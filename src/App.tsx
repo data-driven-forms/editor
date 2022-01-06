@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Pane, Text, DragHandleVerticalIcon } from 'evergreen-ui';
+import { Menu, Pane, DragHandleVerticalIcon, majorScale } from 'evergreen-ui';
 
 import './app.css';
 
@@ -10,6 +10,7 @@ import Editor from './editor-core/editor';
 import Component, { ComponentProps } from './editor-core/component';
 import useState from './dnd/use-state';
 import PropertiesCard from './properties-card';
+import TopNav from './top-nav';
 
 const ComponentWrapper: React.FC<ComponentProps> = (props) => {
   const state = useState();
@@ -45,12 +46,23 @@ const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component=
 
 function App() {
   return (
-    <Editor>
-      <Pane background='tint1' marginBottom={8} padding={16} >
-        <Text>Data Driven Forms Pro Editor</Text>
-      </Pane>
-      <div className='builder'>
-        <Pane border className='components'>
+    <Editor
+      DropCursorProps={{
+        CursorProps: {
+          className: 'drop-cursor'
+        }
+      }}
+    >
+      <TopNav />
+      <Pane display="flex">
+        <Pane
+          display="flex"
+          position="sticky"
+          flexDirection="column"
+          overflowY="auto"
+          maxHeight="calc(100vh - 64px)"
+          paddingX={majorScale(1)}
+        >
           <Menu>
             <Menu.Group title="Components">
               <MenuItemWrapper component="text-field" >Text field</MenuItemWrapper>
@@ -61,7 +73,7 @@ function App() {
         </Pane>
         <ContainerWrapper isRoot Component={ComponentWrapper} />
         <PropertiesCard />
-      </div>
+      </Pane>
     </Editor>
   );
 }
