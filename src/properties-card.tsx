@@ -42,16 +42,25 @@ const PropertiesCard: React.FC = () => {
                 </Tablist>
             </Pane>
         </Pane>
-        <Pane flex="1" overflowY="scroll" background="tint1" padding={8}>
+        <Pane flex="1" background="tint1" padding={8}>
             <Card
                 backgroundColor="white"
                 elevation={0}
-                height={240}
                 padding={8}
                 display="flex"
             >
                 <Properties
                     componentMapper={componentMapper}
+                    fields={[{
+                        name: 'text-field-group',
+                        component: 'sub-form',
+                        condition: { when: 'component', is: ['text-field', 'select']},
+                        fields: [
+                            { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.'},
+                            { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.'},
+                            { component: 'text-field', name: 'hint', label: 'Hint', description: 'Hint of the field.'}
+                        ]
+                    }]}
                 />
             </Card>
         </Pane>

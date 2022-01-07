@@ -1,15 +1,18 @@
+import React from 'react';
+
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import TextField from '../text-field';
 import Select from '../select';
+import SubForm from '../sub-form';
 
-const NullComponent = () => 'Not implemented';
+const NullComponent = () => <span>Not implemented</span>;
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA]: NullComponent,
   [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: NullComponent,
-  [componentTypes.SUB_FORM]: NullComponent,
+  [componentTypes.SUB_FORM]: SubForm,
   [componentTypes.RADIO]: NullComponent,
   [componentTypes.TABS]: NullComponent,
   [componentTypes.DATE_PICKER]: NullComponent,

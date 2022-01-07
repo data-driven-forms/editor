@@ -11,6 +11,8 @@ import Component, { ComponentProps } from './editor-core/component';
 import useState from './dnd/use-state';
 import PropertiesCard from './properties-card';
 import TopNav from './top-nav';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentMapper from './evergreen-component-mapper/component-mapper';
 
 const ComponentWrapper: React.FC<ComponentProps> = (props) => {
   const state = useState();
@@ -48,35 +50,46 @@ const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component=
 
 function App() {
   return (
-    <Editor
-      DropCursorProps={{
-        CursorProps: {
-          className: 'drop-cursor'
-        }
-      }}
+    <Pane
+      display="flex"
+      flexDirection="column"
+      height="100vh"
     >
-      <TopNav />
-      <Pane display="flex">
-        <Pane
-          display="flex"
-          position="sticky"
-          flexDirection="column"
-          overflowY="auto"
-          maxHeight="calc(100vh - 64px)"
-          paddingX={majorScale(1)}
-        >
-          <Menu>
-            <Menu.Group title="Components">
-              <MenuItemWrapper component="text-field" >Text field</MenuItemWrapper>
-              <MenuItemWrapper component="select">Select</MenuItemWrapper>
-              <MenuItemWrapper component="form-group" isContainer>Form group</MenuItemWrapper>
-            </Menu.Group>
-          </Menu>
+      <Editor
+        DropCursorProps={{
+          CursorProps: {
+            className: 'drop-cursor'
+          }
+        }}
+      >
+        <TopNav />
+        <Pane display="flex" flexGrow="1">
+          <Pane
+            display="flex"
+            position="sticky"
+            flexDirection="column"
+            overflowY="auto"
+            maxHeight="calc(100vh - 64px)"
+            paddingX={majorScale(1)}
+          >
+            <Menu>
+              <Menu.Group title="Components">
+                <MenuItemWrapper component="text-field" >Text field</MenuItemWrapper>
+                <MenuItemWrapper component="select">Select</MenuItemWrapper>
+                <MenuItemWrapper component="form-group" isContainer>Form group</MenuItemWrapper>
+              </Menu.Group>
+            </Menu>
+          </Pane>
+          <FormRenderer
+            schema={{ fields: [] }}
+            onSubmit={() => undefined}
+            componentMapper={componentMapper}
+            FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
+          />
+          <PropertiesCard />
         </Pane>
-        <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />
-        <PropertiesCard />
-      </Pane>
-    </Editor>
+      </Editor>
+    </Pane>
   );
 }
 
