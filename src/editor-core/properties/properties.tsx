@@ -1,6 +1,7 @@
 import React from 'react';
 
 import omit from 'lodash/omit';
+import isEqual from 'lodash/isEqual';
 
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
@@ -47,11 +48,15 @@ const Properties: React.FC<PropertiesProps> = ({ componentMapper, fields = [] })
         schema={{
             fields: [
                 {
-                    component: 'editor-form-spy', name: 'editor-form-spy', onChange: (values: AnyObject) => dispatch({
-                        type: 'UPDATE_PROPS',
-                        id: state.selectedComponent,
-                        props: values
-                    })
+                    component: 'editor-form-spy', name: 'editor-form-spy', onChange: (values: AnyObject) => {
+                        if (!isEqual(omit(selectedComponent, ['ref']), values)) {
+                            dispatch({
+                                type: 'UPDATE_PROPS',
+                                id: state.selectedComponent,
+                                props: values
+                            })
+                        }
+                    }
                 },
                 ...fields
             ]
