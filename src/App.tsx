@@ -61,6 +61,7 @@ function App() {
             className: 'drop-cursor'
           }
         }}
+        componentMapper={componentMapper}
       >
         <TopNav />
         <Pane flex="1" width="100%" display="flex">
@@ -75,9 +76,9 @@ function App() {
           >
             <Menu>
               <Menu.Group title="Components">
-                <MenuItemWrapper component="text-field" >Text field</MenuItemWrapper>
-                <MenuItemWrapper component="select">Select</MenuItemWrapper>
-                <MenuItemWrapper component="form-group" isContainer>Form group</MenuItemWrapper>
+                {Object.keys(componentMapper).map(key => <MenuItemWrapper key={key} component={key}>
+                  {key.replaceAll('-', ' ')}
+                </MenuItemWrapper>)}
               </Menu.Group>
             </Menu>
           </Pane>
@@ -87,7 +88,7 @@ function App() {
             componentMapper={componentMapper}
             FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
           />
-          <PropertiesCard />
+          <PropertiesCard componentMapper={componentMapper} />
         </Pane>
       </Editor>
     </Pane>

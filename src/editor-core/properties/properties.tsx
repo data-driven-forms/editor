@@ -53,31 +53,10 @@ const Properties: React.FC<PropertiesProps> = ({ componentMapper, fields = [] })
                         props: values
                     })
                 },
-                {
-                    name: 'component',
-                    component: 'select',
-                    label: 'Component',
-                    description: 'Component type.',
-                    isRequired: true,
-                    validate: [{ type: 'required' }],
-                    options: [
-                        { label: 'Text field', value: 'text-field' },
-                        { label: 'Select', value: 'select' },
-                        { label: 'Form group', value: 'form-group' },
-                    ]
-                },
-                {
-                    name: 'name',
-                    component: 'text-field',
-                    label: 'Name',
-                    description: 'Name of the field. You can use dot notation to nest variables.',
-                    isRequired: true,
-                    validate: [{ type: 'required' }]
-                },
                 ...fields
             ]
         }}
-        onSubmit={console.log}
+        onSubmit={() => undefined}
         FormTemplate={FormTemplate}
         componentMapper={{
             'editor-form-spy': EditorFormSpy,
