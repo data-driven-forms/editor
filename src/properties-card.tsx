@@ -15,7 +15,7 @@ const PropertiesCard: React.FC = () => {
         return null;
     }
 
-    return <Pane position="sticky" top="40px" maxHeight="calc(100vh - 100px)">
+    return <Pane position="sticky" top="40px" maxHeight="calc(100vh - 40px)"  display="flex" flexDirection="column">
         <Pane zIndex={1} flexShrink={0} elevation={0} backgroundColor="white">
             <Pane padding={16} borderBottom="muted">
                 <Pane display="flex">
