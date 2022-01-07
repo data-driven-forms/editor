@@ -1,12 +1,50 @@
-# Getting Started with Create React App
+- [Data Driven Forms Pro Editor](#data-driven-forms-pro-editor)
+- [Packages](#packages)
+  - [dnd](#dnd)
+  - [editor-core](#editor-core)
+  - [editor-pro](#editor-pro)
+  - [evergreen-component-mapper](#evergreen-component-mapper)
+- [Available Scripts](#available-scripts)
+  - [`npm start`](#npm-start)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Data Driven Forms Pro Editor
 
-## Available Scripts
+Drag and Drop editor for building [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
+
+# Packages
+
+## dnd
+
+Drag and Drop system powering the editor.
+
+- Touch support
+- Nesting support
+- Supporting any kind of storage (useReducer, redux, etc.)
+- Custom "backend" => everything is controlled in JS and React
+
+Roadmap
+
+- [ ] keyboard support
+
+## editor-core
+
+A set of utilities for building Data Driven Forms editors. Using these components and hooks you can easily build and customize your own editor in short time.
+
+## editor-pro
+
+An implementation of editor using `editor-core` utilities. Using [Evergreen-ui](https://github.com/segmentio/evergreen) to look neutral when using with other mappers.
+
+- Supports all mappers
+
+## evergreen-component-mapper
+
+Set of basic components to power `editor-pro` properties editor. [See more](https://github.com/segmentio/evergreen).
+
+# Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+## `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,33 +52,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
