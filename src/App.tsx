@@ -48,6 +48,38 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => {
 
 const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />
 
+const fields = [
+  {
+    name: 'component',
+    component: 'select',
+    label: 'Component',
+    description: 'Component type.',
+    isRequired: true,
+    validate: [{ type: 'required' }],
+    options: Object.keys(componentMapper).map(key => ({
+      label: key.replaceAll('-', ' '),
+      value: key
+    }))
+  },
+  {
+    name: 'name',
+    component: 'text-field',
+    label: 'Name',
+    description: 'Name of the field. You can use dot notation to nest variables.',
+    isRequired: true,
+    validate: [{ type: 'required' }]
+  },
+  {
+    name: 'text-field-group',
+    component: 'sub-form',
+    condition: { when: 'component', is: ['text-field', 'select'] },
+    fields: [
+      { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' },
+      { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.' },
+      { component: 'text-field', name: 'hint', label: 'Hint', description: 'Hint of the field.' }
+    ]
+  }]
+
 function App() {
   return (
     <Pane
@@ -88,7 +120,7 @@ function App() {
             componentMapper={componentMapper}
             FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
           />
-          <PropertiesCard componentMapper={componentMapper} />
+          <PropertiesCard fields={fields}/>
         </Pane>
       </Editor>
     </Pane>

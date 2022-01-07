@@ -5,13 +5,13 @@ import useEditorState from './dnd/use-state';
 import Properties from './editor-core/properties';
 import componentMapper from './evergreen-component-mapper/component-mapper';
 import useDispatch from './dnd/use-dispatch';
-import { AnyObject } from './dnd/types';
+import { Field } from '@data-driven-forms/react-form-renderer';
 
 interface PropertiesCardProps {
-    componentMapper: AnyObject;
+    fields: Field[];
 }
 
-const PropertiesCard: React.FC<PropertiesCardProps> = ({ componentMapper: propsComponentMapper }) => {
+const PropertiesCard: React.FC<PropertiesCardProps> = ({ fields }) => {
     const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const state = useEditorState()
     const dispatch = useDispatch();
@@ -60,37 +60,7 @@ const PropertiesCard: React.FC<PropertiesCardProps> = ({ componentMapper: propsC
             >
                 <Properties
                     componentMapper={componentMapper}
-                    fields={[
-                        {
-                            name: 'component',
-                            component: 'select',
-                            label: 'Component',
-                            description: 'Component type.',
-                            isRequired: true,
-                            validate: [{ type: 'required' }],
-                            options: Object.keys(propsComponentMapper).map(key => ({
-                                label: key.replaceAll('-', ' '),
-                                value: key
-                            }))
-                        },
-                        {
-                            name: 'name',
-                            component: 'text-field',
-                            label: 'Name',
-                            description: 'Name of the field. You can use dot notation to nest variables.',
-                            isRequired: true,
-                            validate: [{ type: 'required' }]
-                        },
-                        {
-                            name: 'text-field-group',
-                            component: 'sub-form',
-                            condition: { when: 'component', is: ['text-field', 'select'] },
-                            fields: [
-                                { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' },
-                                { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.' },
-                                { component: 'text-field', name: 'hint', label: 'Hint', description: 'Hint of the field.' }
-                            ]
-                        }]}
+                    fields={fields}
                 />
             </Card>
         </Pane>
