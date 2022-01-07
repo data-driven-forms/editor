@@ -23,7 +23,7 @@ const ComponentWrapper: React.FC<ComponentProps> = (props) => {
     HandleProps={{
       style: { marginLeft: 'auto' },
       size: 24,
-      className: 'handle'
+      cursor: 'grab'
     }}
     Handle={DragHandleVerticalIcon}
   />
@@ -35,7 +35,7 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => {
     HandleProps={{
       style: { marginLeft: 'auto' },
       size: 24,
-      className: 'handle'
+      cursor: 'grab'
     }}
     Handle={DragHandleVerticalIcon}
     ListProps={{
@@ -63,14 +63,15 @@ function App() {
         }}
       >
         <TopNav />
-        <Pane display="flex" flexGrow="1">
+        <Pane flex="1" width="100%" display="flex">
           <Pane
             display="flex"
             position="sticky"
             flexDirection="column"
             overflowY="auto"
-            maxHeight="calc(100vh - 64px)"
+            maxHeight="calc(100vh - 48px)"
             paddingX={majorScale(1)}
+            top="48px"
           >
             <Menu>
               <Menu.Group title="Components">

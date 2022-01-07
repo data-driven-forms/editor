@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
-import { Pane, Heading, Tab, Tablist, Paragraph, Card } from 'evergreen-ui';
+import { Pane, Heading, Tab, Tablist, Paragraph, Card, CrossIcon } from 'evergreen-ui';
 
 import useEditorState from './dnd/use-state';
 import Properties from './editor-core/properties';
 import componentMapper from './evergreen-component-mapper/component-mapper';
+import useDispatch from './dnd/use-dispatch';
 
 const PropertiesCard: React.FC = () => {
     const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const state = useEditorState()
+    const dispatch = useDispatch();
 
     if (!state.selectedComponent) {
-        return <Pane padding={16} borderBottom="muted">
-            <Heading size={600}>No component</Heading>
-            <Paragraph size={400} color="muted">
-                No component is selected
-            </Paragraph>
-        </Pane>
+        return null;
     }
 
-    return <Pane>
+    return <Pane position="sticky" top="40px" maxHeight="calc(100vh - 100px)">
         <Pane zIndex={1} flexShrink={0} elevation={0} backgroundColor="white">
             <Pane padding={16} borderBottom="muted">
-                <Heading size={600}>
-                    {state.selectedComponent}
-                </Heading>
+                <Pane display="flex">
+                    <Pane flex="1">
+                        <Heading size={600}>
+                            {state.selectedComponent}
+                        </Heading>
+                    </Pane>
+                    <Pane>
+                        <CrossIcon cursor="pointer" onClick={() => dispatch({ type: 'UNSELECT_COMPONENT' })} />
+                    </Pane>
+                </Pane>
                 <Paragraph size={400} color="muted">
                     Edit field properties.
                 </Paragraph>
@@ -54,11 +58,11 @@ const PropertiesCard: React.FC = () => {
                     fields={[{
                         name: 'text-field-group',
                         component: 'sub-form',
-                        condition: { when: 'component', is: ['text-field', 'select']},
+                        condition: { when: 'component', is: ['text-field', 'select'] },
                         fields: [
-                            { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.'},
-                            { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.'},
-                            { component: 'text-field', name: 'hint', label: 'Hint', description: 'Hint of the field.'}
+                            { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' },
+                            { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.' },
+                            { component: 'text-field', name: 'hint', label: 'Hint', description: 'Hint of the field.' }
                         ]
                     }]}
                 />

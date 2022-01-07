@@ -14,6 +14,9 @@ const reducer = (state: any, action: any) => {
         case 'SELECT_COMPONENT':
             state.selectedComponent = action.id;
             return { ...state };
+        case 'UNSELECT_COMPONENT':
+            state.selectedComponent = null;
+            return { ...state };
         case 'UPDATE_PROPS':
             state.components[action.id] = {
                 ...state.components[action.id],
