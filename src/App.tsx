@@ -39,7 +39,7 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => {
     }}
     Handle={DragHandleVerticalIcon}
     ListProps={{
-      style: { minWidth: '80%' }
+      style: { minWidth: 'calc(100% - 24px)' }
     }}
     className='canvas'
     style={{ display: 'flex', ...(props.isRoot && { border: '2px dotted rgb(71 77 102 / 50%)' }) }}
