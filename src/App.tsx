@@ -13,6 +13,8 @@ import PropertiesCard from './properties-card';
 import TopNav from './top-nav';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
 //import componentMapper from './evergreen-component-mapper/component-mapper';
 
@@ -82,56 +84,70 @@ const fields = [
     ]
   }]
 
-  const componentInitialProps: AnyObject = {
-    'dual-list-select': {
-      options: []
-    }
+const componentInitialProps: AnyObject = {
+  'dual-list-select': {
+    options: []
+  },
+  'sub-form': {
+    fields: []
+  },
+  'field-array': {
+    fields: []
+  },
+  wizard: {
+    fields: [{ name: 'step-1', fields: [] }]
+  },
+  tabs: {
+    fields: []
   }
+}
 
 function App() {
   return (
-    <Pane
-      display="flex"
-      flexDirection="column"
-      height="100vh"
-    >
-      <Editor
-        DropCursorProps={{
-          CursorProps: {
-            className: 'drop-cursor'
-          }
-        }}
-        componentMapper={componentMapper}
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Pane
+        display="flex"
+        flexDirection="column"
+        height="100vh"
       >
-        <TopNav />
-        <Pane flex="1" width="100%" display="flex">
-          <Pane
-            display="flex"
-            position="sticky"
-            flexDirection="column"
-            overflowY="auto"
-            maxHeight="calc(100vh - 48px)"
-            paddingX={majorScale(1)}
-            top="48px"
-          >
-            <Menu>
-              <Menu.Group title="Components">
-                {Object.keys(componentMapper).map(key => <MenuItemWrapper key={key} component={key} componentInitialProps={componentInitialProps[key]}>
-                  {key.replaceAll('-', ' ')}
-                </MenuItemWrapper>)}
-              </Menu.Group>
-            </Menu>
+        <Editor
+          DropCursorProps={{
+            CursorProps: {
+              className: 'drop-cursor'
+            }
+          }}
+          componentMapper={componentMapper}
+        >
+          <TopNav />
+          <Pane flex="1" width="100%" display="flex">
+            <Pane
+              display="flex"
+              position="sticky"
+              flexDirection="column"
+              overflowY="auto"
+              maxHeight="calc(100vh - 48px)"
+              paddingX={majorScale(1)}
+              top="48px"
+            >
+              <Menu>
+                <Menu.Group title="Components">
+                  {Object.keys(componentMapper).map(key => <MenuItemWrapper key={key} component={key} componentInitialProps={componentInitialProps[key]}>
+                    {key.replaceAll('-', ' ')}
+                  </MenuItemWrapper>)}
+                </Menu.Group>
+              </Menu>
+            </Pane>
+            <FormRenderer
+              schema={{ fields: [] }}
+              onSubmit={() => undefined}
+              componentMapper={componentMapper}
+              FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
+            />
+            <PropertiesCard fields={fields} />
           </Pane>
-          <FormRenderer
-            schema={{ fields: [] }}
-            onSubmit={() => undefined}
-            componentMapper={componentMapper}
-            FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
-          />
-          <PropertiesCard fields={fields}/>
-        </Pane>
-      </Editor>
-    </Pane>
+        </Editor>
+      </Pane>
+    </LocalizationProvider>
   );
 }
 
