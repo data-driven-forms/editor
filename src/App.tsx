@@ -76,11 +76,14 @@ const fields = [
   {
     name: 'text-field-group',
     component: 'sub-form',
-    condition: { when: 'component', is: ['text-field', 'select'] },
+    condition: { when: 'component', is: ['text-field', 'textarea', 'checkbox', 'select', 'radio', 'switch', 'dual-list-select', 'field-array'] },
     fields: [
       { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' },
       { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.' },
-      { component: 'text-field', name: 'hint', label: 'Hint', description: 'Hint of the field.' }
+      { component: 'text-field', name: 'helperText', label: 'Helper text' },
+      { component: 'checkbox', name: 'isRequired', label: 'Is required?' },
+      { component: 'checkbox', name: 'isDisabled', label: 'Is disabled?' },
+      { component: 'checkbox', name: 'isReadOnly', label: 'Is read-only?' },
     ]
   }]
 

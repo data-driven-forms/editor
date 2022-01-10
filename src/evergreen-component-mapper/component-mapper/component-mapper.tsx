@@ -4,6 +4,7 @@ import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import TextField from '../text-field';
 import Select from '../select';
 import SubForm from '../sub-form';
+import Checkbox from '../checkbox';
 
 const NullComponent = () => <span>Not implemented</span>;
 
@@ -11,7 +12,7 @@ const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA]: NullComponent,
   [componentTypes.SELECT]: Select,
-  [componentTypes.CHECKBOX]: NullComponent,
+  [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
   [componentTypes.RADIO]: NullComponent,
   [componentTypes.TABS]: NullComponent,
