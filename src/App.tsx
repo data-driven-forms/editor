@@ -12,7 +12,9 @@ import useState from './dnd/use-state';
 import PropertiesCard from './properties-card';
 import TopNav from './top-nav';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
-import componentMapper from './evergreen-component-mapper/component-mapper';
+import { componentMapper } from '@data-driven-forms/mui-component-mapper';
+import { AnyObject } from './dnd/types';
+//import componentMapper from './evergreen-component-mapper/component-mapper';
 
 const ComponentWrapper: React.FC<ComponentProps> = (props) => {
   const state = useState();
@@ -80,6 +82,12 @@ const fields = [
     ]
   }]
 
+  const componentInitialProps: AnyObject = {
+    'dual-list-select': {
+      options: []
+    }
+  }
+
 function App() {
   return (
     <Pane
@@ -108,7 +116,7 @@ function App() {
           >
             <Menu>
               <Menu.Group title="Components">
-                {Object.keys(componentMapper).map(key => <MenuItemWrapper key={key} component={key}>
+                {Object.keys(componentMapper).map(key => <MenuItemWrapper key={key} component={key} componentInitialProps={componentInitialProps[key]}>
                   {key.replaceAll('-', ' ')}
                 </MenuItemWrapper>)}
               </Menu.Group>

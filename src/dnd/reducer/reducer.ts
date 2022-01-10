@@ -2,6 +2,7 @@ export const clearDrag = {
     draggingElement: null,
     isDraggingContainer: null,
     draggingSourceContainer: null,
+    draggingProps: null
 }
 
 export const dragStart = (state: any, action: any) => ({
@@ -9,6 +10,7 @@ export const dragStart = (state: any, action: any) => ({
     draggingElement: action.component,
     isDraggingContainer: action.isContainer,
     sourceContainer: action.sourceContainer,
+    draggingProps: action.props
 })
 
 export const dragDrop = (state: any, action: any) => {
@@ -64,7 +66,7 @@ export const dragDrop = (state: any, action: any) => {
     }
 
     // generate id for new items or used the old one
-    const id = state.sourceContainer ? state.draggingElement : `${state.draggingElement}-${Date.now()}`;
+    const id = action.id || state.sourceContainer ? state.draggingElement : `${state.draggingElement}-${Date.now()}`;
 
     // remove item from the old container, or create a new one
     if (state.sourceContainer) {
@@ -98,6 +100,7 @@ export const dragDrop = (state: any, action: any) => {
                         [id]: {
                             children: [],
                             ref: null,
+                            ...state.draggingProps
                         }
                     },
                 })
@@ -112,7 +115,8 @@ export const dragDrop = (state: any, action: any) => {
                     ...state.components,
                     [id]: {
                         component: state.draggingElement,
-                        name: id
+                        name: id,
+                        ...state.draggingProps
                     }
                 },
             })
