@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pane, Heading, Tab, Tablist, Paragraph, Card, CrossIcon } from 'evergreen-ui';
+import { Pane, Heading, Tab, Tablist, Paragraph, Card, CrossIcon, Button } from 'evergreen-ui';
 
 import useEditorState from './dnd/use-state';
 import Properties from './editor-core/properties';
@@ -29,13 +29,16 @@ const PropertiesCard: React.FC<PropertiesCardProps> = ({ fields }) => {
                             {state.selectedComponent}
                         </Heading>
                     </Pane>
-                    <Pane>
-                        <CrossIcon cursor="pointer" onClick={() => dispatch({ type: 'UNSELECT_COMPONENT' })} />
-                    </Pane>
+                    <CrossIcon cursor="pointer" onClick={() => dispatch({ type: 'UNSELECT_COMPONENT' })} />
                 </Pane>
                 <Paragraph size={400} color="muted">
                     Edit field properties.
                 </Paragraph>
+            </Pane>
+            <Pane display="flex">
+            <Button flex="1" margin="8px" intent="danger" onClick={() => dispatch({ type: 'REMOVE_COMPONENT', id: state.selectedComponent })}>
+                Remove
+            </Button>
             </Pane>
             <Pane display="flex" padding={8}>
                 <Tablist>

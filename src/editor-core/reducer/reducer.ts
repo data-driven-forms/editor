@@ -23,6 +23,16 @@ const reducer = (state: any, action: any) => {
                 ...action.props
             };
             return { ...state };
+        case 'REMOVE_COMPONENT':
+            delete state.components[action.id];
+
+            const parent = Object.keys(state.containers).find(key =>
+                state.containers[key].children.includes(action.id)
+            )
+
+            state.containers[parent as string].children = state.containers[parent as string].children.filter((key: string) => key !== action.id);
+
+            return { ...state, ...(action.id === state.selectedComponent && { selectedComponent: null }) }
     }
 }
 
