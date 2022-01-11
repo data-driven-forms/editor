@@ -16,6 +16,7 @@ import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
+import SubForm from './sub-form';
 //import componentMapper from './evergreen-component-mapper/component-mapper';
 
 const ComponentWrapper: React.FC<ComponentProps> = (props) => {
@@ -84,7 +85,16 @@ const fields = [
       { component: 'checkbox', name: 'isRequired', label: 'Is required?' },
       { component: 'checkbox', name: 'isDisabled', label: 'Is disabled?' },
       { component: 'checkbox', name: 'isReadOnly', label: 'Is read-only?' },
-    ]
+    ],
+  },
+  {
+    name: 'sub-form-group',
+    component: 'sub-form',
+    condition: { when: 'component', is: ['sub-form'] },
+    fields: [
+      { component: 'text-field', name: 'title', label: 'Title', description: 'Title of the sub-form.' },
+      { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the sub-form.' },
+    ],
   }]
 
 const componentInitialProps: AnyObject = {
@@ -92,6 +102,7 @@ const componentInitialProps: AnyObject = {
     options: []
   },
   'sub-form': {
+    title: 'Sub form',
     fields: []
   },
   'field-array': {
@@ -104,6 +115,8 @@ const componentInitialProps: AnyObject = {
     fields: []
   }
 }
+
+
 
 function App() {
   return (
@@ -119,7 +132,6 @@ function App() {
               className: 'drop-cursor'
             }
           }}
-          componentMapper={componentMapper}
         >
           <TopNav />
           <Pane flex="1" width="100%" display="flex">
@@ -143,7 +155,7 @@ function App() {
             <FormRenderer
               schema={{ fields: [] }}
               onSubmit={() => undefined}
-              componentMapper={componentMapper}
+              componentMapper={{...componentMapper, 'sub-form': SubForm}}
               FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
             />
             <PropertiesCard fields={fields} />
