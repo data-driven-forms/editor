@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@data-driven-forms/mui-component-mapper": "^3.16.1",
-    "@data-driven-forms/react-form-renderer": "^3.16.0",
+    "@data-driven-forms/mui-component-mapper": "^3.16.2",
+    "@data-driven-forms/react-form-renderer": "^3.16.2",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "@testing-library/jest-dom": "^5.16.1",
