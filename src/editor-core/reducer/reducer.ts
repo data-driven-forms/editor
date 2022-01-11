@@ -24,8 +24,21 @@ const reducer = (state: any, action: any) => {
             };
             return { ...state };
         case 'REMOVE_COMPONENT':
-            delete state.components[action.id];
+            const removeInnerChild = (id: string) => {
+                delete state.components[id];
+                if (state.containers[id]) {
+                    const children = state.containers[id].children;
 
+                    children.forEach(removeInnerChild);
+
+                    delete state.containers[id];
+                }
+            }
+
+            // remove item + container + all children
+            removeInnerChild(action.id)
+
+            // clear component from parent container
             const parent = Object.keys(state.containers).find(key =>
                 state.containers[key].children.includes(action.id)
             )
