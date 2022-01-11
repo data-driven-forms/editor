@@ -1,6 +1,5 @@
 export const clearDrag = {
     draggingElement: null,
-    isDraggingContainer: null,
     sourceContainer: null,
     draggingProps: null
 }
@@ -8,7 +7,6 @@ export const clearDrag = {
 export const dragStart = (state: any, action: any) => ({
     ...state,
     draggingElement: action.component,
-    isDraggingContainer: action.isContainer,
     sourceContainer: action.sourceContainer,
     draggingProps: action.props
 })
@@ -22,8 +20,10 @@ export const dragDrop = (state: any, action: any) => {
         }
     }
 
+    const isDraggingContainer = Boolean(state.draggingElement && state.containers[state.draggingElement])
+
     // dragging container into itself
-    if (state.isDraggingContainer && state.draggingElement === action.targetContainer) {
+    if (isDraggingContainer && state.draggingElement === action.targetContainer) {
         return {
             ...state,
             ...clearDrag,
@@ -31,7 +31,7 @@ export const dragDrop = (state: any, action: any) => {
     }
 
     // dragging container into sub-container
-    if (state.isDraggingContainer) {
+    if (isDraggingContainer) {
         let parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(action.targetContainer));
 
         // check all parent containers
@@ -89,23 +89,6 @@ export const dragDrop = (state: any, action: any) => {
         }
         // inserting a new node
     } else {
-        // if dragging container add a container
-        if (state.isDraggingContainer) {
-            return {
-                ...state,
-                ...clearDrag,
-                ...(action.targetContainer && {
-                    containers: {
-                        ...state.containers,
-                        [id]: {
-                            children: [],
-                            ref: null,
-                            ...state.draggingProps
-                        }
-                    },
-                })
-            };
-        }
         // if dragging component add a component
         return {
             ...state,
@@ -125,7 +108,14 @@ export const dragDrop = (state: any, action: any) => {
 }
 
 export const updateContainer = (state: any, action: any) => {
-    state.containers[action.id].ref = action.ref;
+    if(state.containers[action.id]) {
+        state.containers[action.id].ref = action.ref;
+    } else {
+        state.containers[action.id] = {
+            ref: action.ref,
+            children: []
+        }
+    }
 
     return state;
 };

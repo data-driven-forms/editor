@@ -2,7 +2,9 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Typography, Grid } from '@mui/material';
 
-import { AnyObject, useFormApi } from '@data-driven-forms/react-form-renderer';
+import { AnyObject } from '@data-driven-forms/react-form-renderer';
+import ContainerWrapper from './container-wrapper';
+import ComponentWrapper from './component-wrapper';
 
 const PREFIX = 'SubForm';
 
@@ -26,6 +28,7 @@ interface SubformProps {
     DescriptionProps?: AnyObject;
     DescriptionGridProps?: AnyObject;
     ItemsGridProps?: AnyObject;
+    name: string;
 }
 
 const SubForm: React.FC<SubformProps> = ({
@@ -55,8 +58,8 @@ const SubForm: React.FC<SubformProps> = ({
           </Typography>
         </Grid>
       )}
-      <Grid item xs={12} container rowSpacing={2} {...ItemsGridProps}>
-        <div style={{background: 'red', height: 500, width: 200}} />
+      <Grid item xs={12} container rowSpacing={2} {...ItemsGridProps} sx={{paddingTop: 2}}>
+        <ContainerWrapper Component={ComponentWrapper} id={rest.name} />
       </Grid>
     </StyledGrid>
   );

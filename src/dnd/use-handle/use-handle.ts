@@ -5,7 +5,6 @@ import useDispatch from "../use-dispatch";
 
 interface UseHandleConfig extends AnyObject {
     component: string;
-    isContainer?: boolean;
     sourceContainer?: string;
 }
 
