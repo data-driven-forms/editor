@@ -1,6 +1,6 @@
 import { Field } from '@data-driven-forms/react-form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
-import React, { useCallback } from 'react';
+import React, { useCallback, MouseEvent } from 'react';
 import { AnyObject } from '../../dnd/types';
 import useComponent from '../../dnd/use-component';
 import useDispatch from '../../dnd/use-dispatch';
@@ -20,7 +20,9 @@ const Component: React.FC<ComponentProps> = ({ id, container, HandleProps, Handl
     const formOptions = useFormApi()
     const { ref, component } = useComponent({ id });
 
-    const onClick = useCallback(() => {
+    const onClick = useCallback((e: MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
         dispatch({
             type: 'SELECT_COMPONENT',
             id
