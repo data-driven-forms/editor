@@ -15,7 +15,7 @@ const ComponentWrapper: React.FC<ComponentProps> = (props) => {
             padding: 8,
             margin: 5,
             display: 'flex',
-            opacity: state.draggingElement === props.id ? 0.5 : 1,
+            opacity: state.draggingElement === props.id ? 0.3 : 1,
             boxShadow: state.selectedComponent === props.id ? 'rgb(112 112 112) 2px 5px 5px' : '1px 5px 5px #b3b3b3',
             cursor: 'pointer'
         }}
