@@ -1,14 +1,11 @@
 import React from 'react';
 
-import { Menu, Pane, DragHandleVerticalIcon, majorScale } from 'evergreen-ui';
+import { Menu, Pane, majorScale } from 'evergreen-ui';
 
 import './app.css';
 
-import Container, { ContainerProps } from './editor-core/container';
 import MenuItem, { MenuItemProps } from './editor-core/menu-item';
 import Editor from './editor-core/editor';
-import Component, { ComponentProps } from './editor-core/component';
-import useState from './dnd/use-state';
 import PropertiesCard from './properties-card';
 import TopNav from './top-nav';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
@@ -17,39 +14,9 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
 import SubForm from './sub-form';
+import ContainerWrapper from './container-wrapper';
+import ComponentWrapper from './component-wrapper';
 //import componentMapper from './evergreen-component-mapper/component-mapper';
-
-const ComponentWrapper: React.FC<ComponentProps> = (props) => {
-  const state = useState();
-
-  return <Component
-    {...props}
-    style={{ padding: 8, margin: 5, border: state.selectedComponent === props.id ? '2px dotted red' : '2px dotted #474d66', display: 'flex', opacity: state.draggingElement === props.id ? 0.5 : 1 }}
-    HandleProps={{
-      style: { marginLeft: 'auto' },
-      size: 24,
-      cursor: 'grab'
-    }}
-    Handle={DragHandleVerticalIcon}
-  />
-}
-
-const ContainerWrapper: React.FC<ContainerProps> = (props) => {
-  return <Container
-    {...props}
-    HandleProps={{
-      style: { marginLeft: 'auto' },
-      size: 24,
-      cursor: 'grab'
-    }}
-    Handle={DragHandleVerticalIcon}
-    ListProps={{
-      style: { minWidth: 'calc(100% - 24px)' }
-    }}
-    className='canvas'
-    style={{ display: 'flex', ...(props.isRoot && { border: '2px dotted rgb(71 77 102 / 50%)' }) }}
-  />
-}
 
 const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />
 
@@ -156,7 +123,7 @@ function App() {
               schema={{ fields: [] }}
               onSubmit={() => undefined}
               componentMapper={{...componentMapper, 'sub-form': SubForm}}
-              FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} Container={ContainerWrapper} />}
+              FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} />}
             />
             <PropertiesCard fields={fields} />
           </Pane>
