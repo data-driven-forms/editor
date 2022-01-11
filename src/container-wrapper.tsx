@@ -17,7 +17,7 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => {
             style: { minWidth: 'calc(100% - 24px)' }
         }}
         className='canvas'
-        style={{ display: 'flex', border: '2px dotted rgb(71 77 102 / 50%)' }}
+        style={{ display: 'flex', border: '1px dotted rgb(71 77 102 / 50%)' }}
     />
 }
 
