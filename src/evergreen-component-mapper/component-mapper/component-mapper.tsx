@@ -5,6 +5,7 @@ import TextField from '../text-field';
 import Select from '../select';
 import SubForm from '../sub-form';
 import Checkbox from '../checkbox';
+import Tabs from '../tabs';
 
 const NullComponent = () => <span>Not implemented</span>;
 
@@ -15,7 +16,7 @@ const mapper = {
   [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
   [componentTypes.RADIO]: NullComponent,
-  [componentTypes.TABS]: NullComponent,
+  [componentTypes.TABS]: Tabs,
   [componentTypes.DATE_PICKER]: NullComponent,
   [componentTypes.TIME_PICKER]: NullComponent,
   [componentTypes.WIZARD]: NullComponent,

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Pane, Heading, Tab, Tablist, Paragraph, Card, CrossIcon, Button } from 'evergreen-ui';
+import React from 'react';
+import { Pane, Heading, Paragraph, CrossIcon, Button } from 'evergreen-ui';
 
 import useEditorState from './dnd/use-state';
 import Properties from './editor-core/properties';
@@ -12,7 +12,6 @@ interface PropertiesCardProps {
 }
 
 const PropertiesCard: React.FC<PropertiesCardProps> = ({ fields }) => {
-    const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const state = useEditorState()
     const dispatch = useDispatch();
 
@@ -36,37 +35,15 @@ const PropertiesCard: React.FC<PropertiesCardProps> = ({ fields }) => {
                 </Paragraph>
             </Pane>
             <Pane display="flex">
-            <Button flex="1" margin="8px" intent="danger" onClick={() => dispatch({ type: 'REMOVE_COMPONENT', id: state.selectedComponent })}>
-                Remove
-            </Button>
-            </Pane>
-            <Pane display="flex" padding={8}>
-                <Tablist>
-                    {['Props', 'Validators'].map((tab, index) => (
-                        <Tab
-                            key={tab}
-                            isSelected={selectedIndex === index}
-                            onSelect={() => setSelectedIndex(index)}
-                        >
-                            {tab}
-                        </Tab>
-                    ))}
-                </Tablist>
+                <Button flex="1" margin="8px" intent="danger" onClick={() => dispatch({ type: 'REMOVE_COMPONENT', id: state.selectedComponent })}>
+                    Remove
+                </Button>
             </Pane>
         </Pane>
-        <Pane flex="1" background="tint1" padding={8}>
-            <Card
-                backgroundColor="white"
-                elevation={0}
-                padding={8}
-                display="flex"
-            >
-                <Properties
-                    componentMapper={componentMapper}
-                    fields={fields}
-                />
-            </Card>
-        </Pane>
+        <Properties
+            componentMapper={componentMapper}
+            fields={fields}
+        />
     </Pane>
 }
 

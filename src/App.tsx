@@ -22,47 +22,59 @@ const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component=
 
 const fields = [
   {
-    name: 'component',
-    component: 'select',
-    label: 'Component',
-    description: 'Component type.',
-    isRequired: true,
-    validate: [{ type: 'required' }],
-    options: Object.keys(componentMapper).map(key => ({
-      label: key.replaceAll('-', ' '),
-      value: key
-    }))
-  },
-  {
-    name: 'name',
-    component: 'text-field',
-    label: 'Name',
-    description: 'Name of the field. You can use dot notation to nest variables.',
-    isRequired: true,
-    validate: [{ type: 'required' }]
-  },
-  {
-    name: 'text-field-group',
-    component: 'sub-form',
-    condition: { when: 'component', is: ['text-field', 'textarea', 'checkbox', 'select', 'radio', 'switch', 'dual-list-select', 'field-array'] },
-    fields: [
-      { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' },
-      { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.' },
-      { component: 'text-field', name: 'helperText', label: 'Helper text' },
-      { component: 'checkbox', name: 'isRequired', label: 'Is required?' },
-      { component: 'checkbox', name: 'isDisabled', label: 'Is disabled?' },
-      { component: 'checkbox', name: 'isReadOnly', label: 'Is read-only?' },
-    ],
-  },
-  {
-    name: 'sub-form-group',
-    component: 'sub-form',
-    condition: { when: 'component', is: ['sub-form'] },
-    fields: [
-      { component: 'text-field', name: 'title', label: 'Title', description: 'Title of the sub-form.' },
-      { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the sub-form.' },
-    ],
-  }]
+    name: 'tabs', component: 'tabs', fields: [
+      {
+        name: 'props-tab', title: 'Props', fields: [
+          {
+            name: 'component',
+            component: 'select',
+            label: 'Component',
+            description: 'Component type.',
+            isRequired: true,
+            validate: [{ type: 'required' }],
+            options: Object.keys(componentMapper).map(key => ({
+              label: key.replaceAll('-', ' '),
+              value: key
+            }))
+          },
+          {
+            name: 'name',
+            component: 'text-field',
+            label: 'Name',
+            description: 'Name of the field. You can use dot notation to nest variables.',
+            isRequired: true,
+            validate: [{ type: 'required' }]
+          },
+          {
+            name: 'text-field-group',
+            component: 'sub-form',
+            condition: { when: 'component', is: ['text-field', 'textarea', 'checkbox', 'select', 'radio', 'switch', 'dual-list-select', 'field-array'] },
+            fields: [
+              { component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' },
+              { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the field.' },
+              { component: 'text-field', name: 'helperText', label: 'Helper text' },
+              { component: 'checkbox', name: 'isRequired', label: 'Is required?' },
+              { component: 'checkbox', name: 'isDisabled', label: 'Is disabled?' },
+              { component: 'checkbox', name: 'isReadOnly', label: 'Is read-only?' },
+            ],
+          },
+          {
+            name: 'sub-form-group',
+            component: 'sub-form',
+            condition: { when: 'component', is: ['sub-form'] },
+            fields: [
+              { component: 'text-field', name: 'title', label: 'Title', description: 'Title of the sub-form.' },
+              { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the sub-form.' },
+            ],
+          }
+        ]
+      },
+      { name: 'validators-tabs', title: 'Validators', fields: [] },
+      { name: 'condition-tabs', title: 'Condition', fields: [] },
+      { name: 'field-props', title: 'FieldProps', fields: [] }
+    ]
+  }
+]
 
 const componentInitialProps: AnyObject = {
   'dual-list-select': {
@@ -122,7 +134,7 @@ function App() {
             <FormRenderer
               schema={{ fields: [] }}
               onSubmit={() => undefined}
-              componentMapper={{...componentMapper, 'sub-form': SubForm}}
+              componentMapper={{ ...componentMapper, 'sub-form': SubForm }}
               FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} />}
             />
             <PropertiesCard fields={fields} />
