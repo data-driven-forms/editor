@@ -61,6 +61,7 @@ const Properties: React.FC<PropertiesProps> = ({ componentMapper, fields = [] })
                 ...fields
             ]
         }}
+        clearedValue={null}
         onSubmit={() => undefined}
         FormTemplate={FormTemplate}
         componentMapper={{
