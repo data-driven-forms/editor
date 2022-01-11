@@ -1,7 +1,7 @@
 export const clearDrag = {
     draggingElement: null,
     isDraggingContainer: null,
-    draggingSourceContainer: null,
+    sourceContainer: null,
     draggingProps: null
 }
 
