@@ -24,7 +24,7 @@ const EditorContent: React.FC<EditorContentProps> = ({ fields }) => {
             componentMapper={componentMapper}
             FormTemplate={(props) =>
                 <React.Fragment>
-                    <Pane flex="1" display="flex" paddingTop={8} paddingRight={8} flexDirection="column">
+                    <Pane flex="1" display="flex" paddingLeft={8} paddingTop={8} paddingRight={8} flexDirection="column" elevation={4} zIndex={1}>
                         <FormTemplate {...props} />
                     </Pane>
                     <FormCard />
