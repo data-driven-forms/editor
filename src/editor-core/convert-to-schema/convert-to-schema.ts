@@ -1,6 +1,6 @@
-import { AnyObject } from "./dnd/types";
+import { AnyObject } from "../../dnd/types";
 
-const convertComponent = (state: AnyObject, id: string) => {
+export const convertComponent = (state: AnyObject, id: string) => {
     let schema = {};
 
     if(state.components[id]) {

@@ -7,7 +7,7 @@ import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import { Field, Schema } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
-import convertToSchema from './convert-to-schema';
+import convertToSchema from './editor-core/convert-to-schema';
 import FormCard from './form-card';
 
 export interface EditorContentProps {

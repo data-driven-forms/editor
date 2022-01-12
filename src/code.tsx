@@ -3,7 +3,7 @@ import { Pane, Heading, CrossIcon } from 'evergreen-ui';
 
 import useState from './dnd/use-state';
 import useDispatch from './dnd/use-dispatch';
-import convertToSchema from './convert-to-schema';
+import convertToSchema from './editor-core/convert-to-schema';
 
 const Code: React.FC = () => {
     const state = useState()
