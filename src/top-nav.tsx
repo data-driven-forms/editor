@@ -1,7 +1,10 @@
 import React from 'react'
-import { Pane, majorScale, Heading } from 'evergreen-ui'
+import { Pane, majorScale, Heading, CodeIcon, Button } from 'evergreen-ui'
+import useDispatch from './dnd/use-dispatch'
 
 const TopNav = () => {
+    const dispatch = useDispatch();
+
     return <Pane
         is="nav"
         width="100%"
@@ -14,7 +17,8 @@ const TopNav = () => {
         display="flex"
         alignItems="center"
         borderBottom="muted"
-        paddingX={majorScale(3)}
+        paddingLeft={majorScale(3)}
+        paddingRight={majorScale(1)}
         background='tint2'
     >
         <Pane display="flex" alignItems="center" width={236}>
@@ -25,6 +29,9 @@ const TopNav = () => {
         <Pane flex={1}>
         </Pane>
         <Pane display="flex" justifyContent="flex-end" width={236}>
+            <Button iconBefore={CodeIcon} onClick={() => dispatch({ type: 'TOGGLE_SCHEMA' })}>
+                Show Schema
+            </Button>
         </Pane>
     </Pane>
 }

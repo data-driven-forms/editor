@@ -46,6 +46,9 @@ const reducer = (state: any, action: any) => {
             state.containers[parent as string].children = state.containers[parent as string].children.filter((key: string) => key !== action.id);
 
             return { ...state, ...(action.id === state.selectedComponent && { selectedComponent: null }) }
+        case 'TOGGLE_SCHEMA':
+            state.showSchema = action.showSchema || !state.showSchema;
+            return { ...state }
     }
 }
 

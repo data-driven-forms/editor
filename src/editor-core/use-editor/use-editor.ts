@@ -13,7 +13,8 @@ function useEditor(): [any, any] {
                     ref: null
                 }
             },
-            selectedComponent: null
+            selectedComponent: null,
+            showSchema: false
         };
     });
 

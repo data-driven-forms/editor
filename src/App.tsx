@@ -16,6 +16,7 @@ import { AnyObject } from './dnd/types';
 import SubForm from './sub-form';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
+import Code from './code';
 //import componentMapper from './evergreen-component-mapper/component-mapper';
 
 const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />
@@ -131,12 +132,15 @@ function App() {
                 </Menu.Group>
               </Menu>
             </Pane>
-            <FormRenderer
-              schema={{ fields: [] }}
-              onSubmit={() => undefined}
-              componentMapper={{ ...componentMapper, 'sub-form': SubForm }}
-              FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} />}
-            />
+            <Pane flex="1" display="flex" flexDirection="column">
+              <FormRenderer
+                schema={{ fields: [] }}
+                onSubmit={() => undefined}
+                componentMapper={{ ...componentMapper, 'sub-form': SubForm }}
+                FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} />}
+              />
+              <Code />
+            </Pane>
             <PropertiesCard fields={fields} />
           </Pane>
         </Editor>
