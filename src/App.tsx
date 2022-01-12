@@ -68,6 +68,29 @@ const fields = [
               { component: 'text-field', name: 'title', label: 'Title', description: 'Title of the sub-form.' },
               { component: 'text-field', name: 'description', label: 'Description', description: 'Description of the sub-form.' },
             ],
+          },
+          {
+            name: 'options-group',
+            component: 'sub-form',
+            condition: { when: 'component', is: ['select', 'radio', 'checkbox', 'field-array', 'dual-list-select'] },
+            fields: [
+              {
+                component: 'field-array', name: 'options', label: 'Options', description: 'Available options.', defaultItem: {value: 'value', label: 'label'}, fields: [
+                  {
+                    label: 'Label',
+                    name: 'label',
+                    component: 'text-field',
+                    marginBottom: '4px',
+                  },
+                  {
+                    label: 'Value',
+                    name: 'value',
+                    component: 'text-field',
+                    marginBottom: '2px',
+                  }
+                ]
+              },
+            ],
           }
         ]
       },
