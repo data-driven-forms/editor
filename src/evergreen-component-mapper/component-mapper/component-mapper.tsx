@@ -6,6 +6,7 @@ import Select from '../select';
 import SubForm from '../sub-form';
 import Checkbox from '../checkbox';
 import Tabs from '../tabs';
+import FieldArray from '../field-array';
 
 const NullComponent = () => <span>Not implemented</span>;
 
@@ -22,7 +23,7 @@ const mapper = {
   [componentTypes.WIZARD]: NullComponent,
   [componentTypes.SWITCH]: NullComponent,
   [componentTypes.PLAIN_TEXT]: NullComponent,
-  [componentTypes.FIELD_ARRAY]: NullComponent,
+  [componentTypes.FIELD_ARRAY]: FieldArray,
   [componentTypes.DUAL_LIST_SELECT]: NullComponent,
   [componentTypes.SLIDER]: NullComponent
 };
