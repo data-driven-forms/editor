@@ -75,7 +75,7 @@ const fields = [
             condition: { when: 'component', is: ['select', 'radio', 'checkbox', 'field-array', 'dual-list-select'] },
             fields: [
               {
-                component: 'field-array', name: 'options', label: 'Options', description: 'Available options.', defaultItem: {value: 'value', label: 'label'}, fields: [
+                component: 'field-array', name: 'options', label: 'Options', description: 'Available options.', defaultItem: () => ({ value: `value-${Date.now()}`, label: 'label' }), fields: [
                   {
                     label: 'Label',
                     name: 'label',

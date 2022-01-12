@@ -38,7 +38,7 @@ const FieldArrayItem: React.FC<FieldArrayItemProps> = ({ name, fields, length, m
 
 interface FieldArrayProps extends UseFieldApiProps<any> {
     name: string;
-    defaultItem?: AnyObject;
+    defaultItem?: (value: any) => AnyObject | AnyObject;
 }
 
 const FieldArray: React.FC<FieldArrayProps> = (props) => {
@@ -54,7 +54,7 @@ const FieldArray: React.FC<FieldArrayProps> = (props) => {
                         <Button
                             size="small"
                             disabled={value.length >= maxItems}
-                            {...(!(value.length >= maxItems) && { onClick: () => push(defaultItem) })}
+                            {...(!(value.length >= maxItems) && { onClick: () => push(typeof defaultItem === 'function' ? defaultItem(value) : defaultItem) })}
                         >
                             Add
                         </Button>
