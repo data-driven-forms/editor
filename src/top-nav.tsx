@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pane, majorScale, Heading, CodeIcon, Button } from 'evergreen-ui'
+import { Pane, majorScale, Heading, CodeIcon, Button, SegmentedControl } from 'evergreen-ui'
 import useDispatch from './dnd/use-dispatch'
 
 const TopNav = () => {
@@ -26,7 +26,16 @@ const TopNav = () => {
                 Data Driven Forms Pro Editor
             </Heading>
         </Pane>
-        <Pane flex={1}>
+        <Pane flex={1} display="flex" justifyContent="center">
+            <SegmentedControl
+                size="small"
+                width="200px"
+                options={[
+                    {label: 'Build mode', value: 'build'},
+                    {label: 'Test', value: 'test'}
+                ]}
+                onChange={(mode) => dispatch({type: 'SET_MODE', mode})}
+            />
         </Pane>
         <Pane display="flex" justifyContent="flex-end" width={236}>
             <Button iconBefore={CodeIcon} onClick={() => dispatch({ type: 'TOGGLE_SCHEMA' })}>

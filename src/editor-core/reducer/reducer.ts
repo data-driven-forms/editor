@@ -49,6 +49,9 @@ const reducer = (state: any, action: any) => {
         case 'TOGGLE_SCHEMA':
             state.showSchema = action.showSchema || !state.showSchema;
             return { ...state }
+        case 'SET_MODE':
+            state.mode = action.mode;
+            return { ...state }
     }
 }
 

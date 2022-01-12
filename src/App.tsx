@@ -6,16 +6,17 @@ import './app.css';
 
 import MenuItem, { MenuItemProps } from './editor-core/menu-item';
 import Editor from './editor-core/editor';
-import PropertiesCard from './properties-card';
 import TopNav from './top-nav';
-import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
-import SubForm from './sub-form';
+import EditorContent from './editor-content';
+import PropertiesCard from './properties-card';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
+import SubForm from './sub-form';
 import Code from './code';
 //import componentMapper from './evergreen-component-mapper/component-mapper';
 
@@ -142,6 +143,7 @@ function App() {
               <Code />
             </Pane>
             <PropertiesCard fields={fields} />
+            <EditorContent fields={fields} />
           </Pane>
         </Editor>
       </Pane>

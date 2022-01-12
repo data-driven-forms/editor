@@ -14,7 +14,8 @@ function useEditor(): [any, any] {
                 }
             },
             selectedComponent: null,
-            showSchema: false
+            showSchema: false,
+            mode: 'build'
         };
     });
 
