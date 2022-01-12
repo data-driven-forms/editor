@@ -23,6 +23,7 @@ const useHandle = (config: UseHandleConfig) => {
     const startDrag = useCallback(handleMouseDown(config, dispatch), [ ...Object.values(config) ])
 
     return {
+        onClick: pauseEvent,
         onMouseDown: startDrag,
         onTouchStart: startDrag
     }
