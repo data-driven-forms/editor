@@ -13,7 +13,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
 import EditorContent from './editor-content';
 import PropertiesCard from './properties-card';
-import { FormRenderer } from '@data-driven-forms/react-form-renderer';
+import { Field, FormRenderer, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
 import SubForm from './sub-form';
@@ -94,7 +94,121 @@ const fields = [
           }
         ]
       },
-      { name: 'validators-tabs', title: 'Validators', fields: [] },
+      {
+        name: 'validators-tabs', title: 'Validators', fields: [
+          {
+            label: 'Use warnings',
+            name: 'useWarnings',
+            component: 'checkbox',
+            marginBottom: '4px',
+          },
+          {
+            component: 'field-array', name: 'validate', label: 'Validators', description: 'Available validators.', defaultItem: () => ({ type: 'required', threshold: 0, value: 1 }), fields: [
+              {
+                label: 'Type',
+                name: 'type',
+                component: 'select',
+                marginBottom: '4px',
+                options: [
+                  { label: 'Required', value: 'required' },
+                  { label: 'Min length', value: 'min-length' },
+                  { label: 'Max length', value: 'max-length' },
+                  { label: 'Exact length', value: 'exact-length' },
+                  { label: 'Min number value', value: 'min-number-value' },
+                  { label: 'Max number value', value: 'max-number-value' },
+                  { label: 'Pattern', value: 'pattern' },
+                  { label: 'URL', value: 'url' },
+                ]
+              },
+              {
+                label: 'Threshold',
+                name: 'threshold',
+                component: 'text-field',
+                marginBottom: '2px',
+                condition: {
+                  when: (field: Field) => `${field.name.replace('threshold', 'type')}`,
+                  is: [
+                    'min-length',
+                    'max-length',
+                    'exact-length',
+                  ]
+                },
+                //initializeOnMount: true,
+                //clearOnUnmount: true,
+                initialValue: 0
+              },
+              {
+                label: 'Value',
+                name: 'value',
+                component: 'text-field',
+                marginBottom: '2px',
+                condition: {
+                  when: (field: Field) => `${field.name.replace('value', 'type')}`,
+                  is: [
+                    'min-number-value',
+                    'max-number-value',
+                  ]
+                },
+                //initializeOnMount: true,
+                //clearOnUnmount: true,
+                initialValue: 1
+              },
+              {
+                label: 'Include threshold',
+                name: 'includeThreshold',
+                component: 'checkbox',
+                marginBottom: '2px',
+                condition: {
+                  when: (field: Field) => `${field.name.replace('includeThreshold', 'type')}`,
+                  is: [
+                    'min-number-value',
+                    'max-number-value',
+                  ]
+                },
+                initializeOnMount: true,
+                clearOnUnmount: true,
+                initialValue: true
+              },
+              {
+                label: 'Pattern',
+                name: 'pattern',
+                component: 'text-field',
+                marginBottom: '2px',
+                condition: {
+                  when: (field: Field) => `${field.name.replace('pattern', 'type')}`,
+                  is: 'pattern'
+                },
+                //initializeOnMount: true,
+                //clearOnUnmount: true,
+              },
+              {
+                label: 'Flags',
+                name: 'flags',
+                component: 'text-field',
+                marginBottom: '2px',
+                condition: {
+                  when: (field: Field) => `${field.name.replace('flags', 'type')}`,
+                  is: 'pattern'
+                },
+                initializeOnMount: true,
+                clearOnUnmount: true,
+              },
+              {
+                label: 'Message',
+                name: 'message',
+                component: 'text-field',
+                marginBottom: '2px',
+              },
+              {
+                label: 'Is warning?',
+                name: 'warning',
+                component: 'checkbox',
+                marginBottom: '2px',
+              }
+            ]
+          },
+        ]
+      },
       { name: 'condition-tabs', title: 'Condition', fields: [] },
       { name: 'field-props', title: 'FieldProps', fields: [] }
     ]

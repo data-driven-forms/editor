@@ -39,7 +39,7 @@ const Tabs: React.FC<TabsProps> = ({ fields }) => {
                 display="flex"
             >
                 {fields.map((tab, index) => (
-                    <Pane hidden={index !== selectedIndex}>
+                    <Pane hidden={index !== selectedIndex} width="100%" className="pepa">
                         {formOptions.renderForm(tab.fields)}
                     </Pane>
                 ))}
