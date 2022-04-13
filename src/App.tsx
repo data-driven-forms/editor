@@ -103,12 +103,13 @@ const fields = [
             marginBottom: '4px',
           },
           {
-            component: 'field-array', name: 'validate', label: 'Validators', description: 'Available validators.', defaultItem: () => ({ type: 'required', threshold: 0, value: 1 }), fields: [
+            component: 'field-array', name: 'validate', label: 'Validators', description: 'Available validators.', defaultItem: {}, fields: [
               {
                 label: 'Type',
                 name: 'type',
                 component: 'select',
                 marginBottom: '4px',
+                validate: [{type: 'required'}],
                 options: [
                   { label: 'Required', value: 'required' },
                   { label: 'Min length', value: 'min-length' },
@@ -133,9 +134,8 @@ const fields = [
                     'exact-length',
                   ]
                 },
-                //initializeOnMount: true,
-                //clearOnUnmount: true,
-                initialValue: 0
+                validate: [{type: 'required'}],
+                clearOnUnmount: true,
               },
               {
                 label: 'Value',
@@ -149,9 +149,8 @@ const fields = [
                     'max-number-value',
                   ]
                 },
-                //initializeOnMount: true,
-                //clearOnUnmount: true,
-                initialValue: 1
+                clearOnUnmount: true,
+                validate: [{type: 'required'}],
               },
               {
                 label: 'Include threshold',
@@ -165,9 +164,7 @@ const fields = [
                     'max-number-value',
                   ]
                 },
-                initializeOnMount: true,
                 clearOnUnmount: true,
-                initialValue: true
               },
               {
                 label: 'Pattern',
@@ -178,8 +175,8 @@ const fields = [
                   when: (field: Field) => `${field.name.replace('pattern', 'type')}`,
                   is: 'pattern'
                 },
-                //initializeOnMount: true,
-                //clearOnUnmount: true,
+                clearOnUnmount: true,
+                validate: [{type: 'required'}],
               },
               {
                 label: 'Flags',
@@ -190,7 +187,6 @@ const fields = [
                   when: (field: Field) => `${field.name.replace('flags', 'type')}`,
                   is: 'pattern'
                 },
-                initializeOnMount: true,
                 clearOnUnmount: true,
               },
               {

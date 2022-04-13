@@ -5,6 +5,7 @@ import { AnyObject } from '../../dnd/types';
 import useComponent from '../../dnd/use-component';
 import useDispatch from '../../dnd/use-dispatch';
 import useHandle from '../../dnd/use-handle';
+import prepareValidate from '../prepare-validate';
 
 export interface ComponentProps extends React.HTMLProps<HTMLDivElement> {
     id: string;
@@ -30,6 +31,10 @@ const Component: React.FC<ComponentProps> = ({ id, container, HandleProps, Handl
     }, [id])
 
     const { ref: _ref, ...componentProps } = component;
+
+    if(componentProps.validate) {
+        componentProps.validate = prepareValidate(componentProps.validate)
+    }
 
     return <div ref={ref} {...props} onClick={onClick}>
         {formOptions.renderForm([componentProps as Field])}
