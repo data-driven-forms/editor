@@ -109,8 +109,9 @@ const fields = [
                 name: 'type',
                 component: 'select',
                 marginBottom: '4px',
-                validate: [{type: 'required'}],
+                validate: [{ type: 'required' }],
                 options: [
+                  { label: 'None', value: null },
                   { label: 'Required', value: 'required' },
                   { label: 'Min length', value: 'min-length' },
                   { label: 'Max length', value: 'max-length' },
@@ -134,7 +135,7 @@ const fields = [
                     'exact-length',
                   ]
                 },
-                validate: [{type: 'required'}],
+                validate: [{ type: 'required' }],
                 clearOnUnmount: true,
               },
               {
@@ -150,7 +151,7 @@ const fields = [
                   ]
                 },
                 clearOnUnmount: true,
-                validate: [{type: 'required'}],
+                validate: [{ type: 'required' }],
               },
               {
                 label: 'Include threshold',
@@ -176,7 +177,7 @@ const fields = [
                   is: 'pattern'
                 },
                 clearOnUnmount: true,
-                validate: [{type: 'required'}],
+                validate: [{ type: 'required' }],
               },
               {
                 label: 'Flags',
