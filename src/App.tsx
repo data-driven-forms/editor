@@ -101,6 +101,7 @@ const fields = [
             name: 'useWarnings',
             component: 'checkbox',
             marginBottom: '4px',
+            description: 'Enables using of warnings.'
           },
           {
             component: 'field-array', name: 'validate', label: 'Validators', description: 'Available validators.', defaultItem: {}, fields: [
@@ -201,6 +202,7 @@ const fields = [
                 name: 'warning',
                 component: 'checkbox',
                 marginBottom: '2px',
+                description: 'Does not prevent form submit.'
               }
             ]
           },
