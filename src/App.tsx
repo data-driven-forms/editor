@@ -13,7 +13,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
 import EditorContent from './editor-content';
 import PropertiesCard from './properties-card';
-import { Field, FormRenderer, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { Field, FieldApi, FormRenderer, ResolvePropsFunction, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
 import SubForm from './sub-form';
@@ -101,7 +101,7 @@ const fields = [
             name: 'useWarnings',
             component: 'checkbox',
             marginBottom: '4px',
-            description: 'Enables using of warnings.'
+            description: 'Enable to use warnings - validators, that do not prevent to submit the form.'
           },
           {
             component: 'field-array', name: 'validate', label: 'Validators', description: 'Available validators.', defaultItem: {}, fields: [
@@ -112,7 +112,7 @@ const fields = [
                 marginBottom: '4px',
                 validate: [{ type: 'required' }],
                 options: [
-                  { label: 'None', value: null },
+                  { label: 'None' },
                   { label: 'Required', value: 'required' },
                   { label: 'Min length', value: 'min-length' },
                   { label: 'Max length', value: 'max-length' },
@@ -121,7 +121,16 @@ const fields = [
                   { label: 'Max number value', value: 'max-number-value' },
                   { label: 'Pattern', value: 'pattern' },
                   { label: 'URL', value: 'url' },
-                ]
+                ],
+                resolveProps: (props: AnyObject, { meta }: FieldApi<any>) => {
+                  if (meta.dirty) {
+                    props.options[0].disabled = true;
+
+                    return { options: props.options }
+                  }
+
+                  return {}
+                }
               },
               {
                 label: 'Threshold',
@@ -202,7 +211,11 @@ const fields = [
                 name: 'warning',
                 component: 'checkbox',
                 marginBottom: '2px',
-                description: 'Does not prevent form submit.'
+                clearOnUnmount: true,
+                condition: {
+                  when: 'useWarnings',
+                  is: true
+                }
               }
             ]
           },

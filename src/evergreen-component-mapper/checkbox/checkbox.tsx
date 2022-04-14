@@ -26,7 +26,9 @@ const SingleCheckbox: React.FC<SingleCheckboxProps> = (props) => {
   return (
     <React.Fragment>
       <EvergreenCheckbox {...input} {...rest} />
-      {description && <FormFieldDescription paddingTop={2}>{description}</FormFieldDescription>}
+      {description && <FormFieldDescription paddingTop={2} maxWidth="320px">
+        {description}
+      </FormFieldDescription>}
     </React.Fragment>
   );
 };
