@@ -222,7 +222,53 @@ const fields = [
         ]
       },
       { name: 'condition-tabs', title: 'Condition', fields: [] },
-      { name: 'field-props', title: 'FieldProps', fields: [] }
+      {
+        name: 'field-props', title: 'FieldProps', fields: [
+          {
+            label: 'Initial value',
+            name: 'initialValue',
+            component: 'text-field',
+            marginBottom: '2px',
+          },
+          {
+            label: 'Initialize on mount',
+            name: 'initializeOnMount',
+            component: 'checkbox',
+          },
+          {
+            label: 'Clear on unmount',
+            name: 'clearOnUnmount',
+            component: 'checkbox',
+          },
+          {
+            label: 'Cleared value',
+            name: 'clearedValue',
+            component: 'text-field',
+            marginTop: '2px',
+            marginBottom: '2px',
+          },
+          {
+            label: 'Hide field',
+            name: 'hideField',
+            component: 'checkbox',
+          },
+          {
+            label: 'Data type',
+            name: 'dataType',
+            component: 'select',
+            marginTop: '2px',
+            marginBottom: '4px',
+            options: [
+              { label: 'None', value: '' },
+              { label: 'integer', value: 'integer' },
+              { label: 'float', value: 'float' },
+              { label: 'number', value: 'number' },
+              { label: 'boolean', value: 'boolean' },
+              { label: 'string', value: 'string' },
+            ],
+          },
+        ]
+      }
     ]
   }
 ]
