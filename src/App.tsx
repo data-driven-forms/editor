@@ -219,14 +219,53 @@ const fields = [
               }
             ]
           },
+          {
+            component: 'link',
+            name: 'link1',
+            label: 'Overwriting default messages',
+            href: 'https://data-driven-forms.org/schema/overwriting-default-message',
+            description: 'Default messages can be globally overwritten.',
+            isFirst: true,
+          },
+          {
+            component: 'link',
+            name: 'link2',
+            label: 'Validator mapper',
+            href: 'https://data-driven-forms.org/mappers/validator-mapper',
+            description: 'A custom set of validators can be passed.'
+          },
+          {
+            component: 'link',
+            name: 'link4',
+            label: 'Custom validators',
+            href: 'https://data-driven-forms.org/schema/custom-validator',
+            description: 'A custom function can be passed as a validator.'
+          },
+          {
+            component: 'link',
+            name: 'link3',
+            label: 'Async validators',
+            href: 'https://data-driven-forms.org/schema/async-validator',
+            description: 'A customa async function can be passed as a validator.'
+          },
         ]
       },
-      { name: 'condition-tabs', title: 'Condition', fields: [
-        {
-          component: 'condition',
-          name: 'condition'
-        }
-      ] },
+      {
+        name: 'condition-tabs', title: 'Condition', fields: [
+          {
+            component: 'condition',
+            name: 'condition'
+          },
+          {
+            component: 'link',
+            name: 'link',
+            label: 'Conditional actions',
+            href: 'https://data-driven-forms.org/schema/condition-actions',
+            description: 'Condition can be used to set form values.',
+            isFirst: true,
+          },
+        ]
+      },
       {
         name: 'field-props', title: 'FieldProps', fields: [
           {
@@ -271,6 +310,21 @@ const fields = [
               { label: 'boolean', value: 'boolean' },
               { label: 'string', value: 'string' },
             ],
+          },
+          {
+            component: 'link',
+            name: 'link1',
+            label: 'resolveProps',
+            href: 'https://data-driven-forms.org/schema/resolve-props',
+            description: 'A custom function that resolves props at run-time.',
+            isFirst: true,
+          },
+          {
+            component: 'link',
+            name: 'link2',
+            label: 'actionMapper',
+            href: 'https://data-driven-forms.org/mappers/action-mapper',
+            description: 'A custom mmapper allowing to map shcema props to functions.'
           },
         ]
       }
