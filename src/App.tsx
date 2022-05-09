@@ -246,7 +246,7 @@ const fields = [
             name: 'link3',
             label: 'Async validators',
             href: 'https://data-driven-forms.org/schema/async-validator',
-            description: 'A customa async function can be passed as a validator.'
+            description: 'A custom async function can be passed as a validator.'
           },
         ]
       },
@@ -325,6 +325,13 @@ const fields = [
             label: 'actionMapper',
             href: 'https://data-driven-forms.org/mappers/action-mapper',
             description: 'A custom mmapper allowing to map shcema props to functions.'
+          },
+          {
+            component: 'link',
+            name: 'link2',
+            label: 'fieldProps',
+            href: 'https://data-driven-forms.org/schema/introduction#heading-fieldprops',
+            description: 'A Final Form field configuration.'
           },
         ]
       }
