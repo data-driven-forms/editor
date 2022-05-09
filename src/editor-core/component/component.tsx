@@ -5,6 +5,7 @@ import { AnyObject } from '../../dnd/types';
 import useComponent from '../../dnd/use-component';
 import useDispatch from '../../dnd/use-dispatch';
 import useHandle from '../../dnd/use-handle';
+import prepareCondition from '../prepare-condition';
 import prepareValidate from '../prepare-validate';
 
 export interface ComponentProps extends React.HTMLProps<HTMLDivElement> {
@@ -34,6 +35,10 @@ const Component: React.FC<ComponentProps> = ({ id, container, HandleProps, Handl
 
     if(componentProps.validate) {
         componentProps.validate = prepareValidate(componentProps.validate)
+    }
+
+    if(componentProps.condition) {
+        componentProps.condition = prepareCondition(componentProps.condition)
     }
 
     return <div ref={ref} {...props} onClick={onClick}>

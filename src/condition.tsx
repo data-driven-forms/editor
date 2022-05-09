@@ -20,6 +20,7 @@ const Condition: React.FC<ConditionProps> = (props) => {
         { value: 'and', label: 'And' },
         { value: 'or', label: 'Or' },
         { value: 'single', label: 'Single condition' },
+        { value: 'not', label: 'Not' },
     ];
 
     if (isRoot) {
@@ -69,6 +70,9 @@ const Condition: React.FC<ConditionProps> = (props) => {
         } else if (Object.prototype.hasOwnProperty.call(input.value, 'or')) {
             values.type = 'or';
             values.values = input.value.or.map((x: any) => ({ condition: x }))
+        } else if (Object.prototype.hasOwnProperty.call(input.value, 'not')) {
+            values.type = 'not';
+            values.values = input.value.not.map((x: any) => ({ condition: x }))
         } else {
             values.type = 'single';
             values.when = Array.isArray(input.value.when) ? input.value.when : [input.value.when];
@@ -95,7 +99,7 @@ const Condition: React.FC<ConditionProps> = (props) => {
                         name: 'values',
                         condition: {
                             when: 'type',
-                            is: ['sequence', 'and', 'or']
+                            is: ['sequence', 'and', 'or', 'not']
                         },
                         fields: [{
                             component: 'condition',
