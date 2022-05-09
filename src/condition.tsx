@@ -122,7 +122,27 @@ const Condition: React.FC<ConditionProps> = (props) => {
                                 fields: [{
                                     component: 'text-field'
                                 }]
-                            }
+                            },
+                            {
+                                component: 'select',
+                                name: 'condition_type',
+                                label: 'Condition',
+                                options: [
+                                    { label: 'is', value: 'is' },
+                                    { label: 'pattern', value: 'pattern' },
+                                    { label: 'isEmpty', value: 'isEmpty' },
+                                    { label: 'isNotEmpty', value: 'isNotEmpty' },
+                                    { label: 'greaterThan', value: 'greaterThan' },
+                                    { label: 'greaterThanOrEqualTo', value: 'greaterThanOrEqualTo' },
+                                    { label: 'lessThan', value: 'lessThan' },
+                                    { label: 'lessThanOrEqualTo', value: 'lessThanOrEqualTo' },
+                                ]
+                            },
+                            {
+                                component: 'text-field',
+                                label: 'value',
+                                name: 'value',
+                            },
                         ]
                     }
                 ]
