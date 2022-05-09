@@ -3,9 +3,9 @@ import { Pane, Heading, Paragraph, CrossIcon, Button } from 'evergreen-ui';
 
 import useEditorState from './dnd/use-state';
 import Properties from './editor-core/properties';
-import componentMapper from './evergreen-component-mapper/component-mapper';
 import useDispatch from './dnd/use-dispatch';
 import { Field } from '@data-driven-forms/react-form-renderer';
+import propertiesComponentMapper from './properties-component-mapper';
 
 interface PropertiesCardProps {
     fields: Field[];
@@ -41,7 +41,7 @@ const PropertiesCard: React.FC<PropertiesCardProps> = ({ fields }) => {
             </Pane>
         </Pane>
         <Properties
-            componentMapper={componentMapper}
+            componentMapper={propertiesComponentMapper}
             fields={fields}
         />
     </Pane>

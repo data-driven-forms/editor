@@ -221,7 +221,12 @@ const fields = [
           },
         ]
       },
-      { name: 'condition-tabs', title: 'Condition', fields: [] },
+      { name: 'condition-tabs', title: 'Condition', fields: [
+        {
+          component: 'condition',
+          name: 'condition'
+        }
+      ] },
       {
         name: 'field-props', title: 'FieldProps', fields: [
           {
