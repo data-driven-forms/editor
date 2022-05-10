@@ -8,6 +8,7 @@ import Checkbox from '../checkbox';
 import Tabs from '../tabs';
 import FieldArray from '../field-array';
 import Link from '../link';
+import PlainText from '../plain-text';
 
 const NullComponent = () => <span>Not implemented</span>;
 
@@ -23,7 +24,7 @@ const mapper = {
   [componentTypes.TIME_PICKER]: NullComponent,
   [componentTypes.WIZARD]: NullComponent,
   [componentTypes.SWITCH]: NullComponent,
-  [componentTypes.PLAIN_TEXT]: NullComponent,
+  [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.FIELD_ARRAY]: FieldArray,
   [componentTypes.DUAL_LIST_SELECT]: NullComponent,
   [componentTypes.SLIDER]: NullComponent,
