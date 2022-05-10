@@ -59,6 +59,9 @@ const FieldArray: React.FC<FieldArrayProps> = (props) => {
                             Add
                         </Button>
                     </Pane>
+                    {value.length === 0 && <Pane textAlign="center">
+                        ---
+                    </Pane>}
                     {map((name: string, index: number) => <FieldArrayItem
                         name={name}
                         remove={() => remove(index)}
