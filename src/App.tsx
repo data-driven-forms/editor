@@ -13,7 +13,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AnyObject } from './dnd/types';
 import EditorContent from './editor-content';
 import PropertiesCard from './properties-card';
-import { Field, FieldApi, FormRenderer, ResolvePropsFunction, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { Field, FieldApi, FormRenderer } from '@data-driven-forms/react-form-renderer';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
 import SubForm from './sub-form';
@@ -328,7 +328,7 @@ const fields = [
           },
           {
             component: 'link',
-            name: 'link2',
+            name: 'link3',
             label: 'fieldProps',
             href: 'https://data-driven-forms.org/schema/introduction#heading-fieldprops',
             description: 'A Final Form field configuration.'

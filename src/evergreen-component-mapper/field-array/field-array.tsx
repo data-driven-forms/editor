@@ -44,7 +44,7 @@ interface FieldArrayProps extends UseFieldApiProps<any> {
 const FieldArray: React.FC<FieldArrayProps> = (props) => {
     const { input, meta, arrayValidator, fields, defaultItem, maxItems, minItems, ...rest } = useFieldApi(props)
 
-    return <FormField>
+    return <div>
         <FieldArrayProvider key={input.name} input={input} meta={meta} name={input.name} validate={arrayValidator}>
             {({ fields: { map, value = [], push, remove } }: any) => (
                 <Pane display="flex" flexDirection="column">
@@ -69,7 +69,7 @@ const FieldArray: React.FC<FieldArrayProps> = (props) => {
                 </Pane>
             )}
         </FieldArrayProvider>
-    </FormField>
+    </div>
 }
 
 export default FieldArray;

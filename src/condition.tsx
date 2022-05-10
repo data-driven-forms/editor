@@ -21,6 +21,7 @@ const Condition: React.FC<ConditionProps> = (props) => {
         { value: 'or', label: 'Or' },
         { value: 'single', label: 'Single condition' },
         { value: 'not', label: 'Not' },
+        { value: 'none', label: 'None' },
     ];
 
     if (isRoot) {
@@ -36,7 +37,8 @@ const Condition: React.FC<ConditionProps> = (props) => {
                     const value: AnyObject = {};
 
                     if (values.type === 'single') {
-                        value.when = values.when.length === 1 ? values.when[0] : values.when;
+                        value.when = values.when?.length === 1 ? values.when[0] : values.when;
+                        value[values.condition_type] = values.value
                     } else {
                         value[values.type] = values.values;
 
@@ -73,9 +75,16 @@ const Condition: React.FC<ConditionProps> = (props) => {
         } else if (Object.prototype.hasOwnProperty.call(input.value, 'not')) {
             values.type = 'not';
             values.values = input.value.not.map((x: any) => ({ condition: x }))
-        } else {
+        } else if (Object.prototype.hasOwnProperty.call(input.value, 'when')){
             values.type = 'single';
             values.when = Array.isArray(input.value.when) ? input.value.when : [input.value.when];
+
+            ['is', 'pattern', 'isEmpty', 'isNotEmpty', 'greaterThan', 'greaterThanOrEqualTo', 'lessThan', 'lessThanOrEqualTo', 'x',].forEach((atr) => {
+                if (Object.prototype.hasOwnProperty.call(input.value, atr)) {
+                    values.condition_type = atr;
+                    values.value = input.value[atr];
+                }
+            })
         }
 
         return values;
@@ -92,7 +101,8 @@ const Condition: React.FC<ConditionProps> = (props) => {
                         component: 'select',
                         name: 'type',
                         label: 'type',
-                        options
+                        options,
+                        initialValue: 'none'
                     },
                     {
                         component: 'field-array',
@@ -120,13 +130,17 @@ const Condition: React.FC<ConditionProps> = (props) => {
                                 label: 'when',
                                 name: 'when',
                                 fields: [{
-                                    component: 'text-field'
-                                }]
+                                    component: 'text-field',
+                                    label: 'Name'
+                                }],
+                                clearOnUnmount: true,
                             },
                             {
                                 component: 'select',
                                 name: 'condition_type',
                                 label: 'Condition',
+                                clearOnUnmount: true,
+                                initialValue: 'is',
                                 options: [
                                     { label: 'is', value: 'is' },
                                     { label: 'pattern', value: 'pattern' },
@@ -142,6 +156,23 @@ const Condition: React.FC<ConditionProps> = (props) => {
                                 component: 'text-field',
                                 label: 'value',
                                 name: 'value',
+                                clearOnUnmount: true,
+                                condition: {
+                                    when: 'condition_type',
+                                    is: ['is', 'pattern', 'greaterThan', 'greaterThanOrEqualTo', 'lessThan', 'lessThanOrEqualTo']
+                                }
+                            },
+                            {
+                                component: 'checkbox',
+                                label: 'Value',
+                                name: 'value',
+                                key: 'value1',
+                                initialValue: true,
+                                clearOnUnmount: true,
+                                condition: {
+                                    when: 'condition_type',
+                                    is: ['isEmpty', 'isNotEmpty']
+                                }
                             },
                         ]
                     }
