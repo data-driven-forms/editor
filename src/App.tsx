@@ -331,7 +331,7 @@ const fields = [
             name: 'link2',
             label: 'actionMapper',
             href: 'https://data-driven-forms.org/mappers/action-mapper',
-            description: 'A custom mmapper allowing to map shcema props to functions.'
+            description: 'A custom mapper allowing to map schema props to functions.'
           },
           {
             component: 'link',
