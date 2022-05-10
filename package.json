@@ -26,7 +26,8 @@
     "webpack-dev-server": "^4.7.3"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist"
+    "bootstrap": "lerna bootstrap --hoist",
+    "clean-build": "node ./scripts/clean-build.js"
   },
   "eslintConfig": {
     "extends": [
