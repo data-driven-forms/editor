@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
+    "strict": true,
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "declaration": true,
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "module": "esnext",
+    "esModuleInterop": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "./src/index.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "./demo",
+    "./src/tests",
+    "./*.js",
+    "./*.d.ts"
+  ]
+}

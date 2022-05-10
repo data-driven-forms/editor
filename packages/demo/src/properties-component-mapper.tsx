@@ -1,5 +1,5 @@
 import Condition, { ConditionProps } from "./condition";
-import componentMapper from "./evergreen-component-mapper/component-mapper";
+import componentMapper from "@data-driven-forms/evergreen-component-mapper/component-mapper";
 
 const propertiesComponentMapper = ({
     ...componentMapper,
