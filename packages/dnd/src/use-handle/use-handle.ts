@@ -6,6 +6,7 @@ import useDispatch from "../use-dispatch";
 interface UseHandleConfig extends AnyObject {
     component: string;
     sourceContainer?: string;
+    [key: string]: any;
 }
 
 const handleMouseDown = (config: UseHandleConfig, dispatch: Function) => (e: MouseEvent | TouchEvent) => {

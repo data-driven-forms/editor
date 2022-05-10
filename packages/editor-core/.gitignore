@@ -92,5 +92,7 @@ vendor
 !firebaseFunctions.js
 !scripts/
 !webpack.config.js
+!public
+!tsconfig.dev.json
 
 .DS_STORE
