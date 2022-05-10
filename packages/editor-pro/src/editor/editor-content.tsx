@@ -1,5 +1,5 @@
 import React from 'react';
-import useState from './dnd/use-state';
+import useState from '@data-driven-forms/dnd/use-state';
 
 import { Pane } from 'evergreen-ui';
 
@@ -7,15 +7,16 @@ import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import { Field, Schema } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
-import convertToSchema from './editor-core/convert-to-schema';
+import convertToSchema from '@data-driven-forms/editor-core/convert-to-schema';
 import FormCard from './form-card';
+import { AnyObject } from '../types';
 
 export interface EditorContentProps {
     fields: Field[];
 }
 
 const EditorContent: React.FC<EditorContentProps> = ({ fields }) => {
-    const state = useState()
+    const state: AnyObject = useState()
 
     if (state.mode === 'test') {
         return <FormRenderer

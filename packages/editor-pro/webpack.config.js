@@ -15,7 +15,7 @@ const devConfig = {
         use: {
           loader: 'ts-loader',
           options: {
-            configFile: 'tsconfig.json'
+            configFile: 'tsconfig.dev.json'
           }
         },
         exclude: /node_modules/
@@ -30,7 +30,7 @@ const devConfig = {
     extensions: ['.tsx', '.ts', '.js']
   },
   mode: 'development',
-  entry: resolve(__dirname, './src/index.tsx'),
+  entry: resolve(__dirname, './public/index.tsx'),
   output: {
     path: resolve('../dist'),
     filename: '[name].[hash].js'

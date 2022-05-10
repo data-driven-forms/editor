@@ -2,8 +2,8 @@ import React from 'react';
 
 import { FormRenderer, FormSpy, useFormApi } from "@data-driven-forms/react-form-renderer";
 import useFieldApi, { UseFieldApiProps } from "@data-driven-forms/react-form-renderer/use-field-api";
-import { AnyObject } from "./dnd/types";
 import { isEqual } from 'lodash';
+import { AnyObject } from '../types';
 
 export interface ConditionProps extends UseFieldApiProps<string> {
     name: string;

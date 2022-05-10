@@ -1,12 +1,13 @@
 import React from 'react';
 import { Pane, Heading, CrossIcon } from 'evergreen-ui';
 
-import useState from './dnd/use-state';
-import useDispatch from './dnd/use-dispatch';
-import convertToSchema from './editor-core/convert-to-schema';
+import useState from '@data-driven-forms/dnd/use-state';
+import useDispatch from '@data-driven-forms/dnd/use-dispatch';
+import convertToSchema from '@data-driven-forms/editor-core/convert-to-schema';
+import { AnyObject } from '../types';
 
 const Code: React.FC = () => {
-    const state = useState()
+    const state: AnyObject = useState()
     const dispatch = useDispatch();
 
     if (!state.showSchema) {

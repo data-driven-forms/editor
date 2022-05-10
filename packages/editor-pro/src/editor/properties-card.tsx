@@ -1,18 +1,19 @@
 import React from 'react';
 import { Pane, Heading, Paragraph, CrossIcon, Button } from 'evergreen-ui';
 
-import useEditorState from './dnd/use-state';
-import Properties from './editor-core/properties';
-import useDispatch from './dnd/use-dispatch';
+import useEditorState from '@data-driven-forms/dnd/use-state';
+import Properties from '@data-driven-forms/editor-core/properties';
+import useDispatch from '@data-driven-forms/dnd/use-dispatch';
 import { Field } from '@data-driven-forms/react-form-renderer';
 import propertiesComponentMapper from './properties-component-mapper';
+import { AnyObject } from '../types';
 
 interface PropertiesCardProps {
     fields: Field[];
 }
 
 const PropertiesCard: React.FC<PropertiesCardProps> = ({ fields }) => {
-    const state = useEditorState()
+    const state: AnyObject = useEditorState()
     const dispatch = useDispatch();
 
     if (!state.selectedComponent) {

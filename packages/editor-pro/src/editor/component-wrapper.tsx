@@ -2,12 +2,13 @@ import React from 'react';
 
 import { DragHandleVerticalIcon } from 'evergreen-ui';
 
-import Component, { ComponentProps } from './editor-core/component';
-import useState from './dnd/use-state';
+import Component, { ComponentProps } from '@data-driven-forms/editor-core/component';
+import useState from '@data-driven-forms/dnd/use-state';
+import { AnyObject } from '../types';
 
 
 const ComponentWrapper: React.FC<ComponentProps> = (props) => {
-    const state = useState();
+    const state: AnyObject = useState();
 
     return <Component
         {...props}

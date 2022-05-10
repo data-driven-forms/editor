@@ -1,6 +1,6 @@
 import React from 'react'
 import { Pane, majorScale, Heading, CodeIcon, Button, SegmentedControl } from 'evergreen-ui'
-import useDispatch from './dnd/use-dispatch'
+import useDispatch from '@data-driven-forms/dnd/use-dispatch'
 
 const TopNav = () => {
     const dispatch = useDispatch();

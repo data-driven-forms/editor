@@ -4,13 +4,12 @@ import { Menu, Pane, majorScale } from 'evergreen-ui';
 
 import './App.css';
 
-import MenuItem, { MenuItemProps } from './editor-core/menu-item';
-import Editor from './editor-core/editor';
+import MenuItem, { MenuItemProps } from '@data-driven-forms/editor-core/menu-item';
+import Editor from '@data-driven-forms/editor-core/editor';
 import TopNav from './top-nav';
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { AnyObject } from './dnd/types';
 import EditorContent from './editor-content';
 import PropertiesCard from './properties-card';
 import { Field, FieldApi, FormRenderer } from '@data-driven-forms/react-form-renderer';
@@ -18,6 +17,7 @@ import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
 import SubForm from './sub-form';
 import Code from './code';
+import { AnyObject } from '../types';
 //import componentMapper from './evergreen-component-mapper/component-mapper';
 
 const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />

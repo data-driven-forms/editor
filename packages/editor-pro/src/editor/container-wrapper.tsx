@@ -2,7 +2,7 @@ import React from 'react';
 
 import { DragHandleVerticalIcon } from 'evergreen-ui';
 
-import Container, { ContainerProps } from './editor-core/container';
+import Container, { ContainerProps } from '@data-driven-forms/editor-core/container';
 
 const ContainerWrapper: React.FC<ContainerProps> = (props) => {
     return <Container
