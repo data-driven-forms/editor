@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Menu, Pane, majorScale } from 'evergreen-ui';
 
-import './app.css';
+import './App.css';
 
 import MenuItem, { MenuItemProps } from './editor-core/menu-item';
 import Editor from './editor-core/editor';
