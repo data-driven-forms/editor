@@ -22,7 +22,9 @@ const findTargetElement = (position: any, state: any): any => {
             && position.x - metadata.left <= margin
         ) {
             // check if users wants to move item under another item
-            container.children.forEach((id: any, index: number) => {
+            for(let index = 0; index < container.children.length; index++) {
+                const { id } = container.children[index];
+
                 const component = state.components[id] || state.containers[id];
                 const componentPosition = component.ref.getBoundingClientRect().toJSON();
 
@@ -40,7 +42,7 @@ const findTargetElement = (position: any, state: any): any => {
                         resultPosition = index + 1;
                     }
                 }
-            })
+            }
 
             // user is pointing to the top of the container
             if (position.y - metadata.top < 10) {
