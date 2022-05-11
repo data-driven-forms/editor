@@ -15,10 +15,10 @@ jobs:
           name: install-deps
           command: npm install
       - run:
-          name: build-packages
+          name: lint
           command: npm run lint
       - run:
-          name: build
+          name: build packages
           command: npm run build
       - persist_to_workspace:
           root: ~/editor

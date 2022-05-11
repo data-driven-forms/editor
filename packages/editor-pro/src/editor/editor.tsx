@@ -95,7 +95,7 @@ const fields = [
 					{
 						name: 'custom-props',
 						component: 'plain-text',
-						content: 'Components also accepts custom props. Check documentation for you components/mapper to read more.',
+						content: 'Components also accept custom props. Check documentation for you components/mapper to read more.',
 						maxWidth: '320px',
 						size: '300',
 					}
