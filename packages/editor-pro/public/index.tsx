@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 
 import Editor from '../src/editor';
 
-const App = () => <Editor />
+const App = () => <Editor />;
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('root')
+	<App />,
+	document.getElementById('root')
 );

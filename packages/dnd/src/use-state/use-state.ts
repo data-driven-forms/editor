@@ -1,10 +1,10 @@
-import { useContext } from "react"
-import BuilderContextState from "../state-context"
+import { useContext } from 'react';
+import BuilderContextState from '../state-context';
 
 const useState = () => {
-    const state = useContext(BuilderContextState)
+	const state = useContext(BuilderContextState);
 
-    return state;
-}
+	return state;
+};
 
 export default useState;

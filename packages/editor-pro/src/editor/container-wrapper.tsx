@@ -5,20 +5,20 @@ import { DragHandleVerticalIcon } from 'evergreen-ui';
 import Container, { ContainerProps } from '@data-driven-forms/editor-core/container';
 
 const ContainerWrapper: React.FC<ContainerProps> = (props) => {
-    return <Container
-        {...props}
-        HandleProps={{
-            style: { marginLeft: 'auto' },
-            size: 24,
-            cursor: 'grab'
-        }}
-        Handle={DragHandleVerticalIcon}
-        ListProps={{
-            style: { minWidth: 'calc(100% - 24px)' }
-        }}
-        className='canvas'
-        style={{ display: 'flex', border: '1px dotted rgb(71 77 102 / 50%)' }}
-    />
-}
+	return <Container
+		{...props}
+		HandleProps={{
+			style: { marginLeft: 'auto' },
+			size: 24,
+			cursor: 'grab'
+		}}
+		Handle={DragHandleVerticalIcon}
+		ListProps={{
+			style: { minWidth: 'calc(100% - 24px)' }
+		}}
+		className='canvas'
+		style={{ display: 'flex', border: '1px dotted rgb(71 77 102 / 50%)' }}
+	/>;
+};
 
 export default ContainerWrapper;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useHandle from "@data-driven-forms/dnd/use-handle";
+import useHandle from '@data-driven-forms/dnd/use-handle';
 import { AnyObject } from '../types';
 
 export interface MenuItemProps extends React.HTMLProps<HTMLDivElement> {
@@ -10,11 +10,11 @@ export interface MenuItemProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ component, children, Component = 'div', componentInitialProps, ...props }) => {
-    const events = useHandle({ component, props: componentInitialProps });
+	const events = useHandle({ component, props: componentInitialProps });
 
-    return <Component {...props} {...events}>
-        {children}
-    </Component>
-}
+	return <Component {...props} {...events}>
+		{children}
+	</Component>;
+};
 
 export default MenuItem;

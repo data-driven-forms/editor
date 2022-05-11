@@ -1,25 +1,25 @@
-import { useReducer } from "react";
-import { clearDrag } from "@data-driven-forms/dnd/reducer";
-import reducer from "../reducer";
+import { useReducer } from 'react';
+import { clearDrag } from '@data-driven-forms/dnd/reducer';
+import reducer from '../reducer';
 
 function useEditor(): [any, any] {
-    const [state, dispatch] = useReducer(reducer, null, () => {
-        return {
-            ...clearDrag,
-            components: {},
-            containers: {
-                root: {
-                    children: [],
-                    ref: null
-                }
-            },
-            selectedComponent: null,
-            showSchema: false,
-            mode: 'build'
-        };
-    });
+	const [state, dispatch] = useReducer(reducer, null, () => {
+		return {
+			...clearDrag,
+			components: {},
+			containers: {
+				root: {
+					children: [],
+					ref: null
+				}
+			},
+			selectedComponent: null,
+			showSchema: false,
+			mode: 'build'
+		};
+	});
 
-    return [state, dispatch];
+	return [state, dispatch];
 }
 
 export default useEditor;

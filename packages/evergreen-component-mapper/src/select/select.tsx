@@ -17,25 +17,25 @@ export interface SelectProps extends UseFieldApiProps<string> {
 };
 
 const Select: React.FC<SelectProps> = (props) => {
-    const { input, meta, isDisabled, options, isRequired, ...rest } = useFieldApi(props);
+	const { input, meta, isDisabled, options, isRequired, ...rest } = useFieldApi(props);
 
-    return (
-        <SelectField
-            {...input}
-            isInvalid={Boolean(meta.error)}
-            validationMessage={meta.error}
-            disabled={isDisabled}
-            required={isRequired}
-            {...rest}
-        >
-            {options &&
+	return (
+		<SelectField
+			{...input}
+			isInvalid={Boolean(meta.error)}
+			validationMessage={meta.error}
+			disabled={isDisabled}
+			required={isRequired}
+			{...rest}
+		>
+			{options &&
                 options.map((option: SelectOption) => (
-                    <option key={option.value || option.label} value={option.value} disabled={option.disabled}>
-                        {option.label}
-                    </option>
+                	<option key={option.value || option.label} value={option.value} disabled={option.disabled}>
+                		{option.label}
+                	</option>
                 ))}
-        </SelectField>
-    );
+		</SelectField>
+	);
 };
 
 export default Select;

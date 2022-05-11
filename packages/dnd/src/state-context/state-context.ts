@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { AnyObject } from "../types";
+import { createContext } from 'react';
+import { AnyObject } from '../types';
 
 export interface Component extends AnyObject {
     ref?: React.Ref<HTMLDivElement>;
@@ -27,15 +27,15 @@ export interface StateContext extends AnyObject {
 }
 
 const context = createContext<StateContext>({
-    components: {},
-    containers: {
-        root: {
-            children: []
-        }
-    },
-    draggingElement: null,
-    isDraggingContainer: null,
-    draggingSourceContainer: null,
-})
+	components: {},
+	containers: {
+		root: {
+			children: []
+		}
+	},
+	draggingElement: null,
+	isDraggingContainer: null,
+	draggingSourceContainer: null,
+});
 
 export default context;

@@ -11,15 +11,15 @@ export interface TextFieldProps extends UseFieldApiProps<string> {
 };
 
 const TextField: React.FC<TextFieldProps> = (props) => {
-    const { input, meta, isRequired, ...rest } = useFieldApi(props);
+	const { input, meta, isRequired, ...rest } = useFieldApi(props);
 
-    return <TextInputField
-        {...input}
-        required={isRequired}
-        isInvalid={Boolean(meta.error)}
-        validationMessage={meta.error}
-        {...rest}
-    />;
+	return <TextInputField
+		{...input}
+		required={isRequired}
+		isInvalid={Boolean(meta.error)}
+		validationMessage={meta.error}
+		{...rest}
+	/>;
 };
 
 export default TextField;

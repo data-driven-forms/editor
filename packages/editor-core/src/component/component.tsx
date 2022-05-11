@@ -16,35 +16,35 @@ export interface ComponentProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const Component: React.FC<ComponentProps> = ({ id, container, HandleProps, Handle = 'div', ...props }) => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const events = useHandle({ component: id, sourceContainer: container });
-    const formOptions = useFormApi()
-    const { ref, component } = useComponent({ id });
+	const events = useHandle({ component: id, sourceContainer: container });
+	const formOptions = useFormApi();
+	const { ref, component } = useComponent({ id });
 
-    const onClick = useCallback((e: MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dispatch({
-            type: 'SELECT_COMPONENT',
-            id
-        })
-    }, [id])
+	const onClick = useCallback((e: MouseEvent) => {
+		e.preventDefault();
+		e.stopPropagation();
+		dispatch({
+			type: 'SELECT_COMPONENT',
+			id
+		});
+	}, [id]);
 
-    const { ref: _ref, ...componentProps } = component as AnyObject;
+	const { ref: _ref, ...componentProps } = component as AnyObject;
 
-    if(componentProps.validate) {
-        componentProps.validate = prepareValidate(componentProps.validate)
-    }
+	if(componentProps.validate) {
+		componentProps.validate = prepareValidate(componentProps.validate);
+	}
 
-    if(componentProps.condition) {
-        componentProps.condition = prepareCondition(componentProps.condition)
-    }
+	if(componentProps.condition) {
+		componentProps.condition = prepareCondition(componentProps.condition);
+	}
 
-    return <div ref={ref} {...props} onClick={onClick}>
-        {formOptions.renderForm([componentProps as Field])}
-        <Handle {...events} {...HandleProps} />
-    </div>
-}
+	return <div ref={ref} {...props} onClick={onClick}>
+		{formOptions.renderForm([componentProps as Field])}
+		<Handle {...events} {...HandleProps} />
+	</div>;
+};
 
 export default Component;

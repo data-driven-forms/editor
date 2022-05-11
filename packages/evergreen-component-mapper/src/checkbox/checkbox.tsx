@@ -10,26 +10,25 @@ export interface CheckboxWrapperProps {
 }
 
 const Wrapper: React.FC<CheckboxWrapperProps> = ({ label, children }) => (
-  <div>
-    <h3>{label}</h3>
-    {children}
-  </div>
+	<div>
+		<h3>{label}</h3>
+		{children}
+	</div>
 );
 
-export interface SingleCheckboxProps extends UseFieldApiConfig {
-}
+export type SingleCheckboxProps = UseFieldApiConfig
 
 const SingleCheckbox: React.FC<SingleCheckboxProps> = (props) => {
-  const { input, meta: _meta, description, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
+	const { input, meta: _meta, description, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
 
-  return (
-    <React.Fragment>
-      <EvergreenCheckbox {...input} {...rest} />
-      {description && <FormFieldDescription paddingTop={2} maxWidth="320px">
-        {description}
-      </FormFieldDescription>}
-    </React.Fragment>
-  );
+	return (
+		<React.Fragment>
+			<EvergreenCheckbox {...input} {...rest} />
+			{description && <FormFieldDescription paddingTop={2} maxWidth="320px">
+				{description}
+			</FormFieldDescription>}
+		</React.Fragment>
+	);
 };
 
 const SingleCheckboxInCommon: React.FC = (props) => <EvergreenCheckbox {...props} />;
@@ -40,10 +39,10 @@ export interface CheckboxProps extends AnyObject {
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ options, ...props }) =>
-  options ? (
-    <MultipleChoiceListCommon options={options} {...props} Wrapper={Wrapper} Checkbox={SingleCheckboxInCommon} />
-  ) : (
-    <SingleCheckbox {...props} />
-  );
+	options ? (
+		<MultipleChoiceListCommon options={options} {...props} Wrapper={Wrapper} Checkbox={SingleCheckboxInCommon} />
+	) : (
+		<SingleCheckbox {...props} />
+	);
 
 export default Checkbox;

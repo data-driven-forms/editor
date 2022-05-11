@@ -5,19 +5,19 @@ import ReactDOM from 'react-dom';
 import componentMapper from '../src/component-mapper';
 
 const App = () => <FormRenderer
-    schema={{
-        fields: [{
-            component: 'text-field',
-            name: 'name',
-            label: 'first-name'
-        }]
-    }}
-    componentMapper={componentMapper}
-    onSubmit={console.log}
-    FormTemplate={({ formFields }) => <div>{formFields}</div>}
-/>
+	schema={{
+		fields: [{
+			component: 'text-field',
+			name: 'name',
+			label: 'first-name'
+		}]
+	}}
+	componentMapper={componentMapper}
+	onSubmit={console.log}
+	FormTemplate={({ formFields }) => <div>{formFields}</div>}
+/>;
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('root')
+	<App />,
+	document.getElementById('root')
 );

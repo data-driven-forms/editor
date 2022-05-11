@@ -8,13 +8,13 @@ export interface SubFormProps {
 };
 
 const SubForm: React.FC<SubFormProps> = ({fields = [], ...props}) => {
-    const { renderForm } = useFormApi();
+	const { renderForm } = useFormApi();
 
-    return (
-        <div {...props}>
-            {renderForm(fields)}
-        </div>
-    );
+	return (
+		<div {...props}>
+			{renderForm(fields)}
+		</div>
+	);
 };
 
 export default SubForm;

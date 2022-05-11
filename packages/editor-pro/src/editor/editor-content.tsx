@@ -16,25 +16,25 @@ export interface EditorContentProps {
 }
 
 const EditorContent: React.FC<EditorContentProps> = ({ fields }) => {
-    const state: AnyObject = useState()
+	const state: AnyObject = useState();
 
-    if (state.mode === 'test') {
-        return <FormRenderer
-            schema={convertToSchema(state) as Schema}
-            onSubmit={() => undefined}
-            componentMapper={componentMapper}
-            FormTemplate={(props) =>
-                <React.Fragment>
-                    <Pane flex="1" display="flex" paddingLeft={8} paddingTop={8} paddingRight={8} flexDirection="column" elevation={4} zIndex={1}>
-                        <FormTemplate {...props} />
-                    </Pane>
-                    <FormCard />
-                </React.Fragment>
-            }
-        />;
-    }
+	if (state.mode === 'test') {
+		return <FormRenderer
+			schema={convertToSchema(state) as Schema}
+			onSubmit={() => undefined}
+			componentMapper={componentMapper}
+			FormTemplate={(props) =>
+				<React.Fragment>
+					<Pane flex="1" display="flex" paddingLeft={8} paddingTop={8} paddingRight={8} flexDirection="column" elevation={4} zIndex={1}>
+						<FormTemplate {...props} />
+					</Pane>
+					<FormCard />
+				</React.Fragment>
+			}
+		/>;
+	}
 
-    return null;
-}
+	return null;
+};
 
 export default EditorContent;

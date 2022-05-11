@@ -1,10 +1,10 @@
-import { useContext } from "react"
-import BuilderContextDispatch from "../dispatch-context"
+import { useContext } from 'react';
+import BuilderContextDispatch from '../dispatch-context';
 
 const useDispatch = () => {
-    const dispatch = useContext(BuilderContextDispatch)
+	const dispatch = useContext(BuilderContextDispatch);
 
-    return dispatch;
-}
+	return dispatch;
+};
 
 export default useDispatch;

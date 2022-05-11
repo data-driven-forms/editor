@@ -1,31 +1,31 @@
-import { AnyObject } from "../types";
+import { AnyObject } from '../types';
 
 export const convertComponent = (state: AnyObject, id: string) => {
-    let schema = {};
+	let schema = {};
 
-    if(state.components[id]) {
-        const { ref, ...props } = state.components[id];
+	if(state.components[id]) {
+		const { ref, ...props } = state.components[id];
 
-        schema = { ...schema, ...props };
-    }
+		schema = { ...schema, ...props };
+	}
 
-    if(state.containers[id]) {
-        const {children} = state.containers[id];
+	if(state.containers[id]) {
+		const {children} = state.containers[id];
 
-        const fields = children.map((child: string) =>
-            convertComponent(state, child)
-        );
+		const fields = children.map((child: string) =>
+			convertComponent(state, child)
+		);
 
-        schema = { ...schema, fields };
-    }
+		schema = { ...schema, fields };
+	}
 
-    return schema;
-}
+	return schema;
+};
 
 const convertToSchema = (state: AnyObject) => {
-    const schema = convertComponent(state, 'root');
+	const schema = convertComponent(state, 'root');
 
-    return schema;
-}
+	return schema;
+};
 
 export default convertToSchema;

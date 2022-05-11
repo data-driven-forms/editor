@@ -13,26 +13,26 @@ import PlainText from '../plain-text';
 const NullComponent = () => <span>Not implemented</span>;
 
 const mapper = {
-  [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA]: NullComponent,
-  [componentTypes.SELECT]: Select,
-  [componentTypes.CHECKBOX]: Checkbox,
-  [componentTypes.SUB_FORM]: SubForm,
-  [componentTypes.RADIO]: NullComponent,
-  [componentTypes.TABS]: Tabs,
-  [componentTypes.DATE_PICKER]: NullComponent,
-  [componentTypes.TIME_PICKER]: NullComponent,
-  [componentTypes.WIZARD]: NullComponent,
-  [componentTypes.SWITCH]: NullComponent,
-  [componentTypes.PLAIN_TEXT]: PlainText,
-  [componentTypes.FIELD_ARRAY]: FieldArray,
-  [componentTypes.DUAL_LIST_SELECT]: NullComponent,
-  [componentTypes.SLIDER]: NullComponent,
-  'link': Link
+	[componentTypes.TEXT_FIELD]: TextField,
+	[componentTypes.TEXTAREA]: NullComponent,
+	[componentTypes.SELECT]: Select,
+	[componentTypes.CHECKBOX]: Checkbox,
+	[componentTypes.SUB_FORM]: SubForm,
+	[componentTypes.RADIO]: NullComponent,
+	[componentTypes.TABS]: Tabs,
+	[componentTypes.DATE_PICKER]: NullComponent,
+	[componentTypes.TIME_PICKER]: NullComponent,
+	[componentTypes.WIZARD]: NullComponent,
+	[componentTypes.SWITCH]: NullComponent,
+	[componentTypes.PLAIN_TEXT]: PlainText,
+	[componentTypes.FIELD_ARRAY]: FieldArray,
+	[componentTypes.DUAL_LIST_SELECT]: NullComponent,
+	[componentTypes.SLIDER]: NullComponent,
+	'link': Link
 };
 
 export default mapper;
 
 export const components = {
-  TextField,
+	TextField,
 };

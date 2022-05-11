@@ -14,20 +14,20 @@ import useDispatch from '@data-driven-forms/dnd/use-dispatch';
 
 import { AnyObject } from '../types';
 
-const FormTemplate: React.FC<FormTemplateRenderProps> = ({ schema, formFields }) => {
-    const { handleSubmit } = useFormApi();
+const FormTemplate: React.FC<FormTemplateRenderProps> = ({ formFields }) => {
+	const { handleSubmit } = useFormApi();
 
-    return (
-        <form onSubmit={handleSubmit}>
-            {formFields}
-        </form>
-    )
-}
+	return (
+		<form onSubmit={handleSubmit}>
+			{formFields}
+		</form>
+	);
+};
 
 const EditorFormSpy: React.FC<{ onChange: (values: AnyObject) => void }> = ({ onChange }) => <FormSpy
-    subscription={{ values: true }}
-    onChange={(props: any) => onChange(props.values)}
-/>
+	subscription={{ values: true }}
+	onChange={(e: AnyObject) => onChange(e.values)}
+/>;
 
 interface PropertiesProps {
     componentMapper: AnyObject;
@@ -35,41 +35,41 @@ interface PropertiesProps {
 }
 
 const Properties: React.FC<PropertiesProps> = ({ componentMapper, fields = [] }) => {
-    const state: AnyObject = useState();
-    const dispatch = useDispatch();
+	const state: AnyObject = useState();
+	const dispatch = useDispatch();
 
-    const selectedComponent = state.components[state.selectedComponent] || state.containers[state.selectedComponent];
+	const selectedComponent = state.components[state.selectedComponent] || state.containers[state.selectedComponent];
 
-    if (!selectedComponent) {
-        return <span>No selected component</span>;
-    }
+	if (!selectedComponent) {
+		return <span>No selected component</span>;
+	}
 
-    return <FormRenderer
-        initialValues={omit(selectedComponent, ['ref'])}
-        schema={{
-            fields: [
-                {
-                    component: 'editor-form-spy', name: 'editor-form-spy', onChange: (values: AnyObject) => {
-                        if (!isEqual(omit(selectedComponent, ['ref']), values)) {
-                            dispatch({
-                                type: 'UPDATE_PROPS',
-                                id: state.selectedComponent,
-                                props: values
-                            })
-                        }
-                    }
-                },
-                ...fields
-            ]
-        }}
-        clearedValue={null}
-        onSubmit={() => undefined}
-        FormTemplate={FormTemplate}
-        componentMapper={{
-            'editor-form-spy': EditorFormSpy,
-            ...componentMapper
-        }}
-    />;
-}
+	return <FormRenderer
+		initialValues={omit(selectedComponent, ['ref'])}
+		schema={{
+			fields: [
+				{
+					component: 'editor-form-spy', name: 'editor-form-spy', onChange: (values: AnyObject) => {
+						if (!isEqual(omit(selectedComponent, ['ref']), values)) {
+							dispatch({
+								type: 'UPDATE_PROPS',
+								id: state.selectedComponent,
+								props: values
+							});
+						}
+					}
+				},
+				...fields
+			]
+		}}
+		clearedValue={null}
+		onSubmit={() => undefined}
+		FormTemplate={FormTemplate}
+		componentMapper={{
+			'editor-form-spy': EditorFormSpy,
+			...componentMapper
+		}}
+	/>;
+};
 
 export default Properties;

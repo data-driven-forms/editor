@@ -7,11 +7,11 @@ export interface PlainTextProps extends ParagraphProps {
 };
 
 const PlainText: React.FC<PlainTextProps> = ({ content, ...rest }) => {
-    return (
-        <Paragraph {...rest}>
-            {content}
-        </Paragraph>
-    );
+	return (
+		<Paragraph {...rest}>
+			{content}
+		</Paragraph>
+	);
 };
 
 export default PlainText;

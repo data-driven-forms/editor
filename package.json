@@ -30,7 +30,9 @@
     "clean-build": "node ./scripts/clean-build.js",
     "preinstall": "npm run clean-build",
     "postinstall": "npm run bootstrap",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "lint": "eslint ./packages/*/src",
+    "lint:fix": "eslint ./packages/*/src --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -52,9 +54,15 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.178",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
     "css-loader": "^6.7.1",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.29.4",
     "fs-extra": "^10.1.0",
     "lerna": "^4.0.0",
+    "prettier": "2.6.2",
     "style-loader": "^3.3.1"
   }
 }
