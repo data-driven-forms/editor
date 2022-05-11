@@ -91,6 +91,7 @@ const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
         />
         <div
             ref={mouseRef}
+            {...CursorProps}
             style={{
                 left: -10,
                 position: 'fixed',
@@ -103,7 +104,6 @@ const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
                 pointerEvents: 'none',
                 userSelect: 'none',
             }}
-            {...CursorProps}
         />
     </Fragment>
 }
