@@ -27,7 +27,10 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "clean-build": "node ./scripts/clean-build.js"
+    "clean-build": "node ./scripts/clean-build.js",
+    "preinstall": "npm run clean-build",
+    "postinstall": "npm run bootstrap",
+    "build": "lerna run build"
   },
   "eslintConfig": {
     "extends": [
