@@ -32,7 +32,8 @@
     "postinstall": "npm run bootstrap",
     "build": "lerna run build",
     "lint": "eslint ./packages/*/src",
-    "lint:fix": "eslint ./packages/*/src --fix"
+    "lint:fix": "eslint ./packages/*/src --fix",
+    "release": "lerna exec --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo"
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +64,12 @@
     "fs-extra": "^10.1.0",
     "lerna": "^4.0.0",
     "prettier": "2.6.2",
+    "semantic-release": "^19.0.2",
+    "semantic-release-monorepo": "^7.0.5",
     "style-loader": "^3.3.1"
+  },
+  "release": {
+    "extends": "semantic-release-monorepo",
+    "branches": ["main"]
   }
 }
