@@ -4,6 +4,11 @@ import findTargetElement from "../find-target-element";
 import useDispatch from "../use-dispatch";
 import useState from "../use-state";
 
+export interface CursorPosition {
+    x: number;
+    y: number;
+}
+
 const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
     const selectorRef = createRef<HTMLDivElement>();
     const mouseRef = createRef<HTMLDivElement>();
@@ -12,21 +17,15 @@ const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
     const state = useState();
     const dispatch = useDispatch();
 
-    const handleMouseMove = React.useCallback(
-        (e: any) => {
+
+
+    const handleMove = React.useCallback(
+        (cursorPosition: CursorPosition) => {
             if (!selectorRef.current || !mouseRef.current) {
                 return;
             }
             selectorRef.current.style.border = '';
             selectorRef.current.style.outline = '';
-
-            let cursorPosition = { x: e.x, y: e.y }
-            if (e.type === 'touchmove') {
-                cursorPosition = {
-                    x: e.touches[0].clientX,
-                    y: e.touches[0].clientY,
-                }
-            }
 
             const { rect, container, position } = findTargetElement(cursorPosition, state);
 
@@ -38,13 +37,17 @@ const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
                 selectorRef.current.style.border = '3px solid #A40000';
             }
 
-            mouseRef.current.style.left = `${e.x}px`;
-            mouseRef.current.style.top = `${e.y}px`;
+            mouseRef.current.style.left = `${cursorPosition.x}px`;
+            mouseRef.current.style.top = `${cursorPosition.y}px`;
 
             targetContainer.current = { targetContainer: container, position };
         },
         [],
     );
+
+    const handleMouseMove = React.useCallback((e: MouseEvent) => handleMove({ x: e.x, y: e.y }), [])
+
+    const handleTouchMove = React.useCallback((e: TouchEvent) => handleMove({ x: e.touches[0].clientX, y: e.touches[0].clientY }), [])
 
     const handleMouseUp = useCallback(
         (e: MouseEvent | TouchEvent) => {
@@ -63,14 +66,14 @@ const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
 
-        document.addEventListener('touchmove', handleMouseMove);
+        document.addEventListener('touchmove', handleTouchMove);
         document.addEventListener('touchend', handleMouseUp);
 
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
 
-            document.removeEventListener('touchmove', handleMouseMove);
+            document.removeEventListener('touchmove', handleTouchMove);
             document.removeEventListener('touchend', handleMouseUp);
         };
     })
