@@ -9,7 +9,11 @@ export interface CursorPosition {
     y: number;
 }
 
-const DropCursor: React.FC<{ CursorProps?: any }> = ({ CursorProps }) => {
+export interface DropCursorProps {
+    CursorProps?: any;
+}
+
+const DropCursor = ({ CursorProps }: DropCursorProps) => {
     const selectorRef = createRef<HTMLDivElement>();
     const mouseRef = createRef<HTMLDivElement>();
     const targetContainer = useRef<any>();
