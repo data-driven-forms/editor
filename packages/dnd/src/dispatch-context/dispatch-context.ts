@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const context = createContext<Function>(() => null)
+const context = createContext<(...args: any) => any>(() => null)
 
 export default context;

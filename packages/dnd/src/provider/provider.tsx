@@ -5,7 +5,7 @@ import dispatchContext from "../dispatch-context"
 import stateContext from "../state-context"
 
 export interface ProviderProps {
-    dispatch: Function;
+    dispatch: (...args: any) => any;
     state: any;
     DropCursorProps?: any;
 }
