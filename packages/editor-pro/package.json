@@ -11,14 +11,10 @@
     "forms",
     "javascript"
   ],
-  "devDependencies": {
-  },
   "dependencies": {
     "@data-driven-forms/dnd": "*",
     "@data-driven-forms/editor-core": "*",
     "@data-driven-forms/evergreen-component-mapper": "*"
-  },
-  "peerDependencies": {
   },
   "license": "Apache-2.0",
   "scripts": {
