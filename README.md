@@ -5,7 +5,8 @@
   - [editor-pro](#editor-pro)
   - [evergreen-component-mapper](#evergreen-component-mapper)
 - [Available Scripts](#available-scripts)
-  - [`npm start`](#npm-start)
+  - [`npm install`](#npm-install)
+  - [`npm bootstrap`](#npm-bootstrap)
 
 :warning: **THIS IS WIP REPOSITORY!** :warning:
 # Data Driven Forms Pro Editor
@@ -45,11 +46,7 @@ Set of basic components to power `editor-pro` properties editor. [See more](http
 
 In the project directory, you can run:
 
-## `npm start`
+## `npm install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## `npm bootstrap`
 
