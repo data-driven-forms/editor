@@ -33,7 +33,7 @@ jobs:
           at: ~/editor
       - run:
           name: Add github.com to known hosts
-          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
+          command: ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts
       - run:
           name: Release new version
           command: |
