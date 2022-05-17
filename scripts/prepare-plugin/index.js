@@ -19,7 +19,7 @@ async function prepare(_, { nextRelease }) {
 	console.log('Updating package versions for release!\n');
 	console.log('Next version is:', nextVersion, '\n');
 
-	const root = process.cwd();
+	const root = process.cwd().replace(/packages.*/, '');
 
 	console.log({root});
 
