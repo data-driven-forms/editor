@@ -12,7 +12,7 @@
     "javascript"
   ],
   "dependencies": {
-    "@data-driven-forms/dnd": "^0.0.2"
+    "@data-driven-forms/dnd": "*"
   },
   "license": "Apache-2.0",
   "scripts": {
