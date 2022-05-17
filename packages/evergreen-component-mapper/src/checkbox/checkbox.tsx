@@ -19,7 +19,7 @@ const Wrapper: React.FC<CheckboxWrapperProps> = ({ label, children }) => (
 export type SingleCheckboxProps = UseFieldApiConfig
 
 const SingleCheckbox: React.FC<SingleCheckboxProps> = (props) => {
-	const { input, meta: __meta, description, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
+	const { input, meta: _meta, description, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
 
 	return (
 		<React.Fragment>
