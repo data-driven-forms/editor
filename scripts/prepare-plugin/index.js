@@ -1,7 +1,7 @@
 /* global module */
 
 module.exports = {
-	prepare(pluginConfig, context) {
-		console.log('RELEASE', JSON.stringify({ pluginConfig, context }, null, 2));
+	prepare(pluginConfig, { nextRelease, lastRelease, releases }) {
+		console.log('RELEASE', JSON.stringify({ pluginConfig, nextRelease, lastRelease, releases }, null, 2));
 	},
 };
