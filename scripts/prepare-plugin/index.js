@@ -13,7 +13,7 @@ const getLatestVersion = async (package) => {
 	return data['dist-tags'].latest;
 };
 
-function prepare(_, { nextRelease }) {
+async function prepare(_, { nextRelease }) {
 	const thisPackage = nextRelease.name.replace(/-v.*/, '');
 	const nextVersion = nextRelease.version;
 
