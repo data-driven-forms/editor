@@ -64,6 +64,7 @@
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "lerna": "^4.0.0",
+    "node-fetch": "^2.6.7",
     "prepare-plugin": "file:./scripts/prepare-plugin",
     "prettier": "2.6.2",
     "replace-in-file": "^6.3.2",
@@ -76,6 +77,8 @@
     "branches": [
       "main"
     ],
-    "prepare": ["prepare-plugin"]
+    "prepare": [
+      "prepare-plugin"
+    ]
   }
 }
