@@ -54,7 +54,6 @@
     ]
   },
   "devDependencies": {
-    "@semantic-release/exec": "^6.0.3",
     "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
@@ -65,6 +64,7 @@
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "lerna": "^4.0.0",
+    "prepare-plugin": "file:./scripts/prepare-plugin",
     "prettier": "2.6.2",
     "replace-in-file": "^6.3.2",
     "semantic-release": "^19.0.2",
@@ -75,6 +75,7 @@
     "extends": "semantic-release-monorepo",
     "branches": [
       "main"
-    ]
+    ],
+    "prepare": ["prepare-plugin"]
   }
 }
