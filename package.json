@@ -75,14 +75,6 @@
     "extends": "semantic-release-monorepo",
     "branches": [
       "main"
-    ],
-    "plugins": [
-      [
-        "@semantic-release/exec",
-        {
-          "prepareCmd": "node ./scripts/update-versions.js"
-        }
-      ]
     ]
   }
 }
