@@ -16,7 +16,6 @@ const getLatestVersion = async (package) => {
 async function prepare(_, { nextRelease }) {
 	const thisPackage = nextRelease.name.replace(/-v.*/, '');
 	const nextVersion = nextRelease.version;
-
 	console.log('Updating package versions for release!\n');
 	console.log('Next version is:', nextVersion, '\n');
 
@@ -34,7 +33,7 @@ async function prepare(_, { nextRelease }) {
 
 	(async () => await replace(replaceConfig))();
 
-	const localFiles = glob.sync(`${root}/packages/${thisPackage.replace('@data-driven-forms/')}/package.json`);
+	const localFiles = glob.sync(`${root}/packages/${thisPackage.replace('@data-driven-forms/', '')}/package.json`);
 
 	const versions = await Promise.all([
 		getLatestVersion('@data-driven-forms/evergreen-component-mapper'),
@@ -61,7 +60,9 @@ async function prepare(_, { nextRelease }) {
 
 	(async () => await replace(replaceConfig2))();
 
-	console.log('${thisPackage} package version successfully updated!\n');
+	console.log('Replacing other packages in ', localFiles, ' with versions ', versions, '\n');
+
+	console.log(`${thisPackage} package version successfully updated!\n`);
 };
 
 module.exports = { prepare };
