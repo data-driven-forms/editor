@@ -20,6 +20,11 @@ async function prepare(_, { nextRelease }) {
 	console.log('Next version is:', nextVersion, '\n');
 
 	const root = process.cwd();
+
+	console.log({root});
+
+	throw 'errror';
+
 	const files = glob.sync(`${root}/packages/*/package.json`);
 
 	console.log('Files to replace: ', files.join(',\n'), '\n');
