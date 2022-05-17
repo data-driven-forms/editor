@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@data-driven-forms/dnd": "^0.0.2",
-    "@data-driven-forms/editor-core": "^0.0.3",
+    "@data-driven-forms/editor-core": "^0.0.2",
     "@data-driven-forms/evergreen-component-mapper": "^0.0.2"
   },
   "license": "Apache-2.0",
