@@ -44,7 +44,7 @@ async function prepare(_, { nextRelease }) {
 	]);
 
 	const replaceConfig2 = {
-		localFiles,
+		files: localFiles,
 		from: [
 			'"@data-driven-forms/evergreen-component-mapper": "*"',
 			'"@data-driven-forms/dnd": "*"',
