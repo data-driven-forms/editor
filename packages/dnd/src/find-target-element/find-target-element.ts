@@ -23,7 +23,7 @@ const findTargetElement = (position: any, state: any): any => {
 		) {
 			// check if users wants to move item under another item
 			for(let index = 0; index < container.children.length; index++) {
-				const { id } = container.children[index];
+				const id  = container.children[index];
 
 				const component = state.components[id] || state.containers[id];
 				const componentPosition = component.ref.getBoundingClientRect().toJSON();
