@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/editor-pro",
   "version": "0.0.4",
-  "description": "---",
+  "description": "DnD editor based on EvergreenUI for React Forms",
   "main": "index.js",
   "module": "esm/index.js",
   "typings": "index.d.ts",

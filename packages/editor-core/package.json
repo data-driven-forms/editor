@@ -14,6 +14,9 @@
   "peerDependencies": {
     "@data-driven-forms/dnd": "*"
   },
+  "devDependencies": {
+    "@data-driven-forms/dnd": "*"
+  },
   "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint . --ext .ts",
