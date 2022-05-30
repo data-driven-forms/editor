@@ -16,8 +16,16 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => {
 		ListProps={{
 			style: { minWidth: 'calc(100% - 24px)' }
 		}}
-		className='canvas'
-		style={{ display: 'flex', border: '1px dotted rgb(71 77 102 / 50%)' }}
+		style={{
+			display: 'flex',
+			border: '1px dotted rgb(71 77 102 / 50%)',
+			minHeight: 150,
+			backgroundColor: '#f9fafc',
+			padding: 4,
+			marginLeft: 4,
+			flexGrow: 1,
+			marginRight: 4,
+		}}
 	/>;
 };
 

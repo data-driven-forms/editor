@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Menu, Pane, majorScale } from 'evergreen-ui';
 
-import './editor.css';
-
 import MenuItem, { MenuItemProps } from '@data-driven-forms/editor-core/menu-item';
 import Editor from '@data-driven-forms/editor-core/editor';
 import TopNav from './top-nav';

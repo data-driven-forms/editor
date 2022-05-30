@@ -1,9 +1,0 @@
-.canvas {
-  min-height: 150px;
-  background-color: #f9fafc;
-  border: 2px dotted #474d66;
-  padding: 4px;
-  margin-left: 4px;
-  flex-grow: 1;
-  margin-right: 4px;
-}
