@@ -12,7 +12,6 @@
     "javascript"
   ],
   "dependencies": {
-    "@data-driven-forms/dnd": "*",
     "@data-driven-forms/editor-core": "*",
     "@data-driven-forms/evergreen-component-mapper": "*"
   },
