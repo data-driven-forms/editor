@@ -11,7 +11,7 @@
     "forms",
     "javascript"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@data-driven-forms/dnd": "*"
   },
   "license": "Apache-2.0",
