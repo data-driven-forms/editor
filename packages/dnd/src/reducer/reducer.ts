@@ -4,6 +4,17 @@ export const clearDrag = {
 	draggingProps: null
 };
 
+export const initialState = {
+	...clearDrag,
+	components: {},
+	containers: {
+		root: {
+			children: [],
+			ref: null
+		}
+	},
+};
+
 export const dragStart = (state: any, action: any) => ({
 	...state,
 	draggingElement: action.component,
