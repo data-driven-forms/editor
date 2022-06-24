@@ -94,5 +94,7 @@ vendor
 !webpack.config.js
 !public
 !tsconfig.dev.json
+!cypress
+!cypress.config.ts
 
 .DS_STORE

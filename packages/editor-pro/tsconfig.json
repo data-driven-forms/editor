@@ -16,6 +16,7 @@
     ],
     "module": "esnext",
     "esModuleInterop": true,
+    "types": ["cypress", "@4tw/cypress-drag-drop"]
   },
   "include": [
     "./src/index.ts",
