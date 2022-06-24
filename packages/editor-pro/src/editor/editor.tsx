@@ -9,7 +9,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import EditorContent from './editor-content';
 import PropertiesCard from './properties-card';
-import { Field, FormRenderer, ComponentMapper } from '@data-driven-forms/react-form-renderer';
+import { Field, FormRenderer, ComponentMapper, Schema } from '@data-driven-forms/react-form-renderer';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
 import SubForm from './sub-form';
@@ -22,10 +22,10 @@ export interface EditorProps {
 	componentMapper: ComponentMapper;
 	componentInitialProps?: AnyObject;
 	fields: Field[];
+	initialSchema?: Schema;
 }
 
-
-const Editor = ({ componentMapper, componentInitialProps, fields }: EditorProps) => {
+const Editor = ({ componentMapper, componentInitialProps, fields, initialSchema }: EditorProps) => {
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>
 			<Pane
@@ -39,6 +39,7 @@ const Editor = ({ componentMapper, componentInitialProps, fields }: EditorProps)
 							className: 'drop-cursor'
 						}
 					}}
+					initialSchema={initialSchema}
 				>
 					<TopNav />
 					<Pane flex="1" width="100%" display="flex">
