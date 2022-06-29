@@ -6,3 +6,5 @@ tsconfig.json
 tsconfig.dev.json
 webpack.config.js
 webpack-stats.json
+cypress
+cypress.config.ts

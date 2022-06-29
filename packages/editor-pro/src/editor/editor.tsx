@@ -16,7 +16,7 @@ import SubForm from './sub-form';
 import Code from './code';
 import { AnyObject } from '../types';
 
-const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} />;
+const MenuItemWrapper: React.FC<MenuItemProps> = (props) => <MenuItem Component={Menu.Item} {...props} data-cy={props.component}/>;
 
 export interface EditorProps {
 	componentMapper: ComponentMapper;

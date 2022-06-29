@@ -26,6 +26,7 @@ const ContainerWrapper: React.FC<ContainerProps> = (props) => {
 			flexGrow: 1,
 			marginRight: 4,
 		}}
+		data-cy={`container-${props.isRoot ? 'root' : props.id}`}
 	/>;
 };
 

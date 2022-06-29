@@ -33,7 +33,8 @@
     "build": "lerna run build",
     "lint": "eslint ./packages/*/src",
     "lint:fix": "eslint ./packages/*/src --fix",
-    "release": "lerna exec --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo"
+    "release": "lerna exec --concurrency 1 -- npx --no-install semantic-release -e semantic-release-monorepo",
+    "integration:tests": "lerna run integration:tests --scope @data-driven-forms/editor-pro"
   },
   "eslintConfig": {
     "extends": [
