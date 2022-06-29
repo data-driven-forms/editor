@@ -25,7 +25,7 @@
     "build:esm": "tsc --module es2015 --target es5 --outDir ./esm",
     "build:packages": "node ../../scripts/generate-packages.js",
     "build:css": "node ../../scripts/copy-css.js",
-    "integration:tests": "cypress run --component --browser chrome"
+    "integration:tests": "cypress run --component --browser electron"
   },
   "devDependencies": {
     "cypress": "^10.0.2"
