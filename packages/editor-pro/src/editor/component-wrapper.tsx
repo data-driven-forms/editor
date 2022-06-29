@@ -23,9 +23,11 @@ const ComponentWrapper: React.FC<ComponentProps> = (props) => {
 		HandleProps={{
 			style: { marginLeft: 'auto' },
 			size: 24,
-			cursor: 'grab'
+			cursor: 'grab',
+			'data-cy': 'handle'
 		}}
 		Handle={DragHandleVerticalIcon}
+		data-cy={`component-${props.id}`}
 	/>;
 };
 

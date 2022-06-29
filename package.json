@@ -54,7 +54,6 @@
     ]
   },
   "devDependencies": {
-    "@4tw/cypress-drag-drop": "^2.1.0",
     "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",

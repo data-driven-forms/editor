@@ -31,6 +31,120 @@ const fields = propertiesFields({ componentMapper });
 describe('ProEditor', () => {
 	it('can drag a new component', () => {
 		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
-		cy.contains('text field').drag('.[style="display: flex; border: 1px dotted rgba(71, 77, 102, 0.5); min-height: 150px; background-color: rgb(249, 250, 252); padding: 4px; margin-left: 4px; flex-grow: 1; margin-right: 4px;"] > div');
+
+		cy.get('[data-cy="text-field"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy*="component-text-field"]').should('be.visible');
+	});
+
+	it('can open properties editor', () => {
+		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+
+		cy.get('[data-cy="text-field"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy*="component-text-field"]').click();
+
+		cy.contains('Edit field properties.').should('be.visible');
+	});
+
+	it('can drag multiple components', () => {
+		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+
+		cy.get('[data-cy="text-field"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy="checkbox"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+
+		cy.get('[data-cy*="component-text-field"]').should('be.visible');
+		cy.get('[data-cy*="component-checkbox"]').should('be.visible');
+	});
+
+	it('can drag component to top', () => {
+		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+
+		cy.get('[data-cy="text-field"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy="checkbox"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'top');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'top');
+
+
+		cy.get('[data-cy*="component-text-field"]').then($el => {
+			const textfieldPosition = $el[0].getBoundingClientRect();
+			cy.get('[data-cy*="component-checkbox"]').then($el => {
+				const checkboxPosition = $el[0].getBoundingClientRect();
+
+				assert(textfieldPosition.top > checkboxPosition.top, 'checkbox is on the top');
+			});
+		});
+	});
+
+	it('move components', () => {
+		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+
+		cy.get('[data-cy="text-field"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy="checkbox"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy*="component-checkbox"] [data-cy="handle"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'top');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'top');
+
+		cy.get('[data-cy*="component-text-field"]').then($el => {
+			const textfieldPosition = $el[0].getBoundingClientRect();
+			cy.get('[data-cy*="component-checkbox"]').then($el => {
+				const checkboxPosition = $el[0].getBoundingClientRect();
+
+				assert(textfieldPosition.top > checkboxPosition.top, 'checkbox is on the top');
+			});
+		});
+	});
+
+	it('move into nested component', () => {
+		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+
+		cy.get('[data-cy="sub-form"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy="checkbox"]').trigger('mousedown');
+		cy.get('[data-cy*="container-sub-form"]').trigger('mousemove', 'center');
+		cy.get('[data-cy*="container-sub-form"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy*="container-sub-form"] [data-cy*="component-checkbox"]').should('be.visible');
+	});
+
+	it('move nested into nested component', () => {
+		cy.mount(<Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+
+		cy.get('[data-cy="sub-form"]').trigger('mousedown');
+		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
+		cy.get('[data-cy="container-root"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy="sub-form"]').trigger('mousedown');
+		cy.get('[data-cy*="container-sub-form"]').trigger('mousemove', 'center');
+		cy.get('[data-cy*="container-sub-form"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy*="container-sub-form"] [data-cy*="container-sub-form"]').should('be.visible');
+
+		cy.get('[data-cy="checkbox"]').trigger('mousedown');
+		cy.get('[data-cy*="container-sub-form"] [data-cy*="container-sub-form"]').trigger('mousemove', 'center');
+		cy.get('[data-cy*="container-sub-form"] [data-cy*="container-sub-form"]').trigger('mouseup', 'center');
+
+		cy.get('[data-cy*="container-sub-form"] [data-cy*="container-sub-form"] [data-cy*="component-checkbox"]').should('be.visible');
 	});
 });

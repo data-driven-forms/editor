@@ -49,7 +49,7 @@ const DropCursor = ({ CursorProps }: DropCursorProps) => {
 		[],
 	);
 
-	const handleMouseMove = React.useCallback((e: MouseEvent) => handleMove({ x: e.x, y: e.y }), []);
+	const handleMouseMove = React.useCallback((e: MouseEvent) => handleMove({ x: e.clientX, y: e.clientY }), []);
 
 	const handleTouchMove = React.useCallback((e: TouchEvent) => handleMove({ x: e.touches[0].clientX, y: e.touches[0].clientY }), []);
 
