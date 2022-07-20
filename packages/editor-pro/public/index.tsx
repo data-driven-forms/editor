@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
-
 import Editor from '../src/editor';
 import propertiesFields from '../src/editor/properties-fields';
 
 import { AnyObject } from '../src/types';
 import { componentTypes, Schema, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const componentInitialProps: AnyObject = {
 	'dual-list-select': {
@@ -75,7 +76,7 @@ const initialSchema: Schema = {
 	]
 };
 
-const App = () => <Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} initialSchema={initialSchema} />;
+const App = () => <LocalizationProvider dateAdapter={AdapterDateFns}><Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} initialSchema={initialSchema} /></LocalizationProvider>;
 
 ReactDOM.render(
 	<App />,
