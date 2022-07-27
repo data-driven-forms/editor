@@ -29,7 +29,8 @@ jobs:
     docker:
       - image: circleci/node:16
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/editor
       - run:
           name: run-tests
           command: npm run test
