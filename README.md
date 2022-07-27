@@ -7,6 +7,13 @@
 - [Available Scripts](#available-scripts)
   - [`npm install`](#npm-install)
   - [`npm bootstrap`](#npm-bootstrap)
+  - [`npm run test`](#npm-run-test)
+  - [`npm run build`](#npm-run-build)
+  - [`npm run clean-build`](#npm-run-clean-build)
+  - [`npm run lint`](#npm-run-lint)
+  - [`npm run integration:tests`](#npm-run-integrationtests)
+  - [`npm run start`](#npm-run-start)
+- [Release](#release)
 
 :warning: **THIS IS WIP REPOSITORY!** :warning:
 # Data Driven Forms Pro Editor
@@ -48,5 +55,43 @@ In the project directory, you can run:
 
 ## `npm install`
 
+to install dependencies
 ## `npm bootstrap`
 
+to bootstrap packages (to link them)
+
+## `npm run test`
+
+to run JEST test
+
+## `npm run build`
+
+to build all packages
+
+## `npm run clean-build`
+
+removes built folders (runs automatically before `install`)
+
+## `npm run lint`
+
+to check linting rules (use `npm run lint:fix` to fix basic issues)
+
+## `npm run integration:tests`
+
+to run integration test for the editor-pro
+
+---
+
+In each package directory you can run:
+
+## `npm run start`
+
+to run a local playground
+
+# Release
+
+Data Driven Forms editor follows semantic release to trigger new versions automatically.
+
+You can use: `fix(...): ...`, `feat(...): ...` commit messages to release new packages.
+
+Packages are handled seperately.
