@@ -1,6 +1,7 @@
 import React, { createRef, Fragment, useCallback, useEffect, useRef } from 'react';
 
 import findTargetElement from '../find-target-element';
+import { AnyObject } from '../types';
 import useDispatch from '../use-dispatch';
 import useState from '../use-state';
 
@@ -10,7 +11,7 @@ export interface CursorPosition {
 }
 
 export interface DropCursorProps {
-    CursorProps?: any;
+    CursorProps?: AnyObject;
 }
 
 const DropCursor = ({ CursorProps }: DropCursorProps) => {

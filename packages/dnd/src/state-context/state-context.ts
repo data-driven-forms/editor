@@ -2,11 +2,11 @@ import { createContext } from 'react';
 import { AnyObject } from '../types';
 
 export interface Component extends AnyObject {
-    ref?: React.Ref<HTMLDivElement>;
+    ref?: Element;
 }
 
 export interface Container extends AnyObject {
-    ref?: React.Ref<HTMLDivElement>;
+    ref?: Element;
     children: string[];
 }
 

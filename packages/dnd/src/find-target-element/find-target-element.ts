@@ -1,7 +1,16 @@
-const findTargetElement = (position: any, state: any): any => {
-	let result = null;
-	let resultContainer = null;
-	let resultPosition;
+import { CursorPosition } from '../drop-cursor';
+import { StateContext } from '../state-context';
+
+export interface FindTargetElementResult {
+	rect: DOMRect;
+	container: string;
+	position: number;
+}
+
+const findTargetElement = (position: CursorPosition, state: StateContext): FindTargetElementResult => {
+	let result: DOMRect = {} as DOMRect;
+	let resultContainer = '';
+	let resultPosition = 0;
 
 	let margin = Infinity;
 
@@ -11,7 +20,7 @@ const findTargetElement = (position: any, state: any): any => {
 
 		const container = state.containers[key];
 
-		const metadata = container.ref.getBoundingClientRect().toJSON();
+		const metadata = container?.ref?.getBoundingClientRect().toJSON();
 
 		// check if mouse is inside a container
 		if (
@@ -26,7 +35,7 @@ const findTargetElement = (position: any, state: any): any => {
 				const id  = container.children[index];
 
 				const component = state.components[id] || state.containers[id];
-				const componentPosition = component.ref.getBoundingClientRect().toJSON();
+				const componentPosition = component?.ref?.getBoundingClientRect().toJSON();
 
 				// if users points 5px under and half of the component
 				// insert item under the component

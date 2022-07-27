@@ -1,28 +1,35 @@
+import { StateContext } from '../state-context';
+import { AnyObject } from '../types';
+
+export interface ReducerAction extends AnyObject {
+	type: 'DRAG_START' | 'DRAG_DROP' | 'UPDATE_CONTAINER' | 'UPDATE_COMPONENT';
+}
+
 export const clearDrag = {
 	draggingElement: null,
 	sourceContainer: null,
 	draggingProps: null
 };
 
-export const initialState = {
+export const initialState: StateContext = {
 	...clearDrag,
 	components: {},
 	containers: {
 		root: {
 			children: [],
-			ref: null
+			ref: undefined
 		}
 	},
 };
 
-export const dragStart = (state: any, action: any) => ({
+export const dragStart = (state: StateContext, action: ReducerAction) => ({
 	...state,
 	draggingElement: action.component,
 	sourceContainer: action.sourceContainer,
 	draggingProps: action.props
 });
 
-export const dragDrop = (state: any, action: any) => {
+export const dragDrop = (state: StateContext, action: ReducerAction) => {
 	// dragging outside container
 	if (!action.targetContainer) {
 		return {
@@ -48,7 +55,7 @@ export const dragDrop = (state: any, action: any) => {
 		// check all parent containers
 		while (parentContainer && parentContainer !== 'root' && parentContainer !== state.draggingElement) {
 			// eslint-disable-next-line no-loop-func
-			parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(parentContainer));
+			parentContainer = Object.keys(state.containers).find(key => state.containers[key].children.includes(parentContainer as string));
 			console.log('parent', parentContainer);
 		}
 
@@ -66,8 +73,8 @@ export const dragDrop = (state: any, action: any) => {
         state.sourceContainer === action.targetContainer
         // is being moved to the same position or after the position
         && (
-        	state.containers[state.sourceContainer].children.indexOf(state.draggingElement) === action.position ||
-            state.containers[state.sourceContainer].children.indexOf(state.draggingElement) + 1 === action.position
+        	state.containers[state.sourceContainer].children.indexOf(state.draggingElement as string) === action.position ||
+            state.containers[state.sourceContainer].children.indexOf(state.draggingElement as string) + 1 === action.position
         )
 	) {
 		return {
@@ -87,9 +94,9 @@ export const dragDrop = (state: any, action: any) => {
 	// push to the exact position
 	// when position is not specified, push to the bottom
 	if (typeof action.position === 'undefined') {
-		state.containers[action.targetContainer].children.push(id);
+		state.containers[action.targetContainer].children.push(id as string);
 	} else {
-		state.containers[action.targetContainer].children.splice(action.position, 0, id);
+		state.containers[action.targetContainer].children.splice(action.position, 0, id as string);
 	}
 
 	// moving existing node
@@ -107,7 +114,7 @@ export const dragDrop = (state: any, action: any) => {
 			...(action.targetContainer && {
 				components: {
 					...state.components,
-					[id]: {
+					[id as string | number]: {
 						component: state.draggingElement,
 						name: id,
 						...state.draggingProps
@@ -118,7 +125,7 @@ export const dragDrop = (state: any, action: any) => {
 	}
 };
 
-export const updateContainer = (state: any, action: any) => {
+export const updateContainer = (state: StateContext, action: ReducerAction) => {
 	if(state.containers[action.id]) {
 		state.containers[action.id].ref = action.ref;
 	} else {
@@ -131,14 +138,13 @@ export const updateContainer = (state: any, action: any) => {
 	return state;
 };
 
-export const updateComponent = (state: any, action: any) => {
+export const updateComponent = (state: StateContext, action: ReducerAction) => {
 	state.components[action.id].ref = action.ref;
 
 	return state;
 };
 
-
-export const reducer = (state: any, action: any) => {
+export const reducer = (state: StateContext, action: ReducerAction) => {
 	switch (action.type) {
 	case 'DRAG_START':
 		return dragStart(state, action);

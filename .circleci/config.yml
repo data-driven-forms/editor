@@ -24,6 +24,15 @@ jobs:
           root: ~/editor
           paths:
               - "*"
+  test:
+    working_directory: ~/editor
+    docker:
+      - image: circleci/node:16
+    steps:
+      - checkout
+      - run:
+          name: run-tests
+          command: npm run test
   integration:
     docker:
       - image: cypress/base:14.16.0
@@ -60,6 +69,9 @@ workflows:
   build_and_deploy:
     jobs:
       - build
+      - test:
+          requires:
+            - build
       - integration:
           requires:
             - build
@@ -67,6 +79,7 @@ workflows:
           requires:
             - integration
             - build
+            - test
           filters:
             branches:
               only:
