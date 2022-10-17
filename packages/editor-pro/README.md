@@ -49,6 +49,16 @@ A mapper of components you want to be able to edit.
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 ```
 
+## FormTemplate
+
+A FormTemplate to use in the preview box.
+
+**Example**
+
+```tsx
+import { MuiFormTemplate } from '@data-driven-forms/mui-component-mapper';
+```
+
 ## componentInitialProps
 
 An object to set initial props for components. For example, some components required props to be initialized.

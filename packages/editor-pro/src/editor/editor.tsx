@@ -7,10 +7,9 @@ import CoreEditor from '@data-driven-forms/editor-core/editor';
 import TopNav from './top-nav';
 import EditorContent from './editor-content';
 import PropertiesCard from './properties-card';
-import { Field, FormRenderer, ComponentMapper, Schema } from '@data-driven-forms/react-form-renderer';
+import { Field, FormRenderer, ComponentMapper, Schema, FormTemplateRenderProps } from '@data-driven-forms/react-form-renderer';
 import ContainerWrapper from './container-wrapper';
 import ComponentWrapper from './component-wrapper';
-import SubForm from './sub-form';
 import Code from './code';
 import { AnyObject } from '../types';
 
@@ -21,9 +20,10 @@ export interface EditorProps {
 	componentInitialProps?: AnyObject;
 	fields: Field[];
 	initialSchema?: Schema;
+	FormTemplate: React.ComponentType<FormTemplateRenderProps>;
 }
 
-const Editor = ({ componentMapper, componentInitialProps, fields, initialSchema }: EditorProps) => {
+const Editor = ({ componentMapper, componentInitialProps, fields, initialSchema, FormTemplate }: EditorProps) => {
 	return (
 		<Pane
 			display="flex"
@@ -61,13 +61,13 @@ const Editor = ({ componentMapper, componentInitialProps, fields, initialSchema 
 						<FormRenderer
 							schema={{ fields: [] }}
 							onSubmit={() => undefined}
-							componentMapper={{ ...componentMapper, 'sub-form': SubForm }}
+							componentMapper={componentMapper}
 							FormTemplate={() => <ContainerWrapper isRoot Component={ComponentWrapper} />}
 						/>
 						<Code />
 					</Pane>
 					<PropertiesCard fields={fields} />
-					<EditorContent fields={fields} />
+					<EditorContent fields={fields} componentMapper={componentMapper} FormTemplate={FormTemplate} />
 				</Pane>
 			</CoreEditor>
 		</Pane>

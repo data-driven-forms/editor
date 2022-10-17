@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 
 import Editor from '../../src/editor';
 import propertiesFields from '../../src/editor/properties-fields';
@@ -9,6 +10,7 @@ import { AnyObject } from '../../src/types';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import SubForm from '../../src/editor/sub-form';
 
 const componentInitialProps: AnyObject = {
 	'dual-list-select': {
@@ -33,13 +35,13 @@ const fields = propertiesFields({ componentMapper });
 
 const Wrapper = (props) => (
 	<LocalizationProvider dateAdapter={AdapterDateFns}>
-		<Editor {...props} />
+		<Editor {...props} FormTemplate={FormTemplate} fields={fields} componentMapper={{...componentMapper, 'sub-form': SubForm}} componentInitialProps={componentInitialProps} />
 	</LocalizationProvider>
 );
 
 describe('ProEditor', () => {
 	it('can drag a new component', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="text-field"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
@@ -49,7 +51,7 @@ describe('ProEditor', () => {
 	});
 
 	it('can open properties editor', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="text-field"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
@@ -61,7 +63,7 @@ describe('ProEditor', () => {
 	});
 
 	it('can drag multiple components', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="text-field"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
@@ -77,7 +79,7 @@ describe('ProEditor', () => {
 	});
 
 	it('can drag component to top', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="text-field"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
@@ -99,7 +101,7 @@ describe('ProEditor', () => {
 	});
 
 	it('move components', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="text-field"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
@@ -124,7 +126,7 @@ describe('ProEditor', () => {
 	});
 
 	it('move into nested component', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="sub-form"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');
@@ -138,7 +140,7 @@ describe('ProEditor', () => {
 	});
 
 	it('move nested into nested component', () => {
-		cy.mount(<Wrapper fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} />);
+		cy.mount(<Wrapper />);
 
 		cy.get('[data-cy="sub-form"]').trigger('mousedown');
 		cy.get('[data-cy="container-root"]').trigger('mousemove', 'center');

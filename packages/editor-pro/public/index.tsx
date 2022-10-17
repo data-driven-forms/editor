@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { componentMapper } from '@data-driven-forms/mui-component-mapper';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
+
 import Editor from '../src/editor';
 import propertiesFields from '../src/editor/properties-fields';
+import SubForm from '../src/editor/sub-form';
 
 import { AnyObject } from '../src/types';
 import { componentTypes, Schema, validatorTypes } from '@data-driven-forms/react-form-renderer';
@@ -76,7 +79,15 @@ const initialSchema: Schema = {
 	]
 };
 
-const App = () => <LocalizationProvider dateAdapter={AdapterDateFns}><Editor fields={fields} componentMapper={componentMapper} componentInitialProps={componentInitialProps} initialSchema={initialSchema} /></LocalizationProvider>;
+const App = () => <LocalizationProvider dateAdapter={AdapterDateFns}>
+	<Editor
+		fields={fields}
+		componentMapper={{...componentMapper, 'sub-form': SubForm }}
+		componentInitialProps={componentInitialProps}
+		initialSchema={initialSchema}
+		FormTemplate={FormTemplate}
+	/>
+</LocalizationProvider>;
 
 ReactDOM.render(
 	<App />,
