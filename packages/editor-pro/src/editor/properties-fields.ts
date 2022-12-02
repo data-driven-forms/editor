@@ -72,6 +72,14 @@ const fieldProps = ({componentMapper}: PropertiesFieldsInput) => ([
 		],
 	},
 	{
+		name: 'name-plain-text-group',
+		component: 'sub-form',
+		condition: { when: 'component', is: ['plain-text'] },
+		fields: [
+			{ component: 'text-field', name: 'label', label: 'Label', description: 'Label of the field.' }
+		]
+	},
+	{
 		name: 'custom-props',
 		component: 'plain-text',
 		content: 'Components also accept custom props. Check documentation for you components/mapper to read more.',
