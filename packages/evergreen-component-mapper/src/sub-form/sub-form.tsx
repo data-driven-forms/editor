@@ -1,20 +1,18 @@
 import React from 'react';
 
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
-import { Field } from '@data-driven-forms/react-form-renderer';
+import { Field, useFieldApi, UseFieldApiProps } from '@data-driven-forms/react-form-renderer';
 
-export interface SubFormProps {
+export interface SubFormProps extends UseFieldApiProps<any> {
+    name: string;
     fields?: Field[];
 };
 
-const SubForm: React.FC<SubFormProps> = ({fields = [], ...props}) => {
+const SubForm: React.FC<SubFormProps> = (props) => {
 	const { renderForm } = useFormApi();
+	const { fields = [] } = useFieldApi(props);
 
-	return (
-		<div {...props}>
-			{renderForm(fields)}
-		</div>
-	);
+	return <div {...props}>{renderForm(fields)}</div>;
 };
 
 export default SubForm;
