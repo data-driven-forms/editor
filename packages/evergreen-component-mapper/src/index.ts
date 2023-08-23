@@ -1,4 +1,5 @@
 export * from './checkbox';
+export * from './combo-box';
 export * from './component-mapper';
 export * from './field-array';
 export * from './link';
