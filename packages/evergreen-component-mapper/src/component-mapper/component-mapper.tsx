@@ -9,6 +9,7 @@ import Tabs from '../tabs';
 import FieldArray from '../field-array';
 import Link from '../link';
 import PlainText from '../plain-text';
+import ComboBox from '../combo-box';
 
 const NullComponent = () => <span>Not implemented</span>;
 
@@ -28,7 +29,8 @@ const mapper = {
 	[componentTypes.FIELD_ARRAY]: FieldArray,
 	[componentTypes.DUAL_LIST_SELECT]: NullComponent,
 	[componentTypes.SLIDER]: NullComponent,
-	'link': Link
+	'link': Link,
+	'combo-box': ComboBox
 };
 
 export default mapper;
