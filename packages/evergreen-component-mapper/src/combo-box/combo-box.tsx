@@ -1,27 +1,26 @@
 import React, { useMemo } from 'react';
 
-import { Combobox as EvergreenCombobox, FormField } from 'evergreen-ui';
+import { Combobox as EvergreenCombobox, ComboboxProps as EvergreenComboboxProps, FormField, FormFieldProps } from 'evergreen-ui';
 
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
-import {
-	AnyObject,
-	UseFieldApiProps,
-} from '@data-driven-forms/react-form-renderer';
+import { AnyObject, UseFieldApiProps } from '@data-driven-forms/react-form-renderer';
 
 export interface ComboBoxItem extends AnyObject {
-    value?: any;
-    label: string;
+  value?: any;
+  label: string;
 }
 
-export interface ComboBoxProps extends UseFieldApiProps<string> {
-    name: string;
-    isRequired?: boolean;
-    options: ComboBoxItem[];
+export interface ComboBoxProps
+  extends UseFieldApiProps<string>,
+    Omit<EvergreenComboboxProps, 'selectedItem' | 'onChange' | 'disabled' | 'items' | 'itemToString'>,
+    Pick<FormFieldProps, 'label' | 'description'> {
+  name: string;
+  isRequired?: boolean;
+  options: ComboBoxItem[];
 }
 
 const ComboBox: React.FC<ComboBoxProps> = (props) => {
-	const {
-		id,
+	const { id,
 		input,
 		meta,
 		isDisabled,
@@ -31,10 +30,10 @@ const ComboBox: React.FC<ComboBoxProps> = (props) => {
 		description,
 		inputProps,
 		...rest
-	} = useFieldApi(props);
+	} = useFieldApi(props) as ComboBoxProps;
 
 	const selectedItem = useMemo(() => {
-		return options.find((item: ComboBoxItem) => item.value === input.value);
+		return options.find((item: ComboBoxItem) => item.value === input.value) ?? null;
 	}, [input.value, options]);
 
 	return (
