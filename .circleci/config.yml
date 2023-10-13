@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/editor
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:lts
     steps:
       - checkout
       - run:
@@ -27,7 +27,7 @@ jobs:
   test:
     working_directory: ~/editor
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:lts
     steps:
       - attach_workspace:
           at: ~/editor
@@ -50,7 +50,7 @@ jobs:
   release:
     working_directory: ~/editor
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:lts
     steps:
       - run:
           name: Create .ssh folder
