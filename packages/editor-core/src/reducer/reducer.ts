@@ -19,7 +19,8 @@ const reducer = (state: any, action: any) => {
 		return { ...state };
 	case 'UPDATE_PROPS':
 		state.components[action.id] = {
-			...action.props
+			...action.props,
+			ref: state.components[action.id].ref
 		};
 		return { ...state };
 	case 'REMOVE_COMPONENT':
