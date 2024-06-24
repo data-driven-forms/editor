@@ -7,15 +7,15 @@ import { UseFieldApiProps } from '@data-driven-forms/react-form-renderer';
 
 export interface TextFieldProps extends UseFieldApiProps<string> {
 	name: string;
-	items: string[];
+	items?: string[];
 	isRequired?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps> = (props) => {
-	const { input, meta, isRequired, items, ...rest } = useFieldApi(props);
+	const { input, meta, isRequired, items, ...rest } = useFieldApi(props) as TextFieldProps;
 
 	return (
-		<Autocomplete {...input} items={items} {...rest}>
+		<Autocomplete {...input} items={items || []}>
 			{({ getInputProps, getRef, inputValue, openMenu }) => (
 				<TextInputField
 					ref={getRef}
@@ -24,6 +24,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 					validationMessage={meta.error}
 					{...getInputProps({ onFocus: () => openMenu() })}
 					value={inputValue}
+					{...rest}
 				/>
 			)}
 		</Autocomplete>
