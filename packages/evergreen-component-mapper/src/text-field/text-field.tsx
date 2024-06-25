@@ -1,25 +1,34 @@
 import React from 'react';
 
-import { TextInputField } from 'evergreen-ui';
+import { Autocomplete, TextInputField } from 'evergreen-ui';
 
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
 import { UseFieldApiProps } from '@data-driven-forms/react-form-renderer';
 
 export interface TextFieldProps extends UseFieldApiProps<string> {
-    name: string;
-    isRequired?: boolean;
-};
+	name: string;
+	items?: string[];
+	isRequired?: boolean;
+}
 
 const TextField: React.FC<TextFieldProps> = (props) => {
-	const { input, meta, isRequired, ...rest } = useFieldApi(props);
+	const { input, meta, isRequired, items, ...rest } = useFieldApi(props) as TextFieldProps;
 
-	return <TextInputField
-		{...input}
-		required={isRequired}
-		isInvalid={Boolean(meta.error)}
-		validationMessage={meta.error}
-		{...rest}
-	/>;
+	return (
+		<Autocomplete {...input} items={items || []}>
+			{({ getInputProps, getRef, inputValue, openMenu }) => (
+				<TextInputField
+					ref={getRef}
+					required={isRequired}
+					isInvalid={Boolean(meta.error)}
+					validationMessage={meta.error}
+					{...getInputProps({ onFocus: () => openMenu() })}
+					value={inputValue}
+					{...rest}
+				/>
+			)}
+		</Autocomplete>
+	);
 };
 
 export default TextField;
