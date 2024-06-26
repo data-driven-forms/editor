@@ -15,15 +15,15 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 	const { input, meta, isRequired, items, ...rest } = useFieldApi(props) as TextFieldProps;
 
 	return (
-		<Autocomplete {...input} items={items || []} allowOtherValues>
-			{({ getInputProps, getRef, inputValue, openMenu }) => (
+		<Autocomplete {...input} items={items || []} allowOtherValues {...rest}>
+			{({ getInputProps, getRef, openMenu }) => (
 				<TextInputField
 					ref={getRef}
 					required={isRequired}
 					isInvalid={Boolean(meta.error)}
 					validationMessage={meta.error}
 					{...getInputProps({ onFocus: () => openMenu() })}
-					value={inputValue}
+					value={input.value}
 					{...rest}
 				/>
 			)}
