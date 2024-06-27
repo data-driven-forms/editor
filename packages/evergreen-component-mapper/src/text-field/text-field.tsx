@@ -15,7 +15,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 	const { input, meta, isRequired, items, ...rest } = useFieldApi(props) as TextFieldProps;
 
 	return (
-		<Autocomplete {...input} items={items || []} allowOtherValues>
+		<Autocomplete {...input} items={items || []} allowOtherValues selectedItem={input.value}>
 			{({ getInputProps, getRef, inputValue, openMenu }) => (
 				<TextInputField
 					ref={getRef}
